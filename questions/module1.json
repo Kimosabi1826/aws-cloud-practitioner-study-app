@@ -1,0 +1,413 @@
+[
+  {
+    "question": "What is cloud computing?",
+    "choices": {
+      "A": "Storing data only on physical servers in your office",
+      "B": "On-demand delivery of IT resources over the internet with pay-as-you-go pricing",
+      "C": "Using only private networks to manage applications",
+      "D": "Buying and maintaining your own data center infrastructure"
+    },
+    "correct": "B",
+    "tip": "No upfront hardware + internet access.",
+    "explanations": {
+      "A": "Incorrect. That describes on-premises infrastructure.",
+      "B": "Correct. Cloud computing delivers IT resources on demand over the internet with usage-based pricing.",
+      "C": "Incorrect. Cloud services are not limited to private networks.",
+      "D": "Incorrect. That is the opposite of cloud computing."
+    }
+  },
+  {
+    "question": "Which statement BEST describes the on-demand characteristic of cloud computing?",
+    "choices": {
+      "A": "Customers must request resources manually from AWS support",
+      "B": "Customers can provision and scale resources instantly as needed",
+      "C": "Customers must commit to long-term contracts",
+      "D": "Resources are only available during business hours"
+    },
+    "correct": "B",
+    "tip": "Instant + self-service.",
+    "explanations": {
+      "A": "Incorrect. No support request is needed.",
+      "B": "Correct. Resources can be provisioned instantly without waiting.",
+      "C": "Incorrect. Cloud avoids long-term commitments.",
+      "D": "Incorrect. AWS is always available."
+    }
+  },
+  {
+    "question": "What does pay-as-you-go pricing mean?",
+    "choices": {
+      "A": "You pay upfront for all infrastructure",
+      "B": "You pay only for the resources you use",
+      "C": "You pay monthly fixed pricing",
+      "D": "You pay only for storage"
+    },
+    "correct": "B",
+    "tip": "Only pay when you use it.",
+    "explanations": {
+      "A": "Incorrect. That is on-premises style.",
+      "B": "Correct. You pay only for what you consume.",
+      "C": "Incorrect. Cloud is usage-based.",
+      "D": "Incorrect. It applies to all services."
+    }
+  },
+  {
+    "question": "Which deployment model combines on-premises infrastructure with cloud resources?",
+    "choices": {
+      "A": "Public cloud",
+      "B": "Private cloud",
+      "C": "Hybrid cloud",
+      "D": "Dedicated cloud"
+    },
+    "correct": "C",
+    "tip": "Mix = hybrid.",
+    "explanations": {
+      "A": "Incorrect. Public cloud only.",
+      "B": "Incorrect. Private only.",
+      "C": "Correct. Hybrid combines both.",
+      "D": "Incorrect. Not standard AWS term."
+    }
+  },
+  {
+    "question": "Which AWS benefit helps eliminate the need to guess future capacity requirements?",
+    "choices": {
+      "A": "Go global in minutes",
+      "B": "Stop guessing capacity",
+      "C": "High availability",
+      "D": "Security"
+    },
+    "correct": "B",
+    "tip": "Scale when needed.",
+    "explanations": {
+      "A": "Incorrect. Global expansion.",
+      "B": "Correct. Scale based on demand.",
+      "C": "Incorrect. Uptime focus.",
+      "D": "Incorrect. Security focus."
+    }
+  },
+  {
+    "question": "Why can AWS offer economies of scale?",
+    "choices": {
+      "A": "Small number of users",
+      "B": "Global infrastructure at massive scale",
+      "C": "Single data center",
+      "D": "Only enterprise customers"
+    },
+    "correct": "B",
+    "tip": "Huge scale = cheaper.",
+    "explanations": {
+      "A": "Incorrect.",
+      "B": "Correct. AWS spreads cost across millions of customers.",
+      "C": "Incorrect.",
+      "D": "Incorrect."
+    }
+  },
+  {
+    "question": "What is high availability?",
+    "choices": {
+      "A": "Using one large server",
+      "B": "Ensuring systems remain operational with minimal downtime",
+      "C": "Reducing costs",
+      "D": "Storing backups"
+    },
+    "correct": "B",
+    "tip": "Stay online.",
+    "explanations": {
+      "A": "Incorrect.",
+      "B": "Correct.",
+      "C": "Incorrect.",
+      "D": "Incorrect."
+    }
+  },
+  {
+    "question": "What is the purpose of Availability Zones?",
+    "choices": {
+      "A": "Pricing control",
+      "B": "Isolation and fault tolerance",
+      "C": "Backup storage",
+      "D": "Replace Regions"
+    },
+    "correct": "B",
+    "tip": "Failure isolation.",
+    "explanations": {
+      "A": "Incorrect.",
+      "B": "Correct.",
+      "C": "Incorrect.",
+      "D": "Incorrect."
+    }
+  },
+  {
+    "question": "How can a company protect against an entire Region failure?",
+    "choices": {
+      "A": "Multiple AZs",
+      "B": "Bigger server",
+      "C": "Multi-region deployment",
+      "D": "Local backups"
+    },
+    "correct": "C",
+    "tip": "Region failure = multi-region.",
+    "explanations": {
+      "A": "Incorrect.",
+      "B": "Incorrect.",
+      "C": "Correct.",
+      "D": "Incorrect."
+    }
+  },
+  {
+    "question": "In the Shared Responsibility Model, what is the customer responsible for?",
+    "choices": {
+      "A": "Hardware",
+      "B": "Data center",
+      "C": "Operating system and applications",
+      "D": "Networking infrastructure"
+    },
+    "correct": "C",
+    "tip": "Inside the VM = you.",
+    "explanations": {
+      "A": "Incorrect.",
+      "B": "Incorrect.",
+      "C": "Correct.",
+      "D": "Incorrect."
+    }
+  },
+  {
+    "question": "What is AWS responsible for in the Shared Responsibility Model?",
+    "choices": {
+      "A": "User permissions",
+      "B": "Application code",
+      "C": "Infrastructure security",
+      "D": "OS patching"
+    },
+    "correct": "C",
+    "tip": "AWS = security OF cloud.",
+    "explanations": {
+      "A": "Incorrect.",
+      "B": "Incorrect.",
+      "C": "Correct.",
+      "D": "Incorrect."
+    }
+  },
+
+  {
+    "question": "Which AWS Cloud benefit allows a company to reduce upfront infrastructure costs?",
+    "choices": {
+      "A": "High availability",
+      "B": "Elasticity",
+      "C": "Trade capital expense for variable expense",
+      "D": "Global infrastructure"
+    },
+    "correct": "C",
+    "tip": "No upfront = OpEx.",
+    "explanations": {
+      "A": "Incorrect. High availability focuses on uptime.",
+      "B": "Incorrect. Elasticity is about scaling.",
+      "C": "Correct. AWS allows you to pay only for what you use instead of buying hardware upfront.",
+      "D": "Incorrect. This relates to geographic reach."
+    }
+  },
+  {
+    "question": "Which AWS concept allows resources to automatically scale up and down based on demand?",
+    "choices": {
+      "A": "Durability",
+      "B": "Elasticity",
+      "C": "Fault tolerance",
+      "D": "Availability Zones"
+    },
+    "correct": "B",
+    "tip": "Auto adjust = elasticity.",
+    "explanations": {
+      "A": "Incorrect. Durability relates to data protection.",
+      "B": "Correct. Elasticity allows automatic scaling based on demand.",
+      "C": "Incorrect. Fault tolerance handles failures.",
+      "D": "Incorrect. AZs are infrastructure locations."
+    }
+  },
+  {
+    "question": "Which AWS Cloud benefit helps improve system performance by placing resources closer to users?",
+    "choices": {
+      "A": "Elasticity",
+      "B": "High availability",
+      "C": "Global infrastructure",
+      "D": "Security"
+    },
+    "correct": "C",
+    "tip": "Closer = faster.",
+    "explanations": {
+      "A": "Incorrect. Elasticity is about scaling.",
+      "B": "Incorrect. High availability is about uptime.",
+      "C": "Correct. AWS global infrastructure reduces latency by placing resources closer to users.",
+      "D": "Incorrect. Security is not about performance location."
+    }
+  },
+  {
+    "question": "What is fault tolerance in AWS?",
+    "choices": {
+      "A": "The ability to automatically scale resources",
+      "B": "The ability to continue operating even when components fail",
+      "C": "The ability to reduce costs",
+      "D": "The ability to increase performance"
+    },
+    "correct": "B",
+    "tip": "System survives failure.",
+    "explanations": {
+      "A": "Incorrect. That is elasticity.",
+      "B": "Correct. Fault tolerance allows systems to continue operating despite failures.",
+      "C": "Incorrect. This is cost optimization.",
+      "D": "Incorrect. This is performance tuning."
+    }
+  },
+  {
+    "question": "Which AWS concept ensures data is protected against loss over time?",
+    "choices": {
+      "A": "Elasticity",
+      "B": "Durability",
+      "C": "Latency",
+      "D": "Scalability"
+    },
+    "correct": "B",
+    "tip": "Data safety.",
+    "explanations": {
+      "A": "Incorrect. Elasticity is about scaling.",
+      "B": "Correct. Durability ensures data is safely stored and not lost.",
+      "C": "Incorrect. Latency relates to speed.",
+      "D": "Incorrect. Scalability relates to growth."
+    }
+  },
+  {
+    "question": "Which scenario BEST represents a use case for cloud computing?",
+    "choices": {
+      "A": "Buying servers and installing them in a local data center",
+      "B": "Using on-demand computing resources over the internet",
+      "C": "Maintaining hardware manually",
+      "D": "Using only local storage devices"
+    },
+    "correct": "B",
+    "tip": "Internet + on-demand.",
+    "explanations": {
+      "A": "Incorrect. That is on-premises infrastructure.",
+      "B": "Correct. Cloud computing uses on-demand resources over the internet.",
+      "C": "Incorrect. Cloud reduces manual hardware management.",
+      "D": "Incorrect. Cloud uses remote infrastructure."
+    }
+  },
+  {
+    "question": "Which TWO AWS Cloud characteristics allow customers to scale resources efficiently? (Select TWO.)",
+    "choices": {
+      "A": "Elasticity",
+      "B": "Scalability",
+      "C": "Manual provisioning",
+      "D": "Fixed capacity"
+    },
+    "correct": ["A", "B"],
+    "tip": "Dynamic + growth.",
+    "explanations": {
+      "A": "Correct. Elasticity allows automatic scaling based on demand.",
+      "B": "Correct. Scalability allows systems to handle growth.",
+      "C": "Incorrect. Manual provisioning slows scaling.",
+      "D": "Incorrect. Fixed capacity limits scaling."
+    }
+  },
+
+  {
+    "question": "Which AWS Cloud benefit allows you to deploy applications worldwide quickly?",
+    "choices": {
+      "A": "Elasticity",
+      "B": "Go global in minutes",
+      "C": "High availability",
+      "D": "Security"
+    },
+    "correct": "B",
+    "tip": "Deploy anywhere fast.",
+    "explanations": {
+      "A": "Incorrect.",
+      "B": "Correct.",
+      "C": "Incorrect.",
+      "D": "Incorrect."
+    }
+  },
+  {
+    "question": "Which concept allows AWS resources to scale automatically based on demand?",
+    "choices": {
+      "A": "Elasticity",
+      "B": "Durability",
+      "C": "Isolation",
+      "D": "Latency"
+    },
+    "correct": "A",
+    "tip": "Auto scale.",
+    "explanations": {
+      "A": "Correct.",
+      "B": "Incorrect.",
+      "C": "Incorrect.",
+      "D": "Incorrect."
+    }
+  },
+  {
+    "question": "What is durability in AWS?",
+    "choices": {
+      "A": "Ability to scale",
+      "B": "Data is safely stored and not lost",
+      "C": "Fast performance",
+      "D": "Low cost"
+    },
+    "correct": "B",
+    "tip": "Data safety.",
+    "explanations": {
+      "A": "Incorrect.",
+      "B": "Correct.",
+      "C": "Incorrect.",
+      "D": "Incorrect."
+    }
+  },
+  {
+    "question": "Which AWS concept helps reduce latency for global users?",
+    "choices": {
+      "A": "Regions closer to users",
+      "B": "Bigger servers",
+      "C": "Local storage",
+      "D": "Manual scaling"
+    },
+    "correct": "A",
+    "tip": "Closer = faster.",
+    "explanations": {
+      "A": "Correct.",
+      "B": "Incorrect.",
+      "C": "Incorrect.",
+      "D": "Incorrect."
+    }
+  },
+
+  {
+    "question": "Which TWO are characteristics of cloud computing? (Select TWO.)",
+    "choices": {
+      "A": "On-demand self-service",
+      "B": "High upfront costs",
+      "C": "Scalability",
+      "D": "Manual provisioning"
+    },
+    "correct": ["A", "C"],
+    "tip": "Core cloud traits.",
+    "explanations": {
+      "A": "Correct.",
+      "B": "Incorrect.",
+      "C": "Correct.",
+      "D": "Incorrect."
+    }
+  },
+  {
+    "question": "Which TWO are benefits of AWS Cloud? (Select TWO.)",
+    "choices": {
+      "A": "Trade capital expense for variable expense",
+      "B": "Stop guessing capacity",
+      "C": "Manual infrastructure management",
+      "D": "Single data center reliance"
+    },
+    "correct": ["A", "B"],
+    "tip": "Think AWS advantages.",
+    "explanations": {
+      "A": "Correct.",
+      "B": "Correct.",
+      "C": "Incorrect.",
+      "D": "Incorrect."
+    }
+  }
+]

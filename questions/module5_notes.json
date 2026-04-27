@@ -1,0 +1,267 @@
+{
+  "module": "Module 5 - Networking, VPC, and Connectivity",
+  "sections": [
+    {
+      "title": "Amazon VPC (Virtual Private Cloud)",
+      "points": [
+        "A VPC is a logically isolated network in AWS.",
+        "You define IP ranges, subnets, and routing.",
+        "It allows full control over networking and security.",
+        "Acts like your own private data center in the cloud."
+      ],
+      "exam_tip": "Isolation + control → VPC."
+    },
+    {
+      "title": "Subnets",
+      "points": [
+        "Subnets are segments of a VPC.",
+        "Used to organize and isolate resources.",
+        "Can be public or private.",
+        "Each subnet exists in one Availability Zone."
+      ],
+      "exam_tip": "Organization + isolation → Subnets."
+    },
+    {
+      "title": "Public vs Private Subnets",
+      "points": [
+        "Public subnet = has access to the internet.",
+        "Private subnet = no direct internet access.",
+        "Web servers → public subnet.",
+        "Databases → private subnet."
+      ],
+      "exam_tip": "Database = ALWAYS private subnet."
+    },
+    {
+      "title": "Internet Gateway",
+      "points": [
+        "Allows communication between VPC and the internet.",
+        "Required for public subnets.",
+        "Attached to a VPC.",
+        "Acts like a 'front door' to AWS resources."
+      ],
+      "exam_tip": "Public access → Internet Gateway."
+    },
+    {
+      "title": "Virtual Private Gateway",
+      "points": [
+        "Used to connect VPC to on-premises networks.",
+        "Enables VPN connections.",
+        "Only allows traffic from approved networks.",
+        "Used for secure communication."
+      ],
+      "exam_tip": "Private connection over internet → Virtual Private Gateway."
+    },
+    {
+      "title": "VPN (Virtual Private Network)",
+      "points": [
+        "Encrypts traffic over the internet.",
+        "Creates a secure tunnel.",
+        "Used for connecting on-prem to AWS.",
+        "Shared bandwidth → can be slower."
+      ],
+      "exam_tip": "Secure but shared → VPN."
+    },
+    {
+      "title": "AWS Direct Connect",
+      "points": [
+        "Dedicated private connection to AWS.",
+        "Bypasses the internet.",
+        "Provides consistent high performance.",
+        "Used for large data transfers and compliance."
+      ],
+      "exam_tip": "High bandwidth + low latency → Direct Connect."
+    },
+    {
+      "title": "Direct Connect vs VPN",
+      "points": [
+        "VPN = cheaper, flexible, uses internet.",
+        "Direct Connect = expensive, dedicated, faster.",
+        "VPN = good for small workloads.",
+        "Direct Connect = best for large-scale data."
+      ],
+      "exam_tip": "Big data transfer → Direct Connect."
+    },
+    {
+      "title": "AWS Client VPN",
+      "points": [
+        "Connects remote users to AWS.",
+        "Fully managed and scalable.",
+        "Uses OpenVPN.",
+        "Ideal for remote workforce."
+      ],
+      "exam_tip": "Remote employees → Client VPN."
+    },
+    {
+      "title": "AWS Site-to-Site VPN",
+      "points": [
+        "Connects entire networks (on-prem to AWS).",
+        "Secure encrypted tunnel.",
+        "Supports branch offices.",
+        "High availability supported."
+      ],
+      "exam_tip": "Office → AWS → Site-to-Site VPN."
+    },
+    {
+      "title": "AWS PrivateLink",
+      "points": [
+        "Private connection between VPC and services.",
+        "No internet required.",
+        "No VPN or gateway needed.",
+        "Secure and simplified access."
+      ],
+      "exam_tip": "Private service access → PrivateLink."
+    },
+    {
+      "title": "NAT Gateway",
+      "points": [
+        "Allows private subnet to access the internet.",
+        "Prevents inbound connections from internet.",
+        "Used for updates or API calls.",
+        "Maintains security."
+      ],
+      "exam_tip": "Private subnet outbound → NAT Gateway."
+    },
+    {
+      "title": "AWS Transit Gateway",
+      "points": [
+        "Connects multiple VPCs and networks.",
+        "Acts as a central hub.",
+        "Simplifies complex architectures.",
+        "Supports large-scale networking."
+      ],
+      "exam_tip": "Many VPCs → Transit Gateway."
+    },
+    {
+      "title": "Security Groups",
+      "points": [
+        "Firewall at instance level.",
+        "Controls inbound and outbound traffic.",
+        "Stateful (remembers traffic).",
+        "Default: deny inbound, allow outbound."
+      ],
+      "exam_tip": "Instance security → Security Groups."
+    },
+    {
+      "title": "Network ACLs (NACLs)",
+      "points": [
+        "Firewall at subnet level.",
+        "Controls inbound and outbound traffic.",
+        "Stateless (no memory).",
+        "Can allow and deny rules."
+      ],
+      "exam_tip": "Subnet security → NACL."
+    },
+    {
+      "title": "Security Groups vs NACLs",
+      "points": [
+        "Security groups = stateful.",
+        "NACLs = stateless.",
+        "Security groups = instance level.",
+        "NACLs = subnet level."
+      ],
+      "exam_tip": "Stateful vs stateless = BIG exam question."
+    },
+    {
+      "title": "Packets and Network Traffic",
+      "points": [
+        "Data is sent in packets.",
+        "Packets are checked at multiple layers.",
+        "Security groups and NACLs evaluate traffic.",
+        "Traffic flow is controlled step-by-step."
+      ],
+      "exam_tip": "Every packet is checked."
+    },
+    {
+      "title": "Edge Networking",
+      "points": [
+        "Brings content closer to users.",
+        "Reduces latency.",
+        "Improves performance.",
+        "Uses global edge network."
+      ],
+      "exam_tip": "Fast global delivery → Edge networking."
+    },
+    {
+      "title": "Amazon Route 53",
+      "points": [
+        "DNS service.",
+        "Translates domain names to IP addresses.",
+        "Routes traffic based on policies.",
+        "Can register domain names."
+      ],
+      "exam_tip": "DNS → Route 53."
+    },
+    {
+      "title": "Route 53 Routing Policies",
+      "points": [
+        "Latency-based routing.",
+        "Geolocation routing.",
+        "Weighted routing.",
+        "Geoproximity routing."
+      ],
+      "exam_tip": "Closest region → latency routing."
+    },
+    {
+      "title": "Amazon CloudFront",
+      "points": [
+        "Content Delivery Network (CDN).",
+        "Uses edge locations.",
+        "Caches content globally.",
+        "Speeds up delivery."
+      ],
+      "exam_tip": "Fast content → CloudFront."
+    },
+    {
+      "title": "AWS Global Accelerator",
+      "points": [
+        "Improves performance using AWS network.",
+        "Provides fast failover.",
+        "Routes traffic intelligently.",
+        "Used for real-time apps."
+      ],
+      "exam_tip": "Performance + failover → Global Accelerator."
+    },
+    {
+      "title": "Route 53 vs CloudFront vs Global Accelerator",
+      "points": [
+        "Route 53 = DNS routing.",
+        "CloudFront = content caching.",
+        "Global Accelerator = traffic optimization.",
+        "They often work together."
+      ],
+      "exam_tip": "Know WHEN to use each."
+    },
+    {
+      "title": "Hybrid Cloud Networking",
+      "points": [
+        "Combination of on-prem + AWS.",
+        "Uses VPN or Direct Connect.",
+        "Supports migration and scaling.",
+        "Common enterprise setup."
+      ],
+      "exam_tip": "Hybrid = on-prem + AWS."
+    },
+    {
+      "title": "Real Exam Patterns",
+      "points": [
+        "Private subnet needs internet → NAT Gateway.",
+        "Remote workers → Client VPN.",
+        "Large data transfer → Direct Connect.",
+        "Private service access → PrivateLink.",
+        "Instance security → Security Groups."
+      ],
+      "exam_tip": "Match problem → correct service."
+    },
+    {
+      "title": "Common Exam Traps",
+      "points": [
+        "Security group ≠ subnet level.",
+        "NACL ≠ stateful.",
+        "CloudFront ≠ DNS.",
+        "Route 53 ≠ CDN.",
+        "VPN ≠ high performance."
+      ],
+      "exam_tip": "AWS loves mixing these up."
+    }
+  ]
+}

@@ -1,0 +1,513 @@
+[
+  {
+    "question": "A company wants to recommend products to each customer based on previous purchases and browsing behavior. Which AWS service is the BEST fit?",
+    "choices": {
+      "A": "Amazon Lex",
+      "B": "Amazon Personalize",
+      "C": "Amazon Polly",
+      "D": "Amazon Textract"
+    },
+    "correct": "B",
+    "tip": "Think recommendation engine.",
+    "explanations": {
+      "A": "Incorrect. Lex is for chatbots and conversational interfaces.",
+      "B": "Correct. Amazon Personalize is built for personalized recommendations.",
+      "C": "Incorrect. Polly converts text to speech.",
+      "D": "Incorrect. Textract extracts text from documents."
+    }
+  },
+  {
+    "question": "Which AWS service converts text into lifelike speech?",
+    "choices": {
+      "A": "Amazon Polly",
+      "B": "Amazon Translate",
+      "C": "Amazon Comprehend",
+      "D": "Amazon Transcribe"
+    },
+    "correct": "A",
+    "tip": "Text in, voice out.",
+    "explanations": {
+      "A": "Correct. Amazon Polly converts text to natural-sounding speech.",
+      "B": "Incorrect. Translate converts text between languages.",
+      "C": "Incorrect. Comprehend analyzes text.",
+      "D": "Incorrect. Transcribe converts speech to text."
+    }
+  },
+  {
+    "question": "A business wants to build, train, and deploy custom machine learning models without managing infrastructure. Which AWS service should they choose?",
+    "choices": {
+      "A": "Amazon SageMaker AI",
+      "B": "Amazon EC2",
+      "C": "Amazon Personalize",
+      "D": "Amazon Bedrock"
+    },
+    "correct": "A",
+    "tip": "Custom ML lifecycle platform.",
+    "explanations": {
+      "A": "Correct. SageMaker AI is AWS managed platform for building, training, and deploying ML models.",
+      "B": "Incorrect. EC2 gives compute but not a managed ML platform.",
+      "C": "Incorrect. Personalize is a pre-built recommendation service.",
+      "D": "Incorrect. Bedrock focuses on foundation models and generative AI."
+    }
+  },
+  {
+    "question": "Which AWS service converts spoken audio into text?",
+    "choices": {
+      "A": "Amazon Translate",
+      "B": "Amazon Transcribe",
+      "C": "Amazon Polly",
+      "D": "Amazon Rekognition"
+    },
+    "correct": "B",
+    "tip": "Speech in, text out.",
+    "explanations": {
+      "A": "Incorrect. Translate handles language translation.",
+      "B": "Correct. Amazon Transcribe converts speech to text.",
+      "C": "Incorrect. Polly converts text to speech.",
+      "D": "Incorrect. Rekognition analyzes images and video."
+    }
+  },
+  {
+    "question": "A company needs to analyze customer reviews to determine positive or negative sentiment. Which AWS service is the BEST choice?",
+    "choices": {
+      "A": "Amazon Comprehend",
+      "B": "Amazon Lex",
+      "C": "Amazon Polly",
+      "D": "Amazon Kinesis Data Streams"
+    },
+    "correct": "A",
+    "tip": "Sentiment analysis = NLP.",
+    "explanations": {
+      "A": "Correct. Amazon Comprehend performs sentiment analysis and extracts insights from text.",
+      "B": "Incorrect. Lex builds chatbots.",
+      "C": "Incorrect. Polly generates speech.",
+      "D": "Incorrect. Kinesis ingests streaming data."
+    }
+  },
+  {
+    "question": "Which TWO statements correctly describe machine learning?",
+    "choices": {
+      "A": "It finds patterns in historical data.",
+      "B": "It always requires manually coded rules.",
+      "C": "It can make predictions on new data.",
+      "D": "It only works with image data."
+    },
+    "correct": ["A", "C"],
+    "tip": "Think training + inference.",
+    "explanations": {
+      "A": "Correct. ML training finds patterns in historical data.",
+      "B": "Incorrect. ML reduces reliance on explicit manual rules.",
+      "C": "Correct. Trained models can make predictions on new data.",
+      "D": "Incorrect. ML works across many data types."
+    }
+  },
+  {
+    "question": "Which AWS service allows developers to add voice and text conversational interfaces to applications?",
+    "choices": {
+      "A": "Amazon Lex",
+      "B": "Amazon Translate",
+      "C": "Amazon Bedrock",
+      "D": "Amazon Athena"
+    },
+    "correct": "A",
+    "tip": "Chatbot / virtual assistant.",
+    "explanations": {
+      "A": "Correct. Amazon Lex provides conversational interfaces using voice and text.",
+      "B": "Incorrect. Translate is for language translation.",
+      "C": "Incorrect. Bedrock is for generative AI foundation models.",
+      "D": "Incorrect. Athena queries data with SQL."
+    }
+  },
+  {
+    "question": "Generative AI models trained on vast datasets that can perform multiple tasks are commonly called what?",
+    "choices": {
+      "A": "Data lakes",
+      "B": "Foundation models",
+      "C": "ETL models",
+      "D": "Rule engines"
+    },
+    "correct": "B",
+    "tip": "Large pre-trained models.",
+    "explanations": {
+      "A": "Incorrect. Data lakes store data.",
+      "B": "Correct. Foundation models are large pre-trained models used in generative AI.",
+      "C": "Incorrect. ETL is a data process.",
+      "D": "Incorrect. Rule engines use explicit logic."
+    }
+  },
+  {
+    "question": "A company wants access to multiple foundation models through a single API without managing infrastructure. Which AWS service should they use?",
+    "choices": {
+      "A": "Amazon Bedrock",
+      "B": "Amazon EC2",
+      "C": "Amazon Redshift",
+      "D": "Amazon Lex"
+    },
+    "correct": "A",
+    "tip": "Managed generative AI platform.",
+    "explanations": {
+      "A": "Correct. Amazon Bedrock provides managed access to foundation models through a unified API.",
+      "B": "Incorrect. EC2 is raw compute.",
+      "C": "Incorrect. Redshift is analytics warehouse.",
+      "D": "Incorrect. Lex is conversational AI."
+    }
+  },
+  {
+    "question": "What is the PRIMARY difference between classical programming and machine learning?",
+    "choices": {
+      "A": "Classical programming uses explicit rules, while ML learns patterns from data.",
+      "B": "Classical programming only works in the cloud.",
+      "C": "Machine learning cannot make predictions.",
+      "D": "Machine learning always costs less."
+    },
+    "correct": "A",
+    "tip": "Rules vs learned patterns.",
+    "explanations": {
+      "A": "Correct. Traditional programming uses coded rules; ML learns from data.",
+      "B": "Incorrect. Classical programming works anywhere.",
+      "C": "Incorrect. Prediction is a core ML use case.",
+      "D": "Incorrect. Cost depends on implementation."
+    }
+  },
+  {
+    "question": "A company wants to extract printed text, tables, and form data from scanned invoices. Which AWS service is the BEST choice?",
+    "choices": {
+      "A": "Amazon Textract",
+      "B": "Amazon Polly",
+      "C": "Amazon Lex",
+      "D": "Amazon Rekognition"
+    },
+    "correct": "A",
+    "tip": "Documents + OCR + forms.",
+    "explanations": {
+      "A": "Correct. Amazon Textract extracts text, tables, and forms from documents.",
+      "B": "Incorrect. Polly is text-to-speech.",
+      "C": "Incorrect. Lex is conversational AI.",
+      "D": "Incorrect. Rekognition is image/video analysis."
+    }
+  },
+  {
+    "question": "Which AWS service is used to analyze images and videos to identify objects, people, text, and activities?",
+    "choices": {
+      "A": "Amazon Rekognition",
+      "B": "Amazon Comprehend",
+      "C": "Amazon Translate",
+      "D": "Amazon Athena"
+    },
+    "correct": "A",
+    "tip": "Computer vision service.",
+    "explanations": {
+      "A": "Correct. Amazon Rekognition analyzes images and video content.",
+      "B": "Incorrect. Comprehend analyzes text.",
+      "C": "Incorrect. Translate handles language translation.",
+      "D": "Incorrect. Athena queries data."
+    }
+  },
+  {
+    "question": "A business needs to translate website content from English into multiple languages automatically. Which AWS service should they use?",
+    "choices": {
+      "A": "Amazon Translate",
+      "B": "Amazon Polly",
+      "C": "Amazon Lex",
+      "D": "Amazon SageMaker AI"
+    },
+    "correct": "A",
+    "tip": "Language conversion.",
+    "explanations": {
+      "A": "Correct. Amazon Translate provides neural machine translation.",
+      "B": "Incorrect. Polly creates speech.",
+      "C": "Incorrect. Lex builds chatbots.",
+      "D": "Incorrect. SageMaker is for custom ML models."
+    }
+  },
+  {
+    "question": "Which AWS service lets users search enterprise content across internal data sources using generative AI assistance?",
+    "choices": {
+      "A": "Amazon Q Business",
+      "B": "Amazon Kinesis",
+      "C": "Amazon Route 53",
+      "D": "Amazon Aurora"
+    },
+    "correct": "A",
+    "tip": "Business knowledge assistant.",
+    "explanations": {
+      "A": "Correct. Amazon Q Business helps users search and interact with enterprise knowledge sources.",
+      "B": "Incorrect. Kinesis is streaming data.",
+      "C": "Incorrect. Route 53 is DNS.",
+      "D": "Incorrect. Aurora is a database."
+    }
+  },
+  {
+    "question": "A developer wants AI assistance for coding, documentation, and troubleshooting inside AWS environments. Which service is the BEST fit?",
+    "choices": {
+      "A": "Amazon Q Developer",
+      "B": "Amazon Polly",
+      "C": "Amazon Textract",
+      "D": "Amazon Redshift"
+    },
+    "correct": "A",
+    "tip": "Developer productivity AI.",
+    "explanations": {
+      "A": "Correct. Amazon Q Developer is designed to assist developers with coding and AWS tasks.",
+      "B": "Incorrect. Polly is speech generation.",
+      "C": "Incorrect. Textract extracts document text.",
+      "D": "Incorrect. Redshift is analytics."
+    }
+  },
+  {
+    "question": "Which TWO AWS services are considered pre-trained AI services that do not require building custom models?",
+    "choices": {
+      "A": "Amazon Rekognition",
+      "B": "Amazon Comprehend",
+      "C": "Amazon EC2",
+      "D": "Amazon VPC"
+    },
+    "correct": ["A", "B"],
+    "tip": "Ready-to-use AI APIs.",
+    "explanations": {
+      "A": "Correct. Rekognition is a ready-made AI vision service.",
+      "B": "Correct. Comprehend is a ready-made NLP service.",
+      "C": "Incorrect. EC2 is compute.",
+      "D": "Incorrect. VPC is networking."
+    }
+  },
+  {
+    "question": "A company needs to ingest real-time streaming clickstream data from millions of users. Which AWS service is the BEST fit?",
+    "choices": {
+      "A": "Amazon Kinesis",
+      "B": "Amazon RDS",
+      "C": "Amazon Lightsail",
+      "D": "Amazon S3 Glacier"
+    },
+    "correct": "A",
+    "tip": "Real-time streaming data.",
+    "explanations": {
+      "A": "Correct. Amazon Kinesis is built for streaming data ingestion and processing.",
+      "B": "Incorrect. RDS is a relational database.",
+      "C": "Incorrect. Lightsail is simplified hosting.",
+      "D": "Incorrect. Glacier is archive storage."
+    }
+  },
+  {
+    "question": "Which AWS service is commonly used to transform, catalog, and prepare data for analytics workloads?",
+    "choices": {
+      "A": "AWS Glue",
+      "B": "Amazon Polly",
+      "C": "Amazon Route 53",
+      "D": "Amazon SNS"
+    },
+    "correct": "A",
+    "tip": "ETL / data prep.",
+    "explanations": {
+      "A": "Correct. AWS Glue is used for ETL, data cataloging, and analytics preparation.",
+      "B": "Incorrect. Polly is speech service.",
+      "C": "Incorrect. Route 53 is DNS.",
+      "D": "Incorrect. SNS is notifications."
+    }
+  },
+  {
+    "question": "A company wants to run SQL queries directly against data stored in Amazon S3 without managing servers. Which service should they use?",
+    "choices": {
+      "A": "Amazon Athena",
+      "B": "Amazon EC2",
+      "C": "Amazon Neptune",
+      "D": "Amazon Lex"
+    },
+    "correct": "A",
+    "tip": "SQL on S3.",
+    "explanations": {
+      "A": "Correct. Athena queries data in S3 using standard SQL.",
+      "B": "Incorrect. EC2 requires server management.",
+      "C": "Incorrect. Neptune is graph database.",
+      "D": "Incorrect. Lex is conversational AI."
+    }
+  },
+  {
+    "question": "Which AWS service helps create interactive dashboards and business intelligence visualizations?",
+    "choices": {
+      "A": "Amazon QuickSight",
+      "B": "Amazon Bedrock",
+      "C": "Amazon EBS",
+      "D": "Amazon CloudFront"
+    },
+    "correct": "A",
+    "tip": "Dashboards + BI.",
+    "explanations": {
+      "A": "Correct. Amazon QuickSight is AWS business intelligence and dashboard service.",
+      "B": "Incorrect. Bedrock is generative AI platform.",
+      "C": "Incorrect. EBS is block storage.",
+      "D": "Incorrect. CloudFront is CDN."
+    }
+  },
+  {
+    "question": "A company wants to search log data and application metrics in near real time with dashboards and visualization. Which AWS service is the BEST fit?",
+    "choices": {
+      "A": "Amazon OpenSearch Service",
+      "B": "Amazon RDS",
+      "C": "Amazon Polly",
+      "D": "Amazon Route 53"
+    },
+    "correct": "A",
+    "tip": "Search + logs + dashboards.",
+    "explanations": {
+      "A": "Correct. Amazon OpenSearch Service is commonly used for log analytics, search, and dashboards.",
+      "B": "Incorrect. RDS is a relational database.",
+      "C": "Incorrect. Polly is text-to-speech.",
+      "D": "Incorrect. Route 53 is DNS."
+    }
+  },
+  {
+    "question": "Which AWS analytics service is BEST for processing big data workloads using frameworks such as Hadoop and Spark?",
+    "choices": {
+      "A": "Amazon EMR",
+      "B": "Amazon Lex",
+      "C": "Amazon SNS",
+      "D": "Amazon DynamoDB"
+    },
+    "correct": "A",
+    "tip": "Big data clusters.",
+    "explanations": {
+      "A": "Correct. Amazon EMR is managed big data platform for Hadoop, Spark, and related frameworks.",
+      "B": "Incorrect. Lex is chatbot service.",
+      "C": "Incorrect. SNS is messaging.",
+      "D": "Incorrect. DynamoDB is NoSQL database."
+    }
+  },
+  {
+    "question": "Which TWO services are commonly used together for a modern data lake architecture?",
+    "choices": {
+      "A": "Amazon S3",
+      "B": "Amazon Athena",
+      "C": "Amazon Polly",
+      "D": "Amazon Route 53"
+    },
+    "correct": ["A", "B"],
+    "tip": "Storage + query.",
+    "explanations": {
+      "A": "Correct. Amazon S3 is common storage layer for data lakes.",
+      "B": "Correct. Athena can query data directly in S3.",
+      "C": "Incorrect. Polly is speech generation.",
+      "D": "Incorrect. Route 53 is DNS."
+    }
+  },
+  {
+    "question": "A company wants to deliver streaming data into Amazon S3, Redshift, or OpenSearch with minimal management. Which AWS service should they use?",
+    "choices": {
+      "A": "Amazon Kinesis Data Firehose",
+      "B": "Amazon EC2 Auto Scaling",
+      "C": "Amazon RDS Proxy",
+      "D": "Amazon Lightsail"
+    },
+    "correct": "A",
+    "tip": "Managed delivery stream.",
+    "explanations": {
+      "A": "Correct. Kinesis Data Firehose delivers streaming data to AWS destinations with minimal management.",
+      "B": "Incorrect. Auto Scaling manages compute.",
+      "C": "Incorrect. RDS Proxy is for databases.",
+      "D": "Incorrect. Lightsail is hosting service."
+    }
+  },
+  {
+    "question": "What is the PRIMARY purpose of ETL in analytics workflows?",
+    "choices": {
+      "A": "Encrypt, Transfer, Launch",
+      "B": "Extract, Transform, Load",
+      "C": "Evaluate, Train, Learn",
+      "D": "Execute, Test, Log"
+    },
+    "correct": "B",
+    "tip": "Classic data pipeline term.",
+    "explanations": {
+      "A": "Incorrect. Not the meaning of ETL.",
+      "B": "Correct. ETL stands for Extract, Transform, Load.",
+      "C": "Incorrect. Related to ML, not ETL.",
+      "D": "Incorrect. Not correct."
+    }
+  },
+  {
+    "question": "Which AWS service provides managed access to foundation models for generative AI applications?",
+    "choices": {
+      "A": "Amazon Bedrock",
+      "B": "Amazon Athena",
+      "C": "Amazon EFS",
+      "D": "Amazon Inspector"
+    },
+    "correct": "A",
+    "tip": "Generative AI platform.",
+    "explanations": {
+      "A": "Correct. Amazon Bedrock gives access to foundation models through managed APIs.",
+      "B": "Incorrect. Athena is analytics query service.",
+      "C": "Incorrect. EFS is file storage.",
+      "D": "Incorrect. Inspector is security scanning."
+    }
+  },
+  {
+    "question": "A developer wants to quickly deploy prebuilt machine learning solutions and starter models. Which SageMaker feature is BEST suited?",
+    "choices": {
+      "A": "SageMaker JumpStart",
+      "B": "Amazon Lex",
+      "C": "AWS Shield",
+      "D": "Amazon VPC"
+    },
+    "correct": "A",
+    "tip": "Prebuilt ML solutions.",
+    "explanations": {
+      "A": "Correct. SageMaker JumpStart helps quickly deploy models and ML solutions.",
+      "B": "Incorrect. Lex is chatbot service.",
+      "C": "Incorrect. Shield is DDoS protection.",
+      "D": "Incorrect. VPC is networking."
+    }
+  },
+  {
+    "question": "Which TWO statements are true about generative AI?",
+    "choices": {
+      "A": "It can create new text, images, or code.",
+      "B": "It always requires manually coded rules.",
+      "C": "It often uses foundation models.",
+      "D": "It can only summarize existing text."
+    },
+    "correct": ["A", "C"],
+    "tip": "Creation + large models.",
+    "explanations": {
+      "A": "Correct. Generative AI can create new content.",
+      "B": "Incorrect. It is model-driven, not manual rules only.",
+      "C": "Correct. Foundation models power many generative AI systems.",
+      "D": "Incorrect. It can do far more than summarization."
+    }
+  },
+  {
+    "question": "A company needs dashboards for executives based on data stored in Redshift and S3. Which AWS service is BEST?",
+    "choices": {
+      "A": "Amazon QuickSight",
+      "B": "Amazon Textract",
+      "C": "Amazon Route 53",
+      "D": "Amazon Polly"
+    },
+    "correct": "A",
+    "tip": "Business dashboards.",
+    "explanations": {
+      "A": "Correct. QuickSight is AWS BI and dashboard service.",
+      "B": "Incorrect. Textract extracts document text.",
+      "C": "Incorrect. Route 53 is DNS.",
+      "D": "Incorrect. Polly is speech."
+    }
+  },
+  {
+    "question": "A company wants a search engine for enterprise documents, websites, and FAQs with relevance ranking. Which AWS service is the BEST fit?",
+    "choices": {
+      "A": "Amazon Kendra",
+      "B": "Amazon EBS",
+      "C": "Amazon RDS",
+      "D": "AWS Lambda"
+    },
+    "correct": "A",
+    "tip": "Enterprise intelligent search.",
+    "explanations": {
+      "A": "Correct. Amazon Kendra is intelligent enterprise search service.",
+      "B": "Incorrect. EBS is block storage.",
+      "C": "Incorrect. RDS is database.",
+      "D": "Incorrect. Lambda runs code."
+    }
+  }
+]
+

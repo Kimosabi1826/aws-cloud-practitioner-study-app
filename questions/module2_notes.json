@@ -1,0 +1,329 @@
+{
+  "module": "Module 2 - Compute and EC2",
+  "sections": [
+    {
+      "title": "Amazon EC2 Basics",
+      "points": [
+        "Amazon EC2 stands for Amazon Elastic Compute Cloud.",
+        "EC2 provides on-demand virtual servers in AWS.",
+        "EC2 is more flexible, cost-effective, and faster to start than buying and managing on-premises servers.",
+        "You can launch instances in minutes instead of waiting for hardware purchase, delivery, and setup.",
+        "You pay for running compute capacity, which makes EC2 useful for workloads that change over time.",
+        "EC2 gives you control over the operating system, software, storage, and networking settings on the instance.",
+        "EC2 is considered an unmanaged compute service compared with more managed AWS options."
+      ],
+      "exam_tip": "If the question asks for virtual servers, customizable compute, or control over the OS, think EC2."
+    },
+    {
+      "title": "How EC2 Compares to On-Premises",
+      "points": [
+        "On-premises infrastructure requires upfront hardware purchases, installation, and maintenance.",
+        "On-premises capacity can be hard to predict, which leads to overbuying or underbuying hardware.",
+        "EC2 removes the delay of physical hardware setup.",
+        "EC2 lets you start small, scale up or down, and stop instances when you no longer need them.",
+        "This makes EC2 more agile than traditional on-premises servers."
+      ],
+      "exam_tip": "If AWS asks what EC2 improves over on-premises, the answer usually includes flexibility, speed, and cost-effectiveness."
+    },
+    {
+      "title": "EC2 Instances, Virtual Machines, and Multi-Tenancy",
+      "points": [
+        "EC2 instances are virtual machines (VMs).",
+        "Multiple EC2 instances can share an underlying physical host machine.",
+        "This sharing model is called multi-tenancy.",
+        "Even though instances share a host, they are isolated from one another.",
+        "The software that manages this sharing and isolation is called a hypervisor.",
+        "AWS manages the host hardware, the hypervisor, and the isolation between instances."
+      ],
+      "exam_tip": "Multi-tenancy does NOT mean all workloads mix together. It means shared host, isolated virtual machines."
+    },
+    {
+      "title": "What You Control on an EC2 Instance",
+      "points": [
+        "You choose the operating system, such as Linux or Windows.",
+        "You choose what software runs on the instance.",
+        "You can configure internal business apps, websites, databases, or third-party software.",
+        "You can choose networking behavior, such as whether the instance is publicly or privately accessible.",
+        "You can resize the instance if the workload needs more memory or CPU."
+      ],
+      "exam_tip": "If the question mentions customer control over the guest operating system or installed software, that fits EC2."
+    },
+    {
+      "title": "Scaling Concepts in EC2",
+      "points": [
+        "Vertical scaling means making one instance bigger by adding more CPU or memory.",
+        "Horizontal scaling means adding more instances instead of making one instance bigger.",
+        "Vertical scaling is also called scaling up.",
+        "Horizontal scaling is also called scaling out.",
+        "Horizontal scaling is often better when more work needs to happen in parallel."
+      ],
+      "exam_tip": "Bigger machine = vertical scaling. More machines = horizontal scaling."
+    },
+    {
+      "title": "EC2 Instance Families",
+      "points": [
+        "General purpose instances provide a balanced mix of compute, memory, and networking.",
+        "Compute optimized instances are best for CPU-intensive tasks like high-performance computing and scientific modeling.",
+        "Memory optimized instances are best for memory-heavy workloads like large in-memory datasets and databases.",
+        "Accelerated computing instances use hardware accelerators such as GPUs.",
+        "Storage optimized instances are best for workloads needing high local storage performance and high disk throughput."
+      ],
+      "exam_tip": "Balanced = general purpose. CPU-heavy = compute optimized. RAM-heavy = memory optimized. GPU = accelerated. Disk-heavy = storage optimized."
+    },
+    {
+      "title": "Choosing the Right Instance Type",
+      "points": [
+        "General purpose is often the safest starting point when you do not yet know the workload behavior.",
+        "Compute optimized is best when the processor is the bottleneck.",
+        "Memory optimized is best when the workload must process large datasets in RAM.",
+        "Storage optimized is best when performance depends on fast local data access.",
+        "Accelerated computing is best for graphics, floating point calculations, and machine learning workloads."
+      ],
+      "exam_tip": "AWS exam questions love asking which instance family is BEST. Focus on what the workload is heavy on: CPU, memory, GPU, or storage."
+    },
+    {
+      "title": "Ways to Interact with AWS Resources",
+      "points": [
+        "Everything in AWS is ultimately an API call.",
+        "You can interact with AWS using the AWS Management Console, AWS CLI, or AWS SDK.",
+        "The AWS Management Console is browser-based and good for visual management and getting started.",
+        "The AWS CLI is command-line based and supports automation and scripting.",
+        "The AWS SDK lets developers work with AWS services using programming languages such as Python, Java, and others."
+      ],
+      "exam_tip": "Console = visual. CLI = automation/scripts. SDK = use AWS inside code."
+    },
+    {
+      "title": "Console vs CLI vs SDK",
+      "points": [
+        "The Management Console is good for learning, quick setup, billing checks, and visual workflows.",
+        "The CLI reduces repetitive manual steps and is better for automation.",
+        "The SDK is best when embedding AWS operations into applications.",
+        "Manual console work can increase the chance of human error in repeat tasks.",
+        "AWS CLI and SDK are better choices for repeatable and automated provisioning."
+      ],
+      "exam_tip": "If the question asks about reducing manual steps or scripting, the best answer is usually AWS CLI."
+    },
+    {
+      "title": "Shared Responsibility and EC2",
+      "points": [
+        "AWS secures the cloud infrastructure, including hardware and facilities.",
+        "The customer secures what runs inside the EC2 instance.",
+        "With EC2, the customer manages the guest operating system, applications, updates, and instance security settings.",
+        "The customer is also responsible for configuring firewalls such as security groups.",
+        "This is why EC2 gives more control but also more responsibility."
+      ],
+      "exam_tip": "For EC2, AWS handles the hardware. You handle the OS, apps, patches, and access."
+    },
+    {
+      "title": "Launching an EC2 Instance",
+      "points": [
+        "When launching an EC2 instance, you choose a name for the instance.",
+        "You choose an Amazon Machine Image (AMI), which acts as a template.",
+        "You choose an instance type, which determines CPU, memory, and other capacity.",
+        "You configure a key pair for secure login access.",
+        "You configure network settings, such as allowing HTTP access for a web server.",
+        "You configure storage, such as attaching an EBS volume.",
+        "You can also provide user data scripts to install and configure software automatically at launch."
+      ],
+      "exam_tip": "Core launch ideas: AMI, instance type, storage, networking, key pair."
+    },
+    {
+      "title": "What an AMI Does",
+      "points": [
+        "AMI stands for Amazon Machine Image.",
+        "An AMI is a template used when launching EC2 instances.",
+        "It includes the operating system and can include built-in software and settings.",
+        "An AMI helps create repeatable deployments because multiple instances can launch from the same template.",
+        "You can build your own AMI, use AWS-provided AMIs, or buy AMIs from AWS Marketplace."
+      ],
+      "exam_tip": "AMI = template. It does not choose size or networking by itself. It pre-configures the OS and software."
+    },
+    {
+      "title": "EC2 Pricing Models",
+      "points": [
+        "On-Demand pricing means you pay only for the time your instance runs, with no long-term commitment.",
+        "Savings Plans give discounts in exchange for a usage commitment over one or three years.",
+        "Reserved Instances are good for predictable, steady-state workloads and can reduce cost significantly.",
+        "Spot Instances use spare AWS capacity and can be interrupted by AWS.",
+        "Dedicated Hosts give you an entire physical server for your exclusive use.",
+        "Dedicated Instances also provide hardware isolation, but without full control over physical server placement."
+      ],
+      "exam_tip": "No commitment = On-Demand. Predictable long-term usage = Reserved Instances or Savings Plans. Interruptible cheap workloads = Spot."
+    },
+    {
+      "title": "When to Use Each EC2 Pricing Option",
+      "points": [
+        "On-Demand is best when you are just getting started or your usage is unpredictable.",
+        "Savings Plans are best when you expect steady compute usage across services and want flexible discounts.",
+        "Reserved Instances are best for predictable workloads with long-term commitment.",
+        "Spot Instances are best for fault-tolerant workloads that can handle interruption.",
+        "Dedicated Hosts are best for strict compliance, licensing, or full control over physical placement."
+      ],
+      "exam_tip": "If the question says 'can tolerate interruptions' → Spot. If it says 'no long-term commitment' → On-Demand."
+    },
+    {
+      "title": "Dedicated Hosts vs Dedicated Instances",
+      "points": [
+        "Dedicated Hosts give exclusive use of an entire physical server.",
+        "Dedicated Hosts allow more control over instance placement and host-level visibility.",
+        "Dedicated Instances give isolation at the account level but without choosing the exact physical server.",
+        "Both are about isolation, but Dedicated Hosts give more control."
+      ],
+      "exam_tip": "Need full control over the physical server itself? Dedicated Hosts."
+    },
+    {
+      "title": "Scalability vs Elasticity",
+      "points": [
+        "Scalability is the ability to handle growth by adding resources.",
+        "Elasticity is the ability to automatically grow and shrink resources in response to real-time demand.",
+        "Scalability often refers to long-term growth planning.",
+        "Elasticity is more about dynamic reaction to current demand."
+      ],
+      "exam_tip": "Growth over time = scalability. Automatic up/down based on demand = elasticity."
+    },
+    {
+      "title": "Amazon EC2 Auto Scaling",
+      "points": [
+        "EC2 Auto Scaling automatically adjusts the number of EC2 instances based on demand.",
+        "Dynamic scaling reacts in real time to traffic or metric changes.",
+        "Predictive scaling tries to prepare capacity in advance based on expected demand.",
+        "Auto Scaling improves both cost efficiency and availability.",
+        "Auto Scaling works by scaling out when demand rises and scaling in when demand falls."
+      ],
+      "exam_tip": "If the question mentions fluctuating demand and avoiding over-provisioning, think EC2 Auto Scaling."
+    },
+    {
+      "title": "Minimum, Desired, and Maximum Capacity",
+      "points": [
+        "Minimum capacity is the smallest number of instances that should always be running.",
+        "Desired capacity is the target number of instances Auto Scaling tries to maintain.",
+        "Maximum capacity is the upper limit so scaling does not go too far and create unnecessary cost.",
+        "If desired capacity is not specified, it defaults to the minimum capacity."
+      ],
+      "exam_tip": "Desired = target. Minimum = never go below. Maximum = do not exceed."
+    },
+    {
+      "title": "Elastic Load Balancing (ELB)",
+      "points": [
+        "Elastic Load Balancing distributes incoming traffic across multiple EC2 instances.",
+        "ELB prevents one instance from becoming overloaded while others sit idle.",
+        "ELB improves scalability and reliability by balancing traffic automatically.",
+        "ELB and Auto Scaling work well together.",
+        "As instances are added or removed, the load balancer continues routing traffic to healthy instances."
+      ],
+      "exam_tip": "Auto Scaling changes the number of instances. ELB distributes traffic across them."
+    },
+    {
+      "title": "Why ELB Matters",
+      "points": [
+        "ELB acts as a single point of contact for incoming traffic.",
+        "ELB decouples the front end from the back end.",
+        "Front-end services do not need to know every backend instance individually.",
+        "ELB simplifies failover, maintenance, and traffic routing.",
+        "This design makes applications easier to scale and maintain."
+      ],
+      "exam_tip": "If the question is about distributing traffic, the answer is ELB, not Auto Scaling."
+    },
+    {
+      "title": "Routing Methods Mentioned",
+      "points": [
+        "Round Robin sends traffic evenly across servers in order.",
+        "Least Connections sends traffic to the server with the fewest active connections.",
+        "IP Hash uses the client IP to route traffic consistently to the same server.",
+        "Least Response Time sends traffic to the server responding fastest."
+      ],
+      "exam_tip": "You probably will not need every routing method in detail for Cloud Practitioner, but know ELB uses routing strategies to balance traffic."
+    },
+    {
+      "title": "Messaging and Queuing Basics",
+      "points": [
+        "Applications often need to communicate with one another.",
+        "If they depend on each other directly, the system is tightly coupled.",
+        "Tightly coupled systems are more fragile because one failure can break other parts.",
+        "A queue acts like a buffer between services.",
+        "Using a queue creates a more loosely coupled architecture."
+      ],
+      "exam_tip": "Direct dependency = tightly coupled. Queue/buffer between services = loosely coupled."
+    },
+    {
+      "title": "Amazon SQS",
+      "points": [
+        "Amazon SQS is a message queuing service.",
+        "It lets applications send, store, and receive messages at any scale.",
+        "Messages remain in the queue until they are processed.",
+        "This means one service can continue sending messages even if another service is temporarily down.",
+        "SQS improves reliability and loose coupling."
+      ],
+      "exam_tip": "If the question says messages should wait until a service is available, the answer is SQS."
+    },
+    {
+      "title": "Amazon SNS",
+      "points": [
+        "Amazon SNS is a publish-subscribe messaging service.",
+        "SNS is used to send messages to multiple subscribers.",
+        "Subscribers can include email, SMS, Lambda functions, web servers, and more.",
+        "SNS is useful for fan-out notifications and near-immediate message delivery.",
+        "SNS is different from SQS because SNS is not mainly about storing messages for later pickup."
+      ],
+      "exam_tip": "SQS = queue and hold. SNS = publish and push."
+    },
+    {
+      "title": "Amazon EventBridge",
+      "points": [
+        "EventBridge is an event-driven service that routes events from sources to targets.",
+        "It works with AWS services, custom applications, and third-party sources.",
+        "EventBridge helps build scalable event-driven systems.",
+        "It can filter, transform, and route events automatically."
+      ],
+      "exam_tip": "If the question is about events triggering actions across services, think EventBridge."
+    },
+    {
+      "title": "Tightly Coupled vs Loosely Coupled",
+      "points": [
+        "Tightly coupled components depend directly on each other.",
+        "If one tightly coupled component fails, it can affect the others.",
+        "Loosely coupled components can continue operating even if one component fails.",
+        "Queues and event-driven designs help create loosely coupled systems.",
+        "Microservices architectures often use loose coupling for resilience and flexibility."
+      ],
+      "exam_tip": "AWS generally prefers loosely coupled architectures because they are more resilient."
+    },
+    {
+      "title": "Monolithic vs Microservices",
+      "points": [
+        "A monolithic application has tightly connected components.",
+        "Failure in one part of a monolithic app can affect the whole application.",
+        "Microservices split the application into smaller, loosely coupled parts.",
+        "Microservices improve flexibility, scalability, and fault isolation."
+      ],
+      "exam_tip": "Monolith = tightly coupled. Microservices = loosely coupled."
+    },
+    {
+      "title": "Fast Memory Anchors",
+      "points": [
+        "EC2 = virtual servers.",
+        "AMI = template.",
+        "CLI = automation.",
+        "On-Demand = no commitment.",
+        "Spot = cheapest but interruptible.",
+        "Auto Scaling = change instance count automatically.",
+        "ELB = spread traffic.",
+        "SQS = queue and hold messages.",
+        "SNS = publish and push notifications.",
+        "EventBridge = route events."
+      ],
+      "exam_tip": "If you only memorize one block from this module, memorize this one."
+    },
+    {
+      "title": "Most Common Exam Traps in This Module",
+      "points": [
+        "Auto Scaling is not the same as ELB. Auto Scaling changes capacity; ELB distributes traffic.",
+        "SQS is not the same as SNS. SQS stores messages; SNS pushes notifications.",
+        "On-Demand is not the same as Spot. On-Demand has no commitment; Spot can be interrupted.",
+        "General purpose is not the same as compute optimized. General purpose is balanced; compute optimized is CPU-focused.",
+        "CLI is not the same as Console. CLI is for automation; Console is visual."
+      ],
+      "exam_tip": "AWS loves asking questions that test whether you can separate similar services."
+    }
+  ]
+}

@@ -1,0 +1,519 @@
+[
+  {
+    "question": "What is a key characteristic of serverless computing in AWS?",
+    "choices": {
+      "A": "You must provision and manage servers manually",
+      "B": "You can access and control the underlying infrastructure",
+      "C": "AWS manages infrastructure, scaling, and availability automatically",
+      "D": "You pay for reserved capacity regardless of usage"
+    },
+    "correct": "C",
+    "tip": "Serverless = no servers to manage.",
+    "explanations": {
+      "A": "Incorrect. Serverless removes server management.",
+      "B": "Incorrect. Infrastructure is abstracted away from the user.",
+      "C": "Correct. AWS manages infrastructure, scaling, and availability.",
+      "D": "Incorrect. You pay only for usage in serverless models."
+    }
+  },
+  {
+    "question": "Which TWO characteristics apply to AWS Lambda? (Select TWO.)",
+    "choices": {
+      "A": "Runs continuously like a server",
+      "B": "Triggered by events",
+      "C": "Automatically scales based on demand",
+      "D": "Requires manual patching of operating systems"
+    },
+    "correct": ["B", "C"],
+    "tip": "Lambda = event-driven + auto scaling.",
+    "explanations": {
+      "A": "Incorrect. Lambda runs only when triggered.",
+      "B": "Correct. Lambda is event-driven.",
+      "C": "Correct. Lambda automatically scales.",
+      "D": "Incorrect. AWS manages patching."
+    }
+  },
+  {
+    "question": "Which scenario is BEST suited for AWS Lambda?",
+    "choices": {
+      "A": "Running a database server 24/7",
+      "B": "Processing files when they are uploaded",
+      "C": "Hosting a long-running game server",
+      "D": "Managing a fleet of virtual machines"
+    },
+    "correct": "B",
+    "tip": "Lambda = short, event-driven tasks.",
+    "explanations": {
+      "A": "Incorrect. Databases require persistent compute.",
+      "B": "Correct. Lambda is perfect for event-driven tasks like file processing.",
+      "C": "Incorrect. Game servers require continuous compute.",
+      "D": "Incorrect. EC2 or orchestration tools are better for that."
+    }
+  },
+  {
+    "question": "What is the relationship between Amazon ECR, ECS/EKS, and Fargate?",
+    "choices": {
+      "A": "ECR runs containers, ECS stores them",
+      "B": "ECR stores images, ECS/EKS orchestrate them, Fargate runs them",
+      "C": "Fargate stores images and ECR runs containers",
+      "D": "ECS replaces ECR completely"
+    },
+    "correct": "B",
+    "tip": "Think pipeline: store → manage → run.",
+    "explanations": {
+      "A": "Incorrect. ECR stores images, not runs containers.",
+      "B": "Correct. ECR stores images, ECS/EKS orchestrate, Fargate runs containers.",
+      "C": "Incorrect. Fargate runs containers, not stores images.",
+      "D": "Incorrect. ECS and ECR serve different roles."
+    }
+  },
+  {
+    "question": "Which is a key difference between containers and virtual machines (VMs)?",
+    "choices": {
+      "A": "Containers require a full operating system for each instance",
+      "B": "VMs share the host operating system",
+      "C": "Containers are more lightweight and start faster than VMs",
+      "D": "VMs cannot run multiple applications"
+    },
+    "correct": "C",
+    "tip": "Containers = lightweight and fast.",
+    "explanations": {
+      "A": "Incorrect. That describes VMs, not containers.",
+      "B": "Incorrect. Containers share the host OS.",
+      "C": "Correct. Containers are lightweight and faster to start.",
+      "D": "Incorrect. VMs can run multiple applications."
+    }
+  },
+  {
+    "question": "Which TWO benefits do containers provide? (Select TWO.)",
+    "choices": {
+      "A": "Consistent deployment across environments",
+      "B": "Elimination of all dependencies",
+      "C": "Faster startup times compared to VMs",
+      "D": "Require dedicated physical hardware"
+    },
+    "correct": ["A", "C"],
+    "tip": "Containers fix environment issues + speed.",
+    "explanations": {
+      "A": "Correct. Containers ensure consistent environments.",
+      "B": "Incorrect. Dependencies are packaged, not eliminated.",
+      "C": "Correct. Containers start faster than VMs.",
+      "D": "Incorrect. Containers run on shared infrastructure."
+    }
+  },
+  {
+    "question": "A developer wants full control over the infrastructure running their containers. Which option should they choose?",
+    "choices": {
+      "A": "AWS Fargate",
+      "B": "Amazon ECS with EC2",
+      "C": "AWS Lambda",
+      "D": "Amazon Lightsail"
+    },
+    "correct": "B",
+    "tip": "More control = EC2.",
+    "explanations": {
+      "A": "Incorrect. Fargate removes infrastructure control.",
+      "B": "Correct. ECS with EC2 gives full control over infrastructure.",
+      "C": "Incorrect. Lambda is serverless.",
+      "D": "Incorrect. Lightsail is simplified hosting."
+    }
+  },
+  {
+    "question": "Which scenario BEST fits AWS Batch?",
+    "choices": {
+      "A": "Real-time API processing",
+      "B": "Running millions of parallel data processing jobs",
+      "C": "Hosting a website",
+      "D": "Serving mobile app requests"
+    },
+    "correct": "B",
+    "tip": "Batch = large-scale processing jobs.",
+    "explanations": {
+      "A": "Incorrect. Lambda or EC2 is better for real-time APIs.",
+      "B": "Correct. AWS Batch is designed for large-scale parallel workloads.",
+      "C": "Incorrect. Use EC2, Beanstalk, or Lightsail.",
+      "D": "Incorrect. Batch is not for real-time request handling."
+    }
+  },
+  {
+    "question": "Which AWS service provides the easiest way for beginners to deploy a small website with predictable pricing?",
+    "choices": {
+      "A": "Amazon EC2",
+      "B": "Amazon Lightsail",
+      "C": "Amazon EKS",
+      "D": "AWS Batch"
+    },
+    "correct": "B",
+    "tip": "Beginner-friendly + simple pricing.",
+    "explanations": {
+      "A": "Incorrect. EC2 is more complex.",
+      "B": "Correct. Lightsail is simple and cost-effective.",
+      "C": "Incorrect. EKS is complex Kubernetes.",
+      "D": "Incorrect. Batch is for processing jobs."
+    }
+  },
+  {
+    "question": "Which statement BEST describes AWS Elastic Beanstalk?",
+    "choices": {
+      "A": "It replaces EC2 completely",
+      "B": "It allows you to deploy code while AWS manages infrastructure",
+      "C": "It is used only for container orchestration",
+      "D": "It requires manual scaling configuration"
+    },
+    "correct": "B",
+    "tip": "Beanstalk = deploy code, AWS handles the rest.",
+    "explanations": {
+      "A": "Incorrect. EC2 still runs underneath.",
+      "B": "Correct. Beanstalk simplifies deployment and management.",
+      "C": "Incorrect. ECS/EKS handle containers.",
+      "D": "Incorrect. Beanstalk supports automatic scaling."
+    }
+  },
+
+  {
+    "question": "Which TWO statements correctly describe container orchestration services like Amazon ECS and Amazon EKS? (Select TWO.)",
+    "choices": {
+      "A": "They automatically manage the lifecycle of containers",
+      "B": "They store container images",
+      "C": "They handle scaling, deployment, and monitoring of containers",
+      "D": "They eliminate the need for containers entirely"
+    },
+    "correct": ["A", "C"],
+    "tip": "Orchestration = manage containers, not store them.",
+    "explanations": {
+      "A": "Correct. Orchestration services manage container lifecycle (start, stop, deploy).",
+      "B": "Incorrect. Container images are stored in Amazon ECR.",
+      "C": "Correct. ECS and EKS handle scaling, monitoring, and deployment.",
+      "D": "Incorrect. They are built to manage containers, not remove them."
+    }
+  },
+  {
+    "question": "What is the primary difference between Amazon ECS and Amazon EKS?",
+    "choices": {
+      "A": "ECS supports containers, while EKS does not",
+      "B": "EKS is based on Kubernetes, while ECS is AWS-native",
+      "C": "ECS is serverless, while EKS is not",
+      "D": "EKS is only for storage workloads"
+    },
+    "correct": "B",
+    "tip": "Kubernetes = EKS.",
+    "explanations": {
+      "A": "Incorrect. Both ECS and EKS support containers.",
+      "B": "Correct. EKS runs Kubernetes, while ECS is AWS’s native container service.",
+      "C": "Incorrect. Both can use Fargate for serverless.",
+      "D": "Incorrect. EKS is for container orchestration, not storage."
+    }
+  },
+  {
+    "question": "Which AWS service allows you to run Kubernetes clusters without managing the control plane?",
+    "choices": {
+      "A": "Amazon ECS",
+      "B": "Amazon EKS",
+      "C": "AWS Fargate",
+      "D": "Amazon ECR"
+    },
+    "correct": "B",
+    "tip": "Kubernetes + AWS = EKS.",
+    "explanations": {
+      "A": "Incorrect. ECS is not Kubernetes-based.",
+      "B": "Correct. Amazon EKS is a managed Kubernetes service.",
+      "C": "Incorrect. Fargate is compute, not orchestration.",
+      "D": "Incorrect. ECR stores container images."
+    }
+  },
+  {
+    "question": "Which TWO AWS services are considered container orchestration services? (Select TWO.)",
+    "choices": {
+      "A": "Amazon ECS",
+      "B": "Amazon EKS",
+      "C": "Amazon ECR",
+      "D": "AWS Lambda"
+    },
+    "correct": ["A", "B"],
+    "tip": "Orchestration = ECS + EKS.",
+    "explanations": {
+      "A": "Correct. ECS is an AWS-native orchestration service.",
+      "B": "Correct. EKS is a managed Kubernetes orchestration service.",
+      "C": "Incorrect. ECR is a container registry.",
+      "D": "Incorrect. Lambda is serverless compute, not orchestration."
+    }
+  },
+  {
+    "question": "What is the primary purpose of AWS Fargate?",
+    "choices": {
+      "A": "To store container images",
+      "B": "To run containers without managing servers",
+      "C": "To manage Kubernetes clusters",
+      "D": "To provide virtual machines"
+    },
+    "correct": "B",
+    "tip": "Fargate = serverless containers.",
+    "explanations": {
+      "A": "Incorrect. Images are stored in ECR.",
+      "B": "Correct. Fargate lets you run containers without managing infrastructure.",
+      "C": "Incorrect. EKS manages Kubernetes.",
+      "D": "Incorrect. EC2 provides virtual machines."
+    }
+  },
+  {
+    "question": "Which AWS service is BEST suited for running large-scale batch processing jobs such as simulations or financial analysis?",
+    "choices": {
+      "A": "AWS Lambda",
+      "B": "AWS Batch",
+      "C": "Amazon Lightsail",
+      "D": "Amazon ECS"
+    },
+    "correct": "B",
+    "tip": "Heavy compute jobs = Batch.",
+    "explanations": {
+      "A": "Incorrect. Lambda is for short event-driven tasks.",
+      "B": "Correct. AWS Batch is designed for large-scale batch workloads.",
+      "C": "Incorrect. Lightsail is for simple web hosting.",
+      "D": "Incorrect. ECS is for containers, not specifically batch jobs."
+    }
+  },
+  {
+    "question": "Which AWS service is designed to provide a simple, low-cost way to run web applications and websites?",
+    "choices": {
+      "A": "Amazon Lightsail",
+      "B": "Amazon EC2",
+      "C": "AWS Batch",
+      "D": "Amazon EKS"
+    },
+    "correct": "A",
+    "tip": "Simple + predictable pricing = Lightsail.",
+    "explanations": {
+      "A": "Correct. Lightsail is designed for simple web apps with predictable pricing.",
+      "B": "Incorrect. EC2 is more flexible but more complex.",
+      "C": "Incorrect. Batch is for large processing jobs.",
+      "D": "Incorrect. EKS is for Kubernetes workloads."
+    }
+  },
+  {
+    "question": "Which AWS service extends AWS infrastructure and services to on-premises data centers?",
+    "choices": {
+      "A": "AWS Batch",
+      "B": "AWS Elastic Beanstalk",
+      "C": "AWS Outposts",
+      "D": "Amazon ECS"
+    },
+    "correct": "C",
+    "tip": "Hybrid cloud = Outposts.",
+    "explanations": {
+      "A": "Incorrect. AWS Batch is for batch workloads.",
+      "B": "Incorrect. Elastic Beanstalk is for app deployment.",
+      "C": "Correct. AWS Outposts extends AWS infrastructure on premises.",
+      "D": "Incorrect. ECS is for container orchestration."
+    }
+  },
+  {
+    "question": "A company needs low-latency access to AWS services while keeping data on premises for compliance reasons. Which service should they use?",
+    "choices": {
+      "A": "Amazon Lightsail",
+      "B": "AWS Outposts",
+      "C": "AWS Lambda",
+      "D": "Amazon ECR"
+    },
+    "correct": "B",
+    "tip": "On-prem + AWS = Outposts.",
+    "explanations": {
+      "A": "Incorrect. Lightsail is for simple hosting.",
+      "B": "Correct. Outposts enables AWS services to run on premises.",
+      "C": "Incorrect. Lambda is serverless compute.",
+      "D": "Incorrect. ECR stores container images."
+    }
+  },
+  {
+    "question": "Which AWS service allows developers to deploy applications by uploading code while AWS handles provisioning, scaling, and monitoring?",
+    "choices": {
+      "A": "Amazon EC2",
+      "B": "AWS Elastic Beanstalk",
+      "C": "AWS Batch",
+      "D": "Amazon EKS"
+    },
+    "correct": "B",
+    "tip": "Upload code → AWS builds environment.",
+    "explanations": {
+      "A": "Incorrect. EC2 requires manual setup.",
+      "B": "Correct. Elastic Beanstalk automates infrastructure management for apps.",
+      "C": "Incorrect. Batch is for processing jobs.",
+      "D": "Incorrect. EKS is for Kubernetes."
+    }
+  },
+
+
+
+
+  {
+    "question": "What is a key difference between unmanaged and managed AWS compute services?",
+    "choices": {
+      "A": "Unmanaged services remove all operational responsibility from the customer",
+      "B": "Managed services require the customer to manage the underlying hardware",
+      "C": "Unmanaged services give the customer more control but require more management",
+      "D": "Managed services can only be used for storage workloads"
+    },
+    "correct": "C",
+    "tip": "More control usually means more responsibility.",
+    "explanations": {
+      "A": "Incorrect. Unmanaged services require more customer management, not less.",
+      "B": "Incorrect. AWS manages the underlying hardware for managed services.",
+      "C": "Correct. Unmanaged services like EC2 offer more control, but the customer must manage more of the environment.",
+      "D": "Incorrect. Managed services are available for many compute use cases, not just storage."
+    }
+  },
+  {
+    "question": "Why is Amazon EC2 considered an unmanaged service?",
+    "choices": {
+      "A": "Because AWS does not provide any infrastructure for it",
+      "B": "Because the customer is responsible for tasks such as patching, scaling, and managing the operating system",
+      "C": "Because EC2 can only be used with containers",
+      "D": "Because EC2 does not support high availability"
+    },
+    "correct": "B",
+    "tip": "Think Shared Responsibility Model.",
+    "explanations": {
+      "A": "Incorrect. AWS still provides and manages the underlying infrastructure.",
+      "B": "Correct. With EC2, the customer manages the guest OS, scaling, and many operational tasks.",
+      "C": "Incorrect. EC2 supports many workloads, not just containers.",
+      "D": "Incorrect. EC2 can absolutely be used in highly available architectures."
+    }
+  },
+  {
+    "question": "Which statement BEST describes AWS Lambda?",
+    "choices": {
+      "A": "A virtual machine service that requires OS management",
+      "B": "A serverless compute service that runs code in response to events",
+      "C": "A container registry service",
+      "D": "A hybrid cloud hardware solution"
+    },
+    "correct": "B",
+    "tip": "Lambda = code + trigger + no server management.",
+    "explanations": {
+      "A": "Incorrect. That more closely describes Amazon EC2.",
+      "B": "Correct. AWS Lambda is a serverless compute service that runs code in response to events.",
+      "C": "Incorrect. Container images are stored in Amazon ECR.",
+      "D": "Incorrect. AWS Outposts is the hybrid cloud hardware solution."
+    }
+  },
+  {
+    "question": "Which task remains the customer's responsibility when using AWS Lambda?",
+    "choices": {
+      "A": "Patching the underlying operating system",
+      "B": "Managing server availability",
+      "C": "Managing data access permissions",
+      "D": "Provisioning physical servers"
+    },
+    "correct": "C",
+    "tip": "AWS manages the infrastructure, but you still secure your app.",
+    "explanations": {
+      "A": "Incorrect. AWS handles the underlying operating system in Lambda.",
+      "B": "Incorrect. AWS manages infrastructure availability for Lambda.",
+      "C": "Correct. The customer is still responsible for application security and data access permissions.",
+      "D": "Incorrect. Lambda is serverless, so no server provisioning is required from the customer."
+    }
+  },
+  {
+    "question": "What is the maximum execution time for a single AWS Lambda function invocation?",
+    "choices": {
+      "A": "5 minutes",
+      "B": "10 minutes",
+      "C": "15 minutes",
+      "D": "60 minutes"
+    },
+    "correct": "C",
+    "tip": "Lambda is for shorter event-driven work.",
+    "explanations": {
+      "A": "Incorrect. Lambda supports longer execution than 5 minutes.",
+      "B": "Incorrect. Lambda can run longer than 10 minutes.",
+      "C": "Correct. The maximum duration of a Lambda function is 15 minutes.",
+      "D": "Incorrect. Lambda does not support a 60-minute maximum execution time."
+    }
+  },
+  {
+    "question": "Which THREE components are commonly involved in an automated AWS Lambda workflow? (Select THREE.)",
+    "choices": {
+      "A": "Lambda function",
+      "B": "Triggers",
+      "C": "Runtimes",
+      "D": "Manual scaling configuration"
+    },
+    "correct": ["A", "B", "C"],
+    "tip": "Think code, event, and execution environment.",
+    "explanations": {
+      "A": "Correct. A Lambda function contains the code that runs.",
+      "B": "Correct. Triggers invoke the function in response to events.",
+      "C": "Correct. A runtime provides the language-specific execution environment.",
+      "D": "Incorrect. Lambda scales automatically, so manual scaling configuration is not a core component."
+    }
+  },
+  {
+    "question": "How do containers help solve the 'it works on my machine' problem?",
+    "choices": {
+      "A": "By automatically scaling the application across Regions",
+      "B": "By packaging the application and its dependencies into a consistent environment",
+      "C": "By eliminating the need for configuration files",
+      "D": "By requiring a full operating system for every application"
+    },
+    "correct": "B",
+    "tip": "Containers package what the app needs to run.",
+    "explanations": {
+      "A": "Incorrect. Containers can scale, but that is not the core reason they solve portability problems.",
+      "B": "Correct. Containers package code, runtime, dependencies, and configuration into a consistent portable unit.",
+      "C": "Incorrect. Containers do not eliminate all configuration needs.",
+      "D": "Incorrect. Containers are lighter than full virtual machines and do not require a full OS per app."
+    }
+  },
+  {
+    "question": "Which AWS service is used to store and manage container images?",
+    "choices": {
+      "A": "Amazon ECS",
+      "B": "Amazon EKS",
+      "C": "Amazon ECR",
+      "D": "AWS Fargate"
+    },
+    "correct": "C",
+    "tip": "Registry = image storage.",
+    "explanations": {
+      "A": "Incorrect. Amazon ECS is a container orchestration service.",
+      "B": "Incorrect. Amazon EKS is a managed Kubernetes service.",
+      "C": "Correct. Amazon ECR stores and manages container images.",
+      "D": "Incorrect. AWS Fargate is a compute engine for containers, not a registry."
+    }
+  },
+  {
+    "question": "Which AWS service is a serverless compute engine for containers?",
+    "choices": {
+      "A": "Amazon ECR",
+      "B": "AWS Fargate",
+      "C": "Amazon EC2 Auto Scaling",
+      "D": "AWS Batch"
+    },
+    "correct": "B",
+    "tip": "Serverless containers = no server management.",
+    "explanations": {
+      "A": "Incorrect. Amazon ECR stores container images.",
+      "B": "Correct. AWS Fargate is a serverless compute engine for containers.",
+      "C": "Incorrect. EC2 Auto Scaling manages EC2 instance count.",
+      "D": "Incorrect. AWS Batch is for batch jobs, not general serverless container hosting."
+    }
+  },
+  {
+    "question": "A startup wants to deploy web application code quickly without managing the underlying infrastructure, while still getting auto scaling and monitoring. Which AWS service is the BEST choice?",
+    "choices": {
+      "A": "Amazon EC2",
+      "B": "AWS Elastic Beanstalk",
+      "C": "AWS Batch",
+      "D": "AWS Outposts"
+    },
+    "correct": "B",
+    "tip": "Upload code, let AWS handle the environment.",
+    "explanations": {
+      "A": "Incorrect. Amazon EC2 requires more direct infrastructure management.",
+      "B": "Correct. AWS Elastic Beanstalk simplifies deploying and managing web applications with scaling and monitoring.",
+      "C": "Incorrect. AWS Batch is for batch processing workloads.",
+      "D": "Incorrect. AWS Outposts is for extending AWS infrastructure on premises."
+    }
+  }
+]
+
+

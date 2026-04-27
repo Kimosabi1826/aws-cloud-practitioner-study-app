@@ -1,0 +1,461 @@
+[
+  {
+    "question": "How does Amazon EC2 compare to running servers on premises?",
+    "choices": {
+      "A": "It is more expensive but offers more control.",
+      "B": "It is more flexible, cost-effective, and quicker to get started.",
+      "C": "It requires more time to set up and maintain.",
+      "D": "It is only useful for large businesses."
+    },
+    "correct": "B",
+    "tip": "Think speed, flexibility, and lower upfront effort.",
+    "explanations": {
+      "A": "Incorrect. Amazon EC2 is generally more cost-effective than running servers on premises.",
+      "B": "Correct. Amazon EC2 is more flexible, cost-effective, and faster to get started with than on-premises servers.",
+      "C": "Incorrect. Amazon EC2 typically takes less time to provision and maintain.",
+      "D": "Incorrect. Amazon EC2 is useful for businesses of all sizes."
+    }
+  },
+  {
+    "question": "What is multi-tenancy in Amazon EC2?",
+    "choices": {
+      "A": "Each virtual machine is isolated but shares resources from a host machine.",
+      "B": "Each customer has a dedicated server by default.",
+      "C": "Instances run in different Regions only.",
+      "D": "Only one virtual machine runs per host machine."
+    },
+    "correct": "A",
+    "tip": "Shared host, isolated virtual machines.",
+    "explanations": {
+      "A": "Correct. In Amazon EC2, virtual machines can share a host machine while remaining isolated from one another.",
+      "B": "Incorrect. Dedicated hardware is not the default behavior in Amazon EC2.",
+      "C": "Incorrect. Regions relate to geography, not multi-tenancy.",
+      "D": "Incorrect. Multiple virtual machines can run on a single host."
+    }
+  },
+  {
+    "question": "What component enables resource sharing and isolation between Amazon EC2 instances on a host machine?",
+    "choices": {
+      "A": "Firewall",
+      "B": "Hypervisor",
+      "C": "Load balancer",
+      "D": "Operating system"
+    },
+    "correct": "B",
+    "tip": "Think virtualization layer.",
+    "explanations": {
+      "A": "Incorrect. A firewall controls network traffic.",
+      "B": "Correct. The hypervisor enables virtualization, resource sharing, and isolation between instances.",
+      "C": "Incorrect. A load balancer distributes traffic, not host resources.",
+      "D": "Incorrect. The operating system runs inside the instance."
+    }
+  },
+  {
+    "question": "Which Amazon EC2 instance family is BEST when workload performance is uncertain?",
+    "choices": {
+      "A": "General purpose",
+      "B": "Compute optimized",
+      "C": "Memory optimized",
+      "D": "Storage optimized"
+    },
+    "correct": "A",
+    "tip": "Start balanced.",
+    "explanations": {
+      "A": "Correct. General purpose instances provide a balanced mix of compute, memory, and networking resources.",
+      "B": "Incorrect. Compute optimized instances are best for CPU-intensive workloads.",
+      "C": "Incorrect. Memory optimized instances are best for memory-intensive workloads.",
+      "D": "Incorrect. Storage optimized instances are best for workloads requiring high local storage performance."
+    }
+  },
+  {
+    "question": "Which Amazon EC2 instance type is BEST for machine learning workloads that require hardware acceleration?",
+    "choices": {
+      "A": "General purpose",
+      "B": "Accelerated computing",
+      "C": "Storage optimized",
+      "D": "Reserved Instances"
+    },
+    "correct": "B",
+    "tip": "Think GPUs and hardware accelerators.",
+    "explanations": {
+      "A": "Incorrect. General purpose instances are balanced but not specialized for hardware acceleration.",
+      "B": "Correct. Accelerated computing instances use hardware accelerators such as GPUs.",
+      "C": "Incorrect. Storage optimized instances focus on local storage performance.",
+      "D": "Incorrect. Reserved Instances are a pricing option, not an instance family."
+    }
+  },
+  {
+    "question": "When using Amazon EC2, what is the customer responsible for under the AWS Shared Responsibility Model?",
+    "choices": {
+      "A": "Physical hardware",
+      "B": "Hypervisor",
+      "C": "Operating system and applications",
+      "D": "Data center security"
+    },
+    "correct": "C",
+    "tip": "You manage what is inside the instance.",
+    "explanations": {
+      "A": "Incorrect. AWS is responsible for physical hardware.",
+      "B": "Incorrect. AWS manages the hypervisor.",
+      "C": "Correct. Customers manage the guest operating system, applications, and many related configurations.",
+      "D": "Incorrect. AWS handles physical data center security."
+    }
+  },
+  {
+    "question": "What is an Amazon Machine Image (AMI)?",
+    "choices": {
+      "A": "A pricing model",
+      "B": "A template for operating system and software",
+      "C": "A storage service",
+      "D": "A load balancer"
+    },
+    "correct": "B",
+    "tip": "Template.",
+    "explanations": {
+      "A": "Incorrect. An AMI is not a pricing model.",
+      "B": "Correct. An AMI is a template that includes the operating system and optional preinstalled software.",
+      "C": "Incorrect. An AMI is not a storage service.",
+      "D": "Incorrect. An AMI is not a load balancer."
+    }
+  },
+  {
+    "question": "What is a primary advantage of using the AWS CLI over the AWS Management Console?",
+    "choices": {
+      "A": "It provides a visual interface.",
+      "B": "It supports automation and scripting.",
+      "C": "It works only on Windows.",
+      "D": "It is intended only for one-time manual setup."
+    },
+    "correct": "B",
+    "tip": "Think automation.",
+    "explanations": {
+      "A": "Incorrect. The Management Console is the visual interface.",
+      "B": "Correct. The AWS CLI is especially useful for scripting and automation.",
+      "C": "Incorrect. The AWS CLI works on multiple operating systems.",
+      "D": "Incorrect. The AWS CLI is useful for both repeated and automated tasks."
+    }
+  },
+  {
+    "question": "What does horizontal scaling (scaling out) mean?",
+    "choices": {
+      "A": "Increase CPU or memory on a single instance",
+      "B": "Add more instances",
+      "C": "Delete instances",
+      "D": "Move resources to another Region"
+    },
+    "correct": "B",
+    "tip": "Scale out = more machines.",
+    "explanations": {
+      "A": "Incorrect. That is vertical scaling.",
+      "B": "Correct. Horizontal scaling means adding more instances to handle more load.",
+      "C": "Incorrect. Deleting instances reduces capacity.",
+      "D": "Incorrect. Moving Regions is not the definition of horizontal scaling."
+    }
+  },
+  {
+    "question": "What is elasticity in AWS?",
+    "choices": {
+      "A": "Manual scaling",
+      "B": "Automatic scaling based on demand",
+      "C": "Fixed capacity",
+      "D": "Permanent scaling"
+    },
+    "correct": "B",
+    "tip": "Elastic = auto-adjust.",
+    "explanations": {
+      "A": "Incorrect. Elasticity is not manual by definition.",
+      "B": "Correct. Elasticity is the ability to automatically adjust resources to match demand.",
+      "C": "Incorrect. Fixed capacity is the opposite of elasticity.",
+      "D": "Incorrect. Elasticity includes scaling down as well as scaling up."
+    }
+  },
+  {
+    "question": "What does Amazon EC2 Auto Scaling do?",
+    "choices": {
+      "A": "Increases storage capacity",
+      "B": "Adjusts the number of instances automatically",
+      "C": "Routes traffic across instances",
+      "D": "Monitors application logs"
+    },
+    "correct": "B",
+    "tip": "Auto add and remove instances.",
+    "explanations": {
+      "A": "Incorrect. Storage changes are not the primary role of EC2 Auto Scaling.",
+      "B": "Correct. Amazon EC2 Auto Scaling automatically adjusts instance count based on demand or policies.",
+      "C": "Incorrect. Traffic routing is handled by load balancers.",
+      "D": "Incorrect. Log monitoring is typically handled by monitoring services such as CloudWatch."
+    }
+  },
+  {
+    "question": "What is the main role of Elastic Load Balancing (ELB)?",
+    "choices": {
+      "A": "Create new EC2 instances",
+      "B": "Distribute incoming traffic",
+      "C": "Store application data",
+      "D": "Monitor application code"
+    },
+    "correct": "B",
+    "tip": "Traffic manager.",
+    "explanations": {
+      "A": "Incorrect. ELB does not create EC2 instances.",
+      "B": "Correct. ELB distributes incoming traffic across multiple targets.",
+      "C": "Incorrect. ELB does not store application data.",
+      "D": "Incorrect. ELB is not a code monitoring service."
+    }
+  },
+  {
+    "question": "What is the main benefit of Amazon SQS?",
+    "choices": {
+      "A": "Immediate push notifications to many subscribers",
+      "B": "Stores messages until they are processed",
+      "C": "Direct communication with no buffering",
+      "D": "Replaces compute services"
+    },
+    "correct": "B",
+    "tip": "Queue = buffer.",
+    "explanations": {
+      "A": "Incorrect. That behavior is more aligned with Amazon SNS.",
+      "B": "Correct. Amazon SQS stores messages until they are retrieved and processed.",
+      "C": "Incorrect. Amazon SQS introduces buffering rather than removing it.",
+      "D": "Incorrect. Amazon SQS is a messaging service, not compute."
+    }
+  },
+  {
+    "question": "What is the key difference between Amazon SNS and Amazon SQS?",
+    "choices": {
+      "A": "Amazon SNS stores messages while Amazon SQS sends them instantly",
+      "B": "Amazon SNS pushes messages, while Amazon SQS queues them",
+      "C": "Amazon SNS is compute and Amazon SQS is storage",
+      "D": "There is no meaningful difference"
+    },
+    "correct": "B",
+    "tip": "Push vs queue.",
+    "explanations": {
+      "A": "Incorrect. That reverses the roles of the two services.",
+      "B": "Correct. Amazon SNS is pub/sub push messaging, while Amazon SQS is message queuing.",
+      "C": "Incorrect. Neither service is a compute service.",
+      "D": "Incorrect. They serve different messaging patterns."
+    }
+  },
+  {
+    "question": "Which pricing option has no long-term commitment?",
+    "choices": {
+      "A": "Reserved Instances",
+      "B": "Savings Plans",
+      "C": "On-Demand Instances",
+      "D": "Dedicated Hosts"
+    },
+    "correct": "C",
+    "tip": "Pay as you go.",
+    "explanations": {
+      "A": "Incorrect. Reserved Instances require a commitment.",
+      "B": "Incorrect. Savings Plans require a commitment.",
+      "C": "Correct. On-Demand Instances require no long-term commitment.",
+      "D": "Incorrect. Dedicated Hosts are not the standard no-commitment answer here."
+    }
+  },
+  {
+    "question": "Which pricing option is interruptible but often the cheapest?",
+    "choices": {
+      "A": "On-Demand Instances",
+      "B": "Reserved Instances",
+      "C": "Spot Instances",
+      "D": "Dedicated Hosts"
+    },
+    "correct": "C",
+    "tip": "Cheap but interruptible.",
+    "explanations": {
+      "A": "Incorrect. On-Demand is flexible but not the cheapest.",
+      "B": "Incorrect. Reserved pricing is discounted but not interruptible in the same way.",
+      "C": "Correct. Spot Instances can provide major savings but can be interrupted by AWS.",
+      "D": "Incorrect. Dedicated Hosts are not the cheapest option."
+    }
+  },
+  {
+    "question": "Which pricing option is generally best for predictable workloads?",
+    "choices": {
+      "A": "Spot Instances",
+      "B": "Reserved Instances",
+      "C": "On-Demand Instances",
+      "D": "Elastic Load Balancing"
+    },
+    "correct": "B",
+    "tip": "Predictable = commit and save.",
+    "explanations": {
+      "A": "Incorrect. Spot Instances are better for interruptible workloads.",
+      "B": "Correct. Reserved Instances are commonly used for predictable workloads.",
+      "C": "Incorrect. On-Demand is better for unpredictable or short-term usage.",
+      "D": "Incorrect. ELB is not a pricing model."
+    }
+  },
+  {
+    "question": "Why deploy Amazon EC2 instances across multiple Availability Zones?",
+    "choices": {
+      "A": "To increase CPU per instance",
+      "B": "To improve high availability",
+      "C": "To lower every workload cost",
+      "D": "To guarantee faster internet speeds"
+    },
+    "correct": "B",
+    "tip": "Think failure protection.",
+    "explanations": {
+      "A": "Incorrect. Availability Zones do not increase CPU per instance.",
+      "B": "Correct. Distributing instances across multiple Availability Zones improves resilience and high availability.",
+      "C": "Incorrect. Multi-AZ design is for resilience, not guaranteed lower cost.",
+      "D": "Incorrect. Internet speed is not the main reason."
+    }
+  },
+  {
+    "question": "What is a loosely coupled architecture?",
+    "choices": {
+      "A": "Components depend heavily on each other",
+      "B": "Components operate independently",
+      "C": "A single tightly integrated system",
+      "D": "A design where all components share one database by default"
+    },
+    "correct": "B",
+    "tip": "Independent components.",
+    "explanations": {
+      "A": "Incorrect. That describes tightly coupled systems.",
+      "B": "Correct. Loosely coupled architectures allow components to operate more independently.",
+      "C": "Incorrect. That does not describe loose coupling.",
+      "D": "Incorrect. A shared database does not define loosely coupled architecture."
+    }
+  },
+  {
+    "question": "A company needs to send one message to multiple subscribers, including email addresses, Lambda functions, and web servers. Which AWS service is the BEST choice?",
+    "choices": {
+      "A": "Amazon SQS",
+      "B": "Amazon SNS",
+      "C": "Amazon EC2",
+      "D": "Amazon EBS"
+    },
+    "correct": "B",
+    "tip": "One message to many subscribers = pub/sub.",
+    "explanations": {
+      "A": "Incorrect. Amazon SQS is for queuing messages, not fan-out delivery to many subscribers.",
+      "B": "Correct. Amazon SNS is a publish-subscribe service that can deliver to multiple subscribers.",
+      "C": "Incorrect. Amazon EC2 is a compute service.",
+      "D": "Incorrect. Amazon EBS is block storage."
+    }
+  },
+  {
+    "question": "An application sends messages to a queue, and another application processes those messages later when it becomes available. Which AWS service is being used?",
+    "choices": {
+      "A": "Amazon SNS",
+      "B": "Amazon SQS",
+      "C": "Elastic Load Balancing",
+      "D": "Amazon Route 53"
+    },
+    "correct": "B",
+    "tip": "Queue first, process later.",
+    "explanations": {
+      "A": "Incorrect. Amazon SNS is designed to push messages to subscribers.",
+      "B": "Correct. Amazon SQS stores messages in a queue until they are processed.",
+      "C": "Incorrect. Elastic Load Balancing distributes traffic, not messages.",
+      "D": "Incorrect. Amazon Route 53 is a DNS service."
+    }
+  },
+  {
+    "question": "Which statement BEST describes a loosely coupled architecture?",
+    "choices": {
+      "A": "Application components are directly dependent on each other, so if one fails, others are likely affected.",
+      "B": "Application components operate independently, so one component can fail without bringing down the whole system.",
+      "C": "All components must run on the same EC2 instance.",
+      "D": "Every application component must share the same database server."
+    },
+    "correct": "B",
+    "tip": "Independent components = more resilience.",
+    "explanations": {
+      "A": "Incorrect. That describes a tightly coupled architecture.",
+      "B": "Correct. Loosely coupled components can continue working even if one component fails.",
+      "C": "Incorrect. Running on the same instance is not required.",
+      "D": "Incorrect. Sharing one database is not the defining trait."
+    }
+  },
+  {
+    "question": "Which AWS service is designed to route events from AWS services, custom applications, and third-party software to targets in an event-driven architecture?",
+    "choices": {
+      "A": "Amazon EventBridge",
+      "B": "Amazon SQS",
+      "C": "Amazon SNS",
+      "D": "Amazon EC2 Auto Scaling"
+    },
+    "correct": "A",
+    "tip": "Think event routing and filtering.",
+    "explanations": {
+      "A": "Correct. Amazon EventBridge routes events from many sources to targets.",
+      "B": "Incorrect. Amazon SQS is a queueing service.",
+      "C": "Incorrect. Amazon SNS is a pub/sub service, but not a full event bus like EventBridge.",
+      "D": "Incorrect. Amazon EC2 Auto Scaling manages instance scaling."
+    }
+  },
+  {
+    "question": "A development team wants to improve application resilience so that if one component fails, the rest of the application continues to run. Which architectural approach is BEST?",
+    "choices": {
+      "A": "Monolithic architecture",
+      "B": "Tightly coupled architecture",
+      "C": "Microservices architecture",
+      "D": "Single-instance deployment"
+    },
+    "correct": "C",
+    "tip": "Break the app into independent services.",
+    "explanations": {
+      "A": "Incorrect. Monolithic architectures often increase coupling between components.",
+      "B": "Incorrect. Tightly coupled systems are more vulnerable to cascading failures.",
+      "C": "Correct. Microservices architectures improve resilience by using more independent services.",
+      "D": "Incorrect. A single-instance deployment creates more risk, not less."
+    }
+  },
+  {
+    "question": "Which TWO AWS services are designed for application messaging and communication between components? (Select TWO.)",
+    "choices": {
+      "A": "Amazon SQS",
+      "B": "Amazon SNS",
+      "C": "Amazon EC2",
+      "D": "Elastic Load Balancing"
+    },
+    "correct": ["A", "B"],
+    "tip": "Think messaging services, not compute or traffic routing.",
+    "explanations": {
+      "A": "Correct. Amazon SQS is a message queuing service.",
+      "B": "Correct. Amazon SNS is a publish-subscribe messaging service.",
+      "C": "Incorrect. Amazon EC2 is compute.",
+      "D": "Incorrect. Elastic Load Balancing distributes traffic."
+    }
+  },
+  {
+    "question": "Which TWO characteristics describe a loosely coupled architecture? (Select TWO.)",
+    "choices": {
+      "A": "Components depend heavily on each other",
+      "B": "Failure in one component does not affect others",
+      "C": "Components can operate independently",
+      "D": "All components must be deployed together"
+    },
+    "correct": ["B", "C"],
+    "tip": "Loose = independent + resilient.",
+    "explanations": {
+      "A": "Incorrect. That describes tightly coupled systems.",
+      "B": "Correct. Failures are less likely to spread to other components.",
+      "C": "Correct. Components can operate more independently.",
+      "D": "Incorrect. Deploying everything together is more aligned with tightly coupled designs."
+    }
+  },
+  {
+    "question": "Which TWO statements about Amazon SNS and Amazon SQS are correct? (Select TWO.)",
+    "choices": {
+      "A": "Amazon SNS is commonly used for fan-out messaging to multiple subscribers.",
+      "B": "Amazon SQS stores messages until they are processed.",
+      "C": "Amazon SNS is a block storage service.",
+      "D": "Amazon SQS is primarily used to host virtual machines."
+    },
+    "correct": ["A", "B"],
+    "tip": "Fan-out vs queue.",
+    "explanations": {
+      "A": "Correct. Amazon SNS is commonly used to push messages to multiple subscribers.",
+      "B": "Correct. Amazon SQS stores messages until a consumer processes them.",
+      "C": "Incorrect. Amazon SNS is not a storage service.",
+      "D": "Incorrect. Amazon SQS is not a compute or hosting service."
+    }
+  }
+]

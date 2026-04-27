@@ -1,0 +1,260 @@
+{
+  "module": "Module 3 - Compute Options, Serverless, and Containers",
+  "sections": [
+    {
+      "title": "Unmanaged vs Managed vs Serverless",
+      "points": [
+        "Unmanaged services like EC2 give you full control but require you to manage OS, scaling, and maintenance.",
+        "Managed services reduce operational work by letting AWS handle infrastructure tasks.",
+        "Serverless services remove the need to manage servers entirely.",
+        "In serverless, AWS handles provisioning, scaling, availability, and maintenance.",
+        "You still remain responsible for your application code and permissions."
+      ],
+      "exam_tip": "More control = more responsibility. Less management = more AWS responsibility."
+    },
+    {
+      "title": "Amazon EC2 (Unmanaged)",
+      "points": [
+        "EC2 requires you to manage OS, patches, scaling, and configuration.",
+        "AWS handles hardware, networking, and data centers.",
+        "EC2 provides maximum flexibility and customization.",
+        "You are responsible for security IN the cloud."
+      ],
+      "exam_tip": "If you control OS and software → EC2 (unmanaged)."
+    },
+    {
+      "title": "Managed Services",
+      "points": [
+        "Managed services reduce infrastructure management.",
+        "AWS handles scaling, availability, and maintenance.",
+        "Examples include ELB, SQS, SNS.",
+        "You configure the service, AWS runs it."
+      ],
+      "exam_tip": "If AWS runs the infrastructure for you → managed service."
+    },
+    {
+      "title": "Serverless Computing",
+      "points": [
+        "Serverless means you do not manage servers at all.",
+        "AWS automatically handles scaling and infrastructure.",
+        "You only focus on code execution.",
+        "You pay only for usage, not idle resources."
+      ],
+      "exam_tip": "No servers to manage + pay per use → serverless."
+    },
+    {
+      "title": "AWS Lambda Basics",
+      "points": [
+        "Lambda is a serverless compute service.",
+        "It runs code in response to events.",
+        "No need to provision or manage servers.",
+        "Lambda automatically scales based on demand.",
+        "You are billed based on execution time (milliseconds)."
+      ],
+      "exam_tip": "Event-driven + no servers → Lambda."
+    },
+    {
+      "title": "Lambda Key Features",
+      "points": [
+        "Maximum execution time is 15 minutes.",
+        "Supports multiple programming languages like Python, Java, Node.js.",
+        "Uses runtimes to execute code.",
+        "Integrates easily with other AWS services.",
+        "Highly scalable and automatically adjusts to demand."
+      ],
+      "exam_tip": "If execution time is limited → Lambda might not be ideal."
+    },
+    {
+      "title": "Lambda Triggers",
+      "points": [
+        "Lambda runs when triggered by an event.",
+        "Triggers include S3 uploads, SQS messages, API calls, or events.",
+        "Example: image upload triggers image processing.",
+        "Example: message in queue triggers processing."
+      ],
+      "exam_tip": "If something happens → triggers Lambda."
+    },
+    {
+      "title": "Lambda Real-World Use Cases",
+      "points": [
+        "Image processing when users upload files.",
+        "Real-time data processing.",
+        "Event-driven workflows.",
+        "Backend logic for web applications.",
+        "Automated responses to system events."
+      ],
+      "exam_tip": "If work only happens when something happens → Lambda."
+    },
+    {
+      "title": "Lambda Responsibility Model",
+      "points": [
+        "AWS manages infrastructure, scaling, and availability.",
+        "Customer manages code and permissions.",
+        "Customer is responsible for access control and data security.",
+        "No need to patch OS or manage servers."
+      ],
+      "exam_tip": "Lambda = you manage code, AWS manages everything else."
+    },
+    {
+      "title": "Containers Overview",
+      "points": [
+        "Containers package code, runtime, dependencies, and configuration.",
+        "They provide consistent environments across systems.",
+        "Containers solve 'it works on my machine' problems.",
+        "Containers are lightweight and fast to start."
+      ],
+      "exam_tip": "Consistency across environments → containers."
+    },
+    {
+      "title": "Containers vs Virtual Machines",
+      "points": [
+        "Containers share the host OS and are lightweight.",
+        "Virtual machines run full OS and are heavier.",
+        "Containers start faster and use fewer resources.",
+        "VMs provide stronger isolation but more overhead."
+      ],
+      "exam_tip": "Lightweight = containers. Full OS = VM."
+    },
+    {
+      "title": "Container Orchestration",
+      "points": [
+        "Orchestration manages container lifecycle.",
+        "Handles scaling, deployment, monitoring, and recovery.",
+        "Automatically adjusts resources based on demand.",
+        "Essential for large-scale container environments."
+      ],
+      "exam_tip": "Managing many containers → orchestration."
+    },
+    {
+      "title": "Amazon ECS",
+      "points": [
+        "Amazon ECS is a container orchestration service.",
+        "It is AWS-native and easier to use than Kubernetes.",
+        "Manages container deployment and scaling.",
+        "Works with EC2 or Fargate."
+      ],
+      "exam_tip": "Simple AWS container orchestration → ECS."
+    },
+    {
+      "title": "Amazon EKS",
+      "points": [
+        "Amazon EKS runs Kubernetes on AWS.",
+        "Provides more flexibility and control.",
+        "Used for complex or enterprise workloads.",
+        "Supports open-source Kubernetes ecosystem."
+      ],
+      "exam_tip": "Kubernetes on AWS → EKS."
+    },
+    {
+      "title": "Amazon ECR",
+      "points": [
+        "ECR is a container image registry.",
+        "Stores and manages container images.",
+        "Used to push and pull container images.",
+        "Works with ECS and EKS."
+      ],
+      "exam_tip": "Store container images → ECR."
+    },
+    {
+      "title": "AWS Fargate",
+      "points": [
+        "Fargate is serverless compute for containers.",
+        "No need to manage servers.",
+        "Works with ECS and EKS.",
+        "You pay only for resources used by containers."
+      ],
+      "exam_tip": "Containers without servers → Fargate."
+    },
+    {
+      "title": "EC2 vs Fargate for Containers",
+      "points": [
+        "EC2 gives full control over infrastructure.",
+        "Fargate removes infrastructure management.",
+        "EC2 requires patching and scaling management.",
+        "Fargate is easier but less customizable."
+      ],
+      "exam_tip": "Control → EC2. Simplicity → Fargate."
+    },
+    {
+      "title": "Elastic Beanstalk",
+      "points": [
+        "Elastic Beanstalk is a fully managed application deployment service.",
+        "You upload code and AWS handles infrastructure.",
+        "Automatically manages scaling, load balancing, and monitoring.",
+        "Still provides access to underlying resources."
+      ],
+      "exam_tip": "Deploy app without managing infra → Elastic Beanstalk."
+    },
+    {
+      "title": "AWS Batch",
+      "points": [
+        "AWS Batch is used for large-scale batch processing.",
+        "Automatically provisions and scales compute resources.",
+        "Ideal for data processing, simulations, and analytics.",
+        "Optimizes resource usage based on job requirements."
+      ],
+      "exam_tip": "Heavy data jobs → AWS Batch."
+    },
+    {
+      "title": "Amazon Lightsail",
+      "points": [
+        "Lightsail provides simple VPS-style hosting.",
+        "Offers predictable monthly pricing.",
+        "Good for small apps, websites, and beginners.",
+        "Simplifies AWS complexity."
+      ],
+      "exam_tip": "Simple and cheap hosting → Lightsail."
+    },
+    {
+      "title": "AWS Outposts",
+      "points": [
+        "Outposts extends AWS infrastructure to on-premises.",
+        "Supports hybrid cloud environments.",
+        "Used for low latency or compliance requirements.",
+        "Provides consistent AWS experience locally."
+      ],
+      "exam_tip": "AWS on-premises → Outposts."
+    },
+    {
+      "title": "Choosing the Right Compute Service",
+      "points": [
+        "EC2 → full control and customization.",
+        "Lambda → event-driven serverless.",
+        "ECS/EKS → container orchestration.",
+        "Fargate → serverless containers.",
+        "Elastic Beanstalk → easy app deployment.",
+        "Batch → large processing jobs.",
+        "Lightsail → simple hosting.",
+        "Outposts → hybrid environments."
+      ],
+      "exam_tip": "Always match the service to the workload requirement."
+    },
+    {
+      "title": "Fast Memory Anchors",
+      "points": [
+        "EC2 = full control.",
+        "Lambda = serverless + events.",
+        "ECS = containers (simple).",
+        "EKS = Kubernetes.",
+        "Fargate = serverless containers.",
+        "ECR = container storage.",
+        "Beanstalk = deploy apps easily.",
+        "Batch = heavy jobs.",
+        "Lightsail = simple VPS.",
+        "Outposts = hybrid cloud."
+      ],
+      "exam_tip": "Memorize this block → covers most exam questions."
+    },
+    {
+      "title": "Common Exam Traps",
+      "points": [
+        "Lambda is not for long-running tasks (15 min limit).",
+        "ECS and EKS are orchestration, not compute engines.",
+        "Fargate is compute, not orchestration.",
+        "ECR stores images, it does not run containers.",
+        "Beanstalk is not serverless—it still uses EC2 behind the scenes."
+      ],
+      "exam_tip": "AWS loves mixing these services in questions."
+    }
+  ]
+}

@@ -1,0 +1,111 @@
+{
+  "module": "Module 1 - Cloud Fundamentals (Expanded)",
+  "sections": [
+    {
+      "title": "What is Cloud Computing (Deep Understanding)",
+      "points": [
+        "Cloud computing is the on-demand delivery of IT resources over the internet with pay-as-you-go pricing.",
+        "On-demand means you can provision resources instantly without waiting for hardware setup.",
+        "Cloud eliminates the need for upfront investment in servers and data centers.",
+        "You can scale resources up or down depending on demand at any moment.",
+        "Resources include compute (EC2), storage (S3), databases, networking, AI/ML, and more.",
+        "Before AWS, companies had to build and maintain their own data centers.",
+        "AWS allows companies to run applications in data centers they do not own."
+      ],
+      "exam_tip": "Keywords: on-demand, scalable, no upfront cost, pay-as-you-go → ALWAYS cloud computing."
+    },
+    {
+      "title": "Cloud Deployment Models (Exam Logic)",
+      "points": [
+        "Cloud deployment: Everything runs in AWS infrastructure.",
+        "On-premises: Everything runs locally in your own data center.",
+        "Hybrid: Combination of on-premises + cloud.",
+        "Hybrid is used for compliance, legacy systems, or regulatory requirements.",
+        "Multi-cloud = using multiple cloud providers (less tested but possible).",
+        "Hybrid is VERY common in exam questions involving sensitive data."
+      ],
+      "exam_tip": "If question mentions compliance + scaling → answer = Hybrid."
+    },
+    {
+      "title": "6 Core Benefits of AWS Cloud (Expanded)",
+      "points": [
+        "Trade fixed expense for variable expense → no upfront cost, pay only what you use.",
+        "Massive economies of scale → AWS buys hardware in bulk → cheaper for you.",
+        "Stop guessing capacity → scale automatically instead of predicting demand.",
+        "Increase speed and agility → deploy resources in minutes instead of months.",
+        "Stop running data centers → AWS handles maintenance, power, cooling.",
+        "Go global in minutes → deploy apps worldwide instantly using Regions."
+      ],
+      "exam_tip": "Capacity problem → Stop guessing capacity. Expansion → Go global in minutes."
+    },
+    {
+      "title": "AWS Global Infrastructure (Important)",
+      "points": [
+        "Region = physical geographic location (e.g., us-east-1, eu-west-1).",
+        "Each Region contains multiple Availability Zones (AZs).",
+        "Availability Zone = one or more data centers with independent power and networking.",
+        "AZs are isolated from each other to prevent failure spread.",
+        "Using multiple AZs increases high availability.",
+        "Using multiple Regions increases disaster recovery and global performance."
+      ],
+      "exam_tip": "High availability = Multi-AZ. Disaster recovery/global = Multi-Region."
+    },
+    {
+      "title": "High Availability vs Fault Tolerance",
+      "points": [
+        "High Availability = system stays running with minimal downtime.",
+        "Fault Tolerance = system continues working even if components fail.",
+        "High availability is achieved using multiple AZs.",
+        "Fault tolerance requires redundancy at every layer.",
+        "AWS infrastructure is designed for both HA and fault tolerance."
+      ],
+      "exam_tip": "If system MUST stay running no matter what → Fault tolerance."
+    },
+    {
+      "title": "AWS Shared Responsibility Model (CRITICAL)",
+      "points": [
+        "AWS = security OF the cloud → hardware, data centers, networking, hypervisor.",
+        "Customer = security IN the cloud → OS, applications, data, access control.",
+        "Customer must patch operating systems and secure applications.",
+        "AWS does NOT access your OS or data.",
+        "You control who can access your data.",
+        "You are responsible for encryption and permissions."
+      ],
+      "exam_tip": "OS patching, user access, app security → ALWAYS customer."
+    },
+    {
+      "title": "Data Centers (Reality Check)",
+      "points": [
+        "Data centers are physical buildings with servers.",
+        "Include power, cooling, networking, and security systems.",
+        "AWS manages all physical infrastructure.",
+        "Customers never interact with physical servers.",
+        "AWS removes the burden of maintaining hardware."
+      ],
+      "exam_tip": "Anything physical (servers, racks, power) → AWS responsibility."
+    },
+    {
+      "title": "Real-World Exam Patterns",
+      "points": [
+        "Global company → use multiple Regions.",
+        "High availability → use multiple AZs.",
+        "Sensitive data → use Hybrid model.",
+        "Scaling problem → use AWS (elastic scaling).",
+        "Slow deployment → cloud improves agility.",
+        "High cost infrastructure → cloud reduces upfront cost."
+      ],
+      "exam_tip": "Always match scenario → benefit (this is how AWS tests you)."
+    },
+    {
+      "title": "Memory Anchors (IMPORTANT)",
+      "points": [
+        "Cloud = On-demand + Internet + Pay-as-you-go.",
+        "AWS = Global + Scalable + No infrastructure management.",
+        "Regions = global locations.",
+        "AZs = redundancy inside region.",
+        "Shared Responsibility = AWS (OF) + You (IN)."
+      ],
+      "exam_tip": "If stuck → eliminate answers that break these rules."
+    }
+  ]
+}

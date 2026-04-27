@@ -1,0 +1,513 @@
+[
+  {
+    "question": "A company needs a managed relational database service that supports MySQL and automates backups, patching, and hardware provisioning. Which AWS service should they choose?",
+    "choices": {
+      "A": "Amazon DynamoDB",
+      "B": "Amazon RDS",
+      "C": "Amazon Neptune",
+      "D": "Amazon ElastiCache"
+    },
+    "correct": "B",
+    "tip": "Think managed SQL databases.",
+    "explanations": {
+      "A": "Incorrect. DynamoDB is a NoSQL database.",
+      "B": "Correct. Amazon RDS is a managed relational database service supporting MySQL and other engines.",
+      "C": "Incorrect. Neptune is a graph database.",
+      "D": "Incorrect. ElastiCache is an in-memory cache."
+    }
+  },
+  {
+    "question": "Which AWS database service is BEST for applications requiring a flexible schema and single-digit millisecond performance at scale?",
+    "choices": {
+      "A": "Amazon Aurora",
+      "B": "Amazon RDS for PostgreSQL",
+      "C": "Amazon DynamoDB",
+      "D": "Amazon Redshift"
+    },
+    "correct": "C",
+    "tip": "Flexible schema + very fast performance.",
+    "explanations": {
+      "A": "Incorrect. Aurora is relational.",
+      "B": "Incorrect. PostgreSQL is relational.",
+      "C": "Correct. DynamoDB is a fully managed NoSQL database with flexible schema and fast performance.",
+      "D": "Incorrect. Redshift is a data warehouse."
+    }
+  },
+  {
+    "question": "A company needs to reduce read traffic on its Amazon RDS database by storing frequently requested data in memory. Which service should they use?",
+    "choices": {
+      "A": "Amazon Neptune",
+      "B": "Amazon ElastiCache",
+      "C": "Amazon S3",
+      "D": "AWS Backup"
+    },
+    "correct": "B",
+    "tip": "Think caching layer.",
+    "explanations": {
+      "A": "Incorrect. Neptune is for graph data.",
+      "B": "Correct. ElastiCache stores frequently accessed data in memory to reduce database load.",
+      "C": "Incorrect. S3 is object storage.",
+      "D": "Incorrect. Backup does not improve query performance."
+    }
+  },
+  {
+    "question": "Which AWS service is purpose-built for storing and querying highly connected datasets such as social networks or fraud detection relationships?",
+    "choices": {
+      "A": "Amazon Neptune",
+      "B": "Amazon RDS",
+      "C": "Amazon DynamoDB",
+      "D": "Amazon Aurora"
+    },
+    "correct": "A",
+    "tip": "Connected relationships = graph database.",
+    "explanations": {
+      "A": "Correct. Neptune is a graph database optimized for connected data.",
+      "B": "Incorrect. RDS is relational.",
+      "C": "Incorrect. DynamoDB is NoSQL key-value/document.",
+      "D": "Incorrect. Aurora is relational."
+    }
+  },
+  {
+    "question": "A company wants to migrate an on-premises database to AWS with minimal downtime while keeping the source database operational during migration. Which service should they use?",
+    "choices": {
+      "A": "AWS Database Migration Service (AWS DMS)",
+      "B": "Amazon EC2 Auto Scaling",
+      "C": "AWS Backup",
+      "D": "Amazon Athena"
+    },
+    "correct": "A",
+    "tip": "Migration with low downtime.",
+    "explanations": {
+      "A": "Correct. AWS DMS is designed for database migrations with minimal downtime.",
+      "B": "Incorrect. Auto Scaling is for compute resources.",
+      "C": "Incorrect. Backup handles backups, not migrations.",
+      "D": "Incorrect. Athena is for querying data in S3."
+    }
+  },
+  {
+    "question": "Which TWO responsibilities remain with customers when using fully managed AWS database services?",
+    "choices": {
+      "A": "Designing database schemas",
+      "B": "Managing access controls",
+      "C": "Replacing failed storage hardware",
+      "D": "Applying operating system patches"
+    },
+    "correct": ["A", "B"],
+    "tip": "AWS manages infrastructure; customer manages data use.",
+    "explanations": {
+      "A": "Correct. Customers design data structures and schemas.",
+      "B": "Correct. Customers manage permissions and access controls.",
+      "C": "Incorrect. AWS manages hardware.",
+      "D": "Incorrect. AWS manages patching for fully managed services."
+    }
+  },
+  {
+    "question": "Which AWS database service is MongoDB-compatible and designed for document-oriented workloads?",
+    "choices": {
+      "A": "Amazon DocumentDB",
+      "B": "Amazon Neptune",
+      "C": "Amazon DynamoDB",
+      "D": "Amazon RDS"
+    },
+    "correct": "A",
+    "tip": "MongoDB compatibility.",
+    "explanations": {
+      "A": "Correct. DocumentDB is compatible with MongoDB workloads.",
+      "B": "Incorrect. Neptune is graph database.",
+      "C": "Incorrect. DynamoDB is NoSQL key-value/document but not MongoDB-compatible.",
+      "D": "Incorrect. RDS is relational."
+    }
+  },
+  {
+    "question": "A company needs a relational database with higher throughput than standard MySQL and automatic replication across multiple Availability Zones. Which AWS service is BEST?",
+    "choices": {
+      "A": "Amazon Aurora",
+      "B": "Amazon DynamoDB",
+      "C": "Amazon Neptune",
+      "D": "Amazon ElastiCache"
+    },
+    "correct": "A",
+    "tip": "High-performance managed relational database.",
+    "explanations": {
+      "A": "Correct. Aurora offers higher throughput than standard MySQL and high availability.",
+      "B": "Incorrect. DynamoDB is NoSQL.",
+      "C": "Incorrect. Neptune is graph.",
+      "D": "Incorrect. ElastiCache is cache."
+    }
+  },
+  {
+    "question": "Which problem does Amazon ElastiCache primarily solve?",
+    "choices": {
+      "A": "Long-term archival storage",
+      "B": "Database performance bottlenecks caused by repeated reads",
+      "C": "Database schema migrations",
+      "D": "Operating system patch management"
+    },
+    "correct": "B",
+    "tip": "Cache = speed.",
+    "explanations": {
+      "A": "Incorrect. Archival storage is not a cache use case.",
+      "B": "Correct. ElastiCache reduces repeated database reads and improves performance.",
+      "C": "Incorrect. Not used for schema migrations.",
+      "D": "Incorrect. Does not patch operating systems."
+    }
+  },
+  {
+    "question": "A company wants centralized backup management across RDS, DynamoDB, EFS, and on-premises resources. Which AWS service should they choose?",
+    "choices": {
+      "A": "AWS Backup",
+      "B": "Amazon S3 Glacier",
+      "C": "Amazon CloudWatch",
+      "D": "AWS Organizations"
+    },
+    "correct": "A",
+    "tip": "Centralized backups across services.",
+    "explanations": {
+      "A": "Correct. AWS Backup centralizes backup policies and monitoring across services.",
+      "B": "Incorrect. Glacier is storage, not centralized backup management.",
+      "C": "Incorrect. CloudWatch monitors systems.",
+      "D": "Incorrect. Organizations manages accounts."
+    }
+  },
+  {
+    "question": "A retail company needs a database for customer orders, products, and payment records with complex relationships between tables. Which AWS service is the BEST fit?",
+    "choices": {
+      "A": "Amazon Neptune",
+      "B": "Amazon RDS",
+      "C": "Amazon ElastiCache",
+      "D": "Amazon S3"
+    },
+    "correct": "B",
+    "tip": "Think structured data with relationships.",
+    "explanations": {
+      "A": "Incorrect. Neptune is a graph database for connected relationships.",
+      "B": "Correct. Amazon RDS is ideal for relational workloads using structured tables and SQL.",
+      "C": "Incorrect. ElastiCache is for in-memory caching.",
+      "D": "Incorrect. S3 is object storage, not a relational database."
+    }
+  },
+  {
+    "question": "Which AWS service is BEST for gaming leaderboards requiring microsecond response times?",
+    "choices": {
+      "A": "Amazon ElastiCache",
+      "B": "Amazon Aurora",
+      "C": "Amazon Redshift",
+      "D": "Amazon RDS"
+    },
+    "correct": "A",
+    "tip": "Fast in-memory reads/writes.",
+    "explanations": {
+      "A": "Correct. ElastiCache is ideal for leaderboards and ultra-fast caching workloads.",
+      "B": "Incorrect. Aurora is relational but slower than in-memory cache.",
+      "C": "Incorrect. Redshift is analytics/data warehouse.",
+      "D": "Incorrect. RDS is relational database storage."
+    }
+  },
+  {
+    "question": "A company wants a fully managed NoSQL database that automatically scales and uses key-value or document data models. Which service should they use?",
+    "choices": {
+      "A": "Amazon DynamoDB",
+      "B": "Amazon Neptune",
+      "C": "Amazon Aurora",
+      "D": "Amazon DocumentDB"
+    },
+    "correct": "A",
+    "tip": "NoSQL + seamless scale.",
+    "explanations": {
+      "A": "Correct. DynamoDB is a fully managed NoSQL key-value and document database.",
+      "B": "Incorrect. Neptune is graph database.",
+      "C": "Incorrect. Aurora is relational.",
+      "D": "Incorrect. DocumentDB is document-focused, not key-value primary."
+    }
+  },
+  {
+    "question": "Which feature of Amazon RDS helps provide high availability with automatic failover to a standby instance?",
+    "choices": {
+      "A": "Read Replicas",
+      "B": "Multi-AZ deployments",
+      "C": "EBS Snapshots",
+      "D": "Reserved Instances"
+    },
+    "correct": "B",
+    "tip": "Availability + failover.",
+    "explanations": {
+      "A": "Incorrect. Read replicas scale reads, not automatic failover primary purpose.",
+      "B": "Correct. Multi-AZ deployments provide standby failover.",
+      "C": "Incorrect. Snapshots are backups.",
+      "D": "Incorrect. Reserved Instances are pricing related."
+    }
+  },
+  {
+    "question": "Which AWS database service is MOST appropriate for fraud detection based on patterns of connected accounts and transactions?",
+    "choices": {
+      "A": "Amazon Neptune",
+      "B": "Amazon RDS",
+      "C": "Amazon DynamoDB",
+      "D": "Amazon ElastiCache"
+    },
+    "correct": "A",
+    "tip": "Connected relationships matter.",
+    "explanations": {
+      "A": "Correct. Neptune excels at graph relationships and fraud detection patterns.",
+      "B": "Incorrect. RDS can store data but is less optimized for graph traversal.",
+      "C": "Incorrect. DynamoDB is not graph-focused.",
+      "D": "Incorrect. ElastiCache is cache only."
+    }
+  },
+  {
+    "question": "Which TWO benefits are provided by Amazon Aurora?",
+    "choices": {
+      "A": "High throughput compared to standard MySQL",
+      "B": "Automatic replication across Availability Zones",
+      "C": "Built-in operating system access for administrators",
+      "D": "Manual patching required by customers"
+    },
+    "correct": ["A", "B"],
+    "tip": "Aurora = performance + availability.",
+    "explanations": {
+      "A": "Correct. Aurora can provide much higher throughput than standard MySQL.",
+      "B": "Correct. Aurora replicates across multiple AZs.",
+      "C": "Incorrect. Customers do not manage OS access.",
+      "D": "Incorrect. Aurora is managed."
+    }
+  },
+  {
+    "question": "A company stores user profile documents in JSON format and needs schema flexibility. Which service is BEST?",
+    "choices": {
+      "A": "Amazon DocumentDB",
+      "B": "Amazon RDS for SQL Server",
+      "C": "Amazon Neptune",
+      "D": "Amazon ElastiCache"
+    },
+    "correct": "A",
+    "tip": "JSON documents + flexible schema.",
+    "explanations": {
+      "A": "Correct. DocumentDB is ideal for document workloads with dynamic schemas.",
+      "B": "Incorrect. SQL Server is relational.",
+      "C": "Incorrect. Neptune is graph.",
+      "D": "Incorrect. ElastiCache is not primary document storage."
+    }
+  },
+  {
+    "question": "What is the PRIMARY purpose of using Amazon ElastiCache with Amazon RDS?",
+    "choices": {
+      "A": "Convert SQL data to NoSQL format",
+      "B": "Reduce latency and offload repeated database queries",
+      "C": "Provide long-term backups",
+      "D": "Replace encryption controls"
+    },
+    "correct": "B",
+    "tip": "Cache in front of DB.",
+    "explanations": {
+      "A": "Incorrect. ElastiCache does not convert schemas.",
+      "B": "Correct. ElastiCache speeds responses and reduces database load.",
+      "C": "Incorrect. Not a backup service.",
+      "D": "Incorrect. Not an encryption replacement."
+    }
+  },
+  {
+    "question": "Which AWS service would be MOST suitable for migrating an existing MySQL database to AWS while continuing replication during cutover?",
+    "choices": {
+      "A": "AWS DMS",
+      "B": "Amazon Athena",
+      "C": "Amazon CloudFront",
+      "D": "AWS Lambda"
+    },
+    "correct": "A",
+    "tip": "Migration with minimal downtime.",
+    "explanations": {
+      "A": "Correct. AWS Database Migration Service supports ongoing replication during migration.",
+      "B": "Incorrect. Athena queries S3 data.",
+      "C": "Incorrect. CloudFront is CDN.",
+      "D": "Incorrect. Lambda runs code."
+    }
+  },
+  {
+    "question": "Which statement BEST describes DynamoDB Global Tables?",
+    "choices": {
+      "A": "They convert DynamoDB into a relational database.",
+      "B": "They provide multi-Region replication for globally distributed applications.",
+      "C": "They require manual synchronization between Regions.",
+      "D": "They are used only for backups."
+    },
+    "correct": "B",
+    "tip": "Global scale.",
+    "explanations": {
+      "A": "Incorrect. DynamoDB remains NoSQL.",
+      "B": "Correct. Global Tables replicate data across Regions for global apps.",
+      "C": "Incorrect. Replication is managed.",
+      "D": "Incorrect. They are operational, not backup-only."
+    }
+  },
+  {
+    "question": "A company needs to analyze petabytes of structured data using SQL for business intelligence dashboards. Which AWS service is BEST suited?",
+    "choices": {
+      "A": "Amazon Redshift",
+      "B": "Amazon RDS",
+      "C": "Amazon DynamoDB",
+      "D": "Amazon ElastiCache"
+    },
+    "correct": "A",
+    "tip": "Think analytics + data warehouse + SQL at massive scale.",
+    "explanations": {
+      "A": "Correct. Amazon Redshift is AWS data warehouse service for large-scale analytics.",
+      "B": "Incorrect. RDS is for transactional relational databases, not petabyte analytics.",
+      "C": "Incorrect. DynamoDB is NoSQL operational database.",
+      "D": "Incorrect. ElastiCache is in-memory cache."
+    }
+  },
+  {
+    "question": "Which AWS database service is fully managed and specifically designed for graph workloads?",
+    "choices": {
+      "A": "Amazon Neptune",
+      "B": "Amazon Aurora",
+      "C": "Amazon Redshift",
+      "D": "Amazon DocumentDB"
+    },
+    "correct": "A",
+    "tip": "Relationships between data entities.",
+    "explanations": {
+      "A": "Correct. Neptune is purpose-built for graph use cases.",
+      "B": "Incorrect. Aurora is relational.",
+      "C": "Incorrect. Redshift is analytics warehouse.",
+      "D": "Incorrect. DocumentDB is document database."
+    }
+  },
+  {
+    "question": "A startup needs a database that can automatically scale throughput with unpredictable traffic spikes and no server management. Which service is BEST?",
+    "choices": {
+      "A": "Amazon DynamoDB",
+      "B": "Amazon RDS on EC2",
+      "C": "Amazon Neptune",
+      "D": "Self-managed MySQL on EC2"
+    },
+    "correct": "A",
+    "tip": "Unpredictable traffic + serverless scale.",
+    "explanations": {
+      "A": "Correct. DynamoDB is fully managed and scales automatically.",
+      "B": "Incorrect. More operational overhead.",
+      "C": "Incorrect. Graph database not best fit.",
+      "D": "Incorrect. Highest management burden."
+    }
+  },
+  {
+    "question": "Which TWO AWS services are relational database options?",
+    "choices": {
+      "A": "Amazon Aurora",
+      "B": "Amazon RDS",
+      "C": "Amazon DynamoDB",
+      "D": "Amazon Neptune"
+    },
+    "correct": ["A", "B"],
+    "tip": "SQL-style databases.",
+    "explanations": {
+      "A": "Correct. Aurora is relational.",
+      "B": "Correct. RDS supports relational engines.",
+      "C": "Incorrect. DynamoDB is NoSQL.",
+      "D": "Incorrect. Neptune is graph."
+    }
+  },
+  {
+    "question": "A company wants to cache session data for a web application. Which AWS service is MOST appropriate?",
+    "choices": {
+      "A": "Amazon ElastiCache",
+      "B": "Amazon Redshift",
+      "C": "Amazon Neptune",
+      "D": "Amazon S3 Glacier"
+    },
+    "correct": "A",
+    "tip": "Fast temporary session storage.",
+    "explanations": {
+      "A": "Correct. ElastiCache is commonly used for sessions and caching.",
+      "B": "Incorrect. Redshift is analytics.",
+      "C": "Incorrect. Neptune is graph database.",
+      "D": "Incorrect. Glacier is archive storage."
+    }
+  },
+  {
+    "question": "What is a key benefit of using Amazon RDS instead of self-managed databases on Amazon EC2?",
+    "choices": {
+      "A": "Manual patching is required",
+      "B": "AWS automates backups and maintenance tasks",
+      "C": "It only supports NoSQL engines",
+      "D": "It removes the need for database credentials"
+    },
+    "correct": "B",
+    "tip": "Managed service advantage.",
+    "explanations": {
+      "A": "Incorrect. Opposite of managed benefit.",
+      "B": "Correct. RDS automates backups, patching, and maintenance.",
+      "C": "Incorrect. RDS supports relational engines.",
+      "D": "Incorrect. Credentials/security still matter."
+    }
+  },
+  {
+    "question": "A company stores product catalogs as JSON documents and wants MongoDB compatibility. Which AWS service should they choose?",
+    "choices": {
+      "A": "Amazon DocumentDB",
+      "B": "Amazon Aurora",
+      "C": "Amazon Redshift",
+      "D": "Amazon Neptune"
+    },
+    "correct": "A",
+    "tip": "JSON docs + MongoDB compatibility.",
+    "explanations": {
+      "A": "Correct. DocumentDB is compatible with MongoDB workloads.",
+      "B": "Incorrect. Aurora is relational.",
+      "C": "Incorrect. Redshift is analytics.",
+      "D": "Incorrect. Neptune is graph."
+    }
+  },
+  {
+    "question": "Which AWS service helps migrate databases to AWS with minimal downtime?",
+    "choices": {
+      "A": "AWS Database Migration Service (AWS DMS)",
+      "B": "Amazon CloudWatch",
+      "C": "AWS Config",
+      "D": "Amazon Inspector"
+    },
+    "correct": "A",
+    "tip": "Migration tool.",
+    "explanations": {
+      "A": "Correct. AWS DMS is built for database migration.",
+      "B": "Incorrect. CloudWatch monitors resources.",
+      "C": "Incorrect. Config tracks configurations.",
+      "D": "Incorrect. Inspector scans vulnerabilities."
+    }
+  },
+  {
+    "question": "Which TWO tasks are typically handled by AWS for managed database services like Amazon RDS?",
+    "choices": {
+      "A": "Hardware provisioning",
+      "B": "Automated backups configuration options",
+      "C": "Operating system patching",
+      "D": "Designing the application schema"
+    },
+    "correct": ["A", "C"],
+    "tip": "AWS handles infrastructure layer.",
+    "explanations": {
+      "A": "Correct. AWS provisions underlying hardware.",
+      "B": "Incorrect. Backup settings may be configurable by customer; not best answer here.",
+      "C": "Correct. AWS handles OS patching in managed services.",
+      "D": "Incorrect. Customer designs schema."
+    }
+  },
+  {
+    "question": "A business needs global low-latency reads for a NoSQL application deployed in multiple AWS Regions. Which feature is BEST?",
+    "choices": {
+      "A": "Amazon DynamoDB Global Tables",
+      "B": "Amazon RDS Multi-AZ",
+      "C": "Amazon EBS Snapshots",
+      "D": "Amazon Neptune Clusters"
+    },
+    "correct": "A",
+    "tip": "Global NoSQL replication.",
+    "explanations": {
+      "A": "Correct. DynamoDB Global Tables replicate data across Regions.",
+      "B": "Incorrect. Multi-AZ is regional HA, not global reads.",
+      "C": "Incorrect. Snapshots are backups.",
+      "D": "Incorrect. Not the standard answer for global NoSQL low latency."
+    }
+  }
+]
+

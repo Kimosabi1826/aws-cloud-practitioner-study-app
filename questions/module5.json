@@ -1,0 +1,515 @@
+[
+  {
+    "question": "Which AWS service allows you to create a logically isolated network in the AWS Cloud?",
+    "choices": {
+      "A": "Amazon EC2",
+      "B": "Amazon VPC",
+      "C": "Amazon S3",
+      "D": "AWS Lambda"
+    },
+    "correct": "B",
+    "tip": "Think: your private network in AWS.",
+    "explanations": {
+      "A": "Incorrect. EC2 provides compute resources.",
+      "B": "Correct. Amazon VPC creates a logically isolated network.",
+      "C": "Incorrect. S3 is object storage.",
+      "D": "Incorrect. Lambda is serverless compute."
+    }
+  },
+  {
+    "question": "Which component allows resources in a VPC to communicate with the internet?",
+    "choices": {
+      "A": "Virtual private gateway",
+      "B": "Security group",
+      "C": "Internet gateway",
+      "D": "Network ACL"
+    },
+    "correct": "C",
+    "tip": "Door to the internet.",
+    "explanations": {
+      "A": "Incorrect. Used for VPN connections.",
+      "B": "Incorrect. Controls traffic rules.",
+      "C": "Correct. Internet gateway connects VPC to the internet.",
+      "D": "Incorrect. Network ACL controls subnet traffic."
+    }
+  },
+  {
+    "question": "Which of the following describes a private subnet?",
+    "choices": {
+      "A": "A subnet with direct internet access",
+      "B": "A subnet without internet access",
+      "C": "A subnet that stores only databases",
+      "D": "A subnet that is globally accessible"
+    },
+    "correct": "B",
+    "tip": "Private = no internet.",
+    "explanations": {
+      "A": "Incorrect. That is a public subnet.",
+      "B": "Correct. Private subnets do not have direct internet access.",
+      "C": "Incorrect. It can store many resource types.",
+      "D": "Incorrect. Private subnets are not publicly accessible."
+    }
+  },
+  {
+    "question": "Which AWS service provides a secure encrypted connection between an on-premises network and a VPC over the internet?",
+    "choices": {
+      "A": "AWS Direct Connect",
+      "B": "AWS VPN",
+      "C": "Amazon Route 53",
+      "D": "Amazon CloudFront"
+    },
+    "correct": "B",
+    "tip": "Secure tunnel.",
+    "explanations": {
+      "A": "Incorrect. Direct Connect is a private dedicated connection.",
+      "B": "Correct. VPN provides encrypted connections over the internet.",
+      "C": "Incorrect. Route 53 is DNS.",
+      "D": "Incorrect. CloudFront is CDN."
+    }
+  },
+  {
+    "question": "Which AWS service provides a dedicated private connection from an on-premises data center to AWS?",
+    "choices": {
+      "A": "AWS Site-to-Site VPN",
+      "B": "AWS Client VPN",
+      "C": "AWS Direct Connect",
+      "D": "AWS PrivateLink"
+    },
+    "correct": "C",
+    "tip": "High bandwidth, private line.",
+    "explanations": {
+      "A": "Incorrect. Uses internet.",
+      "B": "Incorrect. Used for remote users.",
+      "C": "Correct. Direct Connect provides dedicated private connection.",
+      "D": "Incorrect. PrivateLink connects services privately."
+    }
+  },
+  {
+    "question": "Which AWS networking component performs stateless filtering of traffic?",
+    "choices": {
+      "A": "Security group",
+      "B": "Network ACL",
+      "C": "Internet gateway",
+      "D": "Route table"
+    },
+    "correct": "B",
+    "tip": "Stateless = checks every time.",
+    "explanations": {
+      "A": "Incorrect. Security groups are stateful.",
+      "B": "Correct. Network ACLs are stateless.",
+      "C": "Incorrect. Internet gateway connects to internet.",
+      "D": "Incorrect. Route table controls routing."
+    }
+  },
+  {
+    "question": "Which AWS networking component is stateful and operates at the instance level?",
+    "choices": {
+      "A": "Network ACL",
+      "B": "Security group",
+      "C": "Subnet",
+      "D": "Internet gateway"
+    },
+    "correct": "B",
+    "tip": "Instance firewall.",
+    "explanations": {
+      "A": "Incorrect. Network ACL is stateless.",
+      "B": "Correct. Security groups are stateful and instance-level.",
+      "C": "Incorrect. Subnet is network segmentation.",
+      "D": "Incorrect. Internet gateway is for connectivity."
+    }
+  },
+  {
+    "question": "Which AWS service is used to translate domain names into IP addresses?",
+    "choices": {
+      "A": "Amazon CloudFront",
+      "B": "Amazon Route 53",
+      "C": "AWS Global Accelerator",
+      "D": "Amazon VPC"
+    },
+    "correct": "B",
+    "tip": "DNS service.",
+    "explanations": {
+      "A": "Incorrect. CloudFront is CDN.",
+      "B": "Correct. Route 53 is DNS.",
+      "C": "Incorrect. Improves performance.",
+      "D": "Incorrect. VPC is networking."
+    }
+  },
+  {
+    "question": "Which AWS service improves content delivery speed by caching content closer to users?",
+    "choices": {
+      "A": "Amazon Route 53",
+      "B": "AWS Global Accelerator",
+      "C": "Amazon CloudFront",
+      "D": "AWS Direct Connect"
+    },
+    "correct": "C",
+    "tip": "CDN.",
+    "explanations": {
+      "A": "Incorrect. Route 53 handles DNS.",
+      "B": "Incorrect. Improves routing performance.",
+      "C": "Correct. CloudFront is a CDN.",
+      "D": "Incorrect. Direct Connect is private network."
+    }
+  },
+  {
+    "question": "Which AWS service allows private connections to AWS services without using the internet?",
+    "choices": {
+      "A": "AWS VPN",
+      "B": "AWS PrivateLink",
+      "C": "Amazon CloudFront",
+      "D": "Amazon Route 53"
+    },
+    "correct": "B",
+    "tip": "Private access without internet.",
+    "explanations": {
+      "A": "Incorrect. Uses internet.",
+      "B": "Correct. PrivateLink provides private connectivity.",
+      "C": "Incorrect. CloudFront is CDN.",
+      "D": "Incorrect. Route 53 is DNS."
+    }
+  },
+  {
+    "question": "Which of the following are valid use cases for subnets in a VPC? (Select TWO.)",
+    "choices": {
+      "A": "Organizing resources within a VPC",
+      "B": "Providing DNS resolution",
+      "C": "Isolating resources for security purposes",
+      "D": "Replacing the need for EC2 instances"
+    },
+    "correct": ["A", "C"],
+    "tip": "Subnets = organization + isolation.",
+    "explanations": {
+      "A": "Correct. Subnets group and organize resources.",
+      "B": "Incorrect. DNS is handled by Route 53.",
+      "C": "Correct. Subnets can isolate public vs private resources.",
+      "D": "Incorrect. Subnets do not replace compute services."
+    }
+  },
+  {
+    "question": "A company wants to allow only internal employees to access certain AWS resources. Which solution should they use?",
+    "choices": {
+      "A": "Internet gateway with public subnet",
+      "B": "Private subnet with no internet gateway",
+      "C": "CloudFront distribution",
+      "D": "Route 53 routing policy"
+    },
+    "correct": "B",
+    "tip": "Internal only = no internet.",
+    "explanations": {
+      "A": "Incorrect. This allows public access.",
+      "B": "Correct. Private subnet restricts internet access.",
+      "C": "Incorrect. CloudFront delivers content.",
+      "D": "Incorrect. Route 53 handles DNS routing."
+    }
+  },
+  {
+    "question": "Which AWS service allows remote users to securely connect to AWS resources?",
+    "choices": {
+      "A": "AWS Client VPN",
+      "B": "AWS Direct Connect",
+      "C": "Amazon CloudFront",
+      "D": "Amazon VPC"
+    },
+    "correct": "A",
+    "tip": "Remote workers.",
+    "explanations": {
+      "A": "Correct. Client VPN connects remote users securely.",
+      "B": "Incorrect. Direct Connect is for dedicated connections.",
+      "C": "Incorrect. CloudFront is CDN.",
+      "D": "Incorrect. VPC is networking environment."
+    }
+  },
+  {
+    "question": "Which of the following best describes AWS PrivateLink?",
+    "choices": {
+      "A": "Provides DNS routing",
+      "B": "Provides private connectivity to services without using the internet",
+      "C": "Caches content globally",
+      "D": "Creates VPN connections"
+    },
+    "correct": "B",
+    "tip": "Private access, no internet.",
+    "explanations": {
+      "A": "Incorrect. That is Route 53.",
+      "B": "Correct. PrivateLink allows private communication.",
+      "C": "Incorrect. That is CloudFront.",
+      "D": "Incorrect. That is VPN."
+    }
+  },
+  {
+    "question": "A company needs high-bandwidth, low-latency connectivity between its data center and AWS. Which solution should they choose?",
+    "choices": {
+      "A": "AWS Client VPN",
+      "B": "AWS Site-to-Site VPN",
+      "C": "AWS Direct Connect",
+      "D": "AWS PrivateLink"
+    },
+    "correct": "C",
+    "tip": "High bandwidth = Direct Connect.",
+    "explanations": {
+      "A": "Incorrect. Used for remote users.",
+      "B": "Incorrect. Uses internet and may have latency.",
+      "C": "Correct. Direct Connect provides dedicated connection.",
+      "D": "Incorrect. Used for private service access."
+    }
+  },
+  {
+    "question": "Which of the following statements about security groups is TRUE?",
+    "choices": {
+      "A": "They are stateless",
+      "B": "They deny all outbound traffic by default",
+      "C": "They allow all inbound traffic by default",
+      "D": "They are stateful and remember traffic decisions"
+    },
+    "correct": "D",
+    "tip": "Security group = smart firewall.",
+    "explanations": {
+      "A": "Incorrect. They are stateful.",
+      "B": "Incorrect. Outbound is allowed by default.",
+      "C": "Incorrect. Inbound is denied by default.",
+      "D": "Correct. Security groups are stateful."
+    }
+  },
+  {
+    "question": "Which of the following statements about network ACLs is TRUE?",
+    "choices": {
+      "A": "They are stateful",
+      "B": "They operate at the instance level",
+      "C": "They are stateless and evaluate every request",
+      "D": "They allow all inbound traffic by default and cannot be modified"
+    },
+    "correct": "C",
+    "tip": "NACL = strict, no memory.",
+    "explanations": {
+      "A": "Incorrect. They are stateless.",
+      "B": "Incorrect. They operate at subnet level.",
+      "C": "Correct. They check every packet in and out.",
+      "D": "Incorrect. Rules can be customized."
+    }
+  },
+  {
+    "question": "Which AWS service helps improve global application availability and routes traffic through the AWS global network?",
+    "choices": {
+      "A": "Amazon Route 53",
+      "B": "Amazon CloudFront",
+      "C": "AWS Global Accelerator",
+      "D": "Amazon VPC"
+    },
+    "correct": "C",
+    "tip": "Fast global routing.",
+    "explanations": {
+      "A": "Incorrect. DNS service.",
+      "B": "Incorrect. CDN.",
+      "C": "Correct. Global Accelerator improves performance globally.",
+      "D": "Incorrect. VPC is networking."
+    }
+  },
+  {
+    "question": "Which AWS services are considered edge networking services? (Select THREE.)",
+    "choices": {
+      "A": "Amazon Route 53",
+      "B": "Amazon CloudFront",
+      "C": "AWS Global Accelerator",
+      "D": "Amazon EC2",
+      "E": "AWS Lambda"
+    },
+    "correct": ["A", "B", "C"],
+    "tip": "Edge = closer to users.",
+    "explanations": {
+      "A": "Correct. Route 53 is DNS at the edge.",
+      "B": "Correct. CloudFront is CDN.",
+      "C": "Correct. Global Accelerator improves routing.",
+      "D": "Incorrect. EC2 is compute.",
+      "E": "Incorrect. Lambda is compute."
+    }
+  },
+  {
+    "question": "A company wants to allow instances in a private subnet to access the internet but prevent inbound internet traffic. Which solution should they use?",
+    "choices": {
+      "A": "Internet gateway",
+      "B": "Virtual private gateway",
+      "C": "NAT gateway",
+      "D": "Route 53"
+    },
+    "correct": "C",
+    "tip": "Outbound only access.",
+    "explanations": {
+      "A": "Incorrect. Allows inbound/outbound.",
+      "B": "Incorrect. Used for VPN.",
+      "C": "Correct. NAT allows outbound internet only.",
+      "D": "Incorrect. DNS service."
+    }
+  },
+  {
+    "question": "Which of the following are characteristics of a public subnet? (Select TWO.)",
+    "choices": {
+      "A": "Has a route to an internet gateway",
+      "B": "Can directly receive inbound traffic from the internet",
+      "C": "Cannot communicate with other subnets",
+      "D": "Does not use route tables"
+    },
+    "correct": ["A", "B"],
+    "tip": "Public = internet access.",
+    "explanations": {
+      "A": "Correct. Public subnets route traffic to an internet gateway.",
+      "B": "Correct. Resources can receive inbound internet traffic.",
+      "C": "Incorrect. Subnets can communicate internally.",
+      "D": "Incorrect. All subnets use route tables."
+    }
+  },
+  {
+    "question": "Which AWS services can be used to establish a hybrid cloud connection between on-premises and AWS? (Select TWO.)",
+    "choices": {
+      "A": "AWS VPN",
+      "B": "AWS Direct Connect",
+      "C": "Amazon CloudFront",
+      "D": "Amazon S3"
+    },
+    "correct": ["A", "B"],
+    "tip": "Hybrid = connect on-prem to cloud.",
+    "explanations": {
+      "A": "Correct. VPN connects over the internet.",
+      "B": "Correct. Direct Connect provides private connection.",
+      "C": "Incorrect. CloudFront is CDN.",
+      "D": "Incorrect. S3 is storage."
+    }
+  },
+  {
+    "question": "Which AWS networking component allows instances in a private subnet to access AWS services privately without using the internet?",
+    "choices": {
+      "A": "Internet gateway",
+      "B": "AWS PrivateLink",
+      "C": "NAT gateway",
+      "D": "Route 53"
+    },
+    "correct": "B",
+    "tip": "Private access, no internet.",
+    "explanations": {
+      "A": "Incorrect. Internet gateway exposes resources.",
+      "B": "Correct. PrivateLink keeps traffic inside AWS network.",
+      "C": "Incorrect. NAT uses internet.",
+      "D": "Incorrect. Route 53 is DNS."
+    }
+  },
+  {
+    "question": "A company wants to ensure that inbound traffic is explicitly allowed or denied at the subnet level. Which AWS feature should they use?",
+    "choices": {
+      "A": "Security groups",
+      "B": "Network ACLs",
+      "C": "Internet gateway",
+      "D": "Elastic Load Balancer"
+    },
+    "correct": "B",
+    "tip": "Subnet-level control.",
+    "explanations": {
+      "A": "Incorrect. Works at instance level.",
+      "B": "Correct. Network ACLs control subnet traffic.",
+      "C": "Incorrect. Gateway connects to internet.",
+      "D": "Incorrect. ELB distributes traffic."
+    }
+  },
+  {
+    "question": "Which of the following statements about Amazon CloudFront are TRUE? (Select TWO.)",
+    "choices": {
+      "A": "It reduces latency by caching content at edge locations",
+      "B": "It is a DNS service",
+      "C": "It improves performance for global users",
+      "D": "It provisions EC2 instances automatically"
+    },
+    "correct": ["A", "C"],
+    "tip": "CloudFront = CDN.",
+    "explanations": {
+      "A": "Correct. Caches content near users.",
+      "B": "Incorrect. DNS is Route 53.",
+      "C": "Correct. Improves global performance.",
+      "D": "Incorrect. Not a compute service."
+    }
+  },
+  {
+    "question": "A company wants to route traffic based on latency to improve user experience. Which AWS service should they use?",
+    "choices": {
+      "A": "Amazon Route 53",
+      "B": "AWS Lambda",
+      "C": "Amazon SQS",
+      "D": "Amazon EC2"
+    },
+    "correct": "A",
+    "tip": "Smart DNS routing.",
+    "explanations": {
+      "A": "Correct. Route 53 supports latency-based routing.",
+      "B": "Incorrect. Lambda is compute.",
+      "C": "Incorrect. SQS is messaging.",
+      "D": "Incorrect. EC2 is compute."
+    }
+  },
+  {
+    "question": "Which AWS features are used to control traffic at different levels within a VPC? (Select TWO.)",
+    "choices": {
+      "A": "Security groups",
+      "B": "Network ACLs",
+      "C": "Route 53",
+      "D": "CloudFront"
+    },
+    "correct": ["A", "B"],
+    "tip": "Instance + subnet control.",
+    "explanations": {
+      "A": "Correct. Security groups control instance traffic.",
+      "B": "Correct. Network ACLs control subnet traffic.",
+      "C": "Incorrect. Route 53 is DNS.",
+      "D": "Incorrect. CloudFront is CDN."
+    }
+  },
+  {
+    "question": "Which AWS service improves application availability by routing traffic to the healthiest endpoints?",
+    "choices": {
+      "A": "Amazon Route 53",
+      "B": "Amazon EC2",
+      "C": "AWS Lambda",
+      "D": "Amazon S3"
+    },
+    "correct": "A",
+    "tip": "Health checks + routing.",
+    "explanations": {
+      "A": "Correct. Route 53 uses health checks.",
+      "B": "Incorrect. Compute service.",
+      "C": "Incorrect. Serverless compute.",
+      "D": "Incorrect. Storage."
+    }
+  },
+  {
+    "question": "Which AWS services help improve network performance for global users? (Select TWO.)",
+    "choices": {
+      "A": "Amazon CloudFront",
+      "B": "AWS Global Accelerator",
+      "C": "Amazon S3",
+      "D": "Amazon EC2"
+    },
+    "correct": ["A", "B"],
+    "tip": "Speed + global reach.",
+    "explanations": {
+      "A": "Correct. CDN improves latency.",
+      "B": "Correct. Optimizes global routing.",
+      "C": "Incorrect. Storage service.",
+      "D": "Incorrect. Compute service."
+    }
+  },
+  {
+    "question": "A company wants to isolate its application into multiple layers such as web, application, and database tiers within a VPC. What should they use?",
+    "choices": {
+      "A": "Multiple VPCs",
+      "B": "Subnets",
+      "C": "Route 53",
+      "D": "CloudFront"
+    },
+    "correct": "B",
+    "tip": "Layered architecture.",
+    "explanations": {
+      "A": "Incorrect. Not required for layering.",
+      "B": "Correct. Subnets create tiers.",
+      "C": "Incorrect. DNS service.",
+      "D": "Incorrect. CDN."
+    }
+  }
+]
+

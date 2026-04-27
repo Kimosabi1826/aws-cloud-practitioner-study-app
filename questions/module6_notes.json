@@ -1,0 +1,178 @@
+{
+  "module": "Module 6 - AWS Storage Services",
+  "sections": [
+    {
+      "title": "Storage Categories",
+      "points": [
+        "AWS storage is commonly divided into Object, Block, and File storage.",
+        "Object storage = scalable internet-accessible data storage.",
+        "Block storage = virtual hard drive volumes for servers.",
+        "File storage = shared folder-style storage using file systems."
+      ],
+      "exam_tip": "S3 = Object | EBS = Block | EFS/FSx = File"
+    },
+    {
+      "title": "Amazon S3 (Simple Storage Service)",
+      "points": [
+        "Highly durable object storage service.",
+        "Stores files as objects inside buckets.",
+        "Virtually unlimited scalability.",
+        "Used for backups, static websites, logs, media, analytics data."
+      ],
+      "exam_tip": "Need scalable file/object storage? Think S3."
+    },
+    {
+      "title": "Amazon S3 Key Features",
+      "points": [
+        "Versioning protects against accidental deletion or overwrite.",
+        "Lifecycle policies automate movement to cheaper tiers.",
+        "Bucket policies control access.",
+        "Supports encryption and replication."
+      ],
+      "exam_tip": "Automate aging data = Lifecycle."
+    },
+    {
+      "title": "Amazon S3 Storage Classes",
+      "points": [
+        "S3 Standard = frequent access.",
+        "S3 Standard-IA = infrequent access, fast retrieval.",
+        "S3 One Zone-IA = lower cost, single AZ.",
+        "S3 Intelligent-Tiering = unknown/changing access patterns.",
+        "S3 Glacier Flexible Retrieval = archive.",
+        "S3 Glacier Deep Archive = lowest cost long-term archive."
+      ],
+      "exam_tip": "Unknown access pattern = Intelligent-Tiering."
+    },
+    {
+      "title": "Amazon EBS (Elastic Block Store)",
+      "points": [
+        "Persistent block storage for Amazon EC2.",
+        "Acts like a virtual hard drive.",
+        "Low-latency storage for databases and applications.",
+        "Data remains after EC2 stop/start."
+      ],
+      "exam_tip": "Need EC2 disk? Use EBS."
+    },
+    {
+      "title": "EBS Snapshots",
+      "points": [
+        "Point-in-time backups of EBS volumes.",
+        "Stored incrementally.",
+        "Used for backup and recovery.",
+        "Can restore new volumes from snapshots."
+      ],
+      "exam_tip": "Backup EBS = Snapshot."
+    },
+    {
+      "title": "EC2 Instance Store",
+      "points": [
+        "Temporary storage physically attached to host server.",
+        "Very fast local performance.",
+        "Lost when instance stops, fails, or terminates.",
+        "Used for buffers, cache, temporary data."
+      ],
+      "exam_tip": "Temporary + high speed = Instance Store."
+    },
+    {
+      "title": "Amazon EFS (Elastic File System)",
+      "points": [
+        "Managed shared file storage for Linux workloads.",
+        "Uses NFS protocol.",
+        "Multiple EC2 instances can mount at same time.",
+        "Automatically scales."
+      ],
+      "exam_tip": "Shared Linux file system = EFS."
+    },
+    {
+      "title": "Amazon FSx",
+      "points": [
+        "Managed file systems for specific workloads.",
+        "FSx for Windows File Server = SMB + Active Directory.",
+        "FSx for Lustre = high-performance computing.",
+        "Used when EFS is not the right fit."
+      ],
+      "exam_tip": "Windows file shares = FSx for Windows."
+    },
+    {
+      "title": "EFS vs FSx",
+      "points": [
+        "EFS = Linux shared file storage.",
+        "FSx Windows = SMB / Microsoft workloads.",
+        "FSx Lustre = HPC / fast compute workloads."
+      ],
+      "exam_tip": "Linux = EFS | Windows = FSx"
+    },
+    {
+      "title": "AWS Backup",
+      "points": [
+        "Centralized backup service.",
+        "Manage backups across AWS services.",
+        "Policy-based scheduling and retention.",
+        "Used for compliance and automation."
+      ],
+      "exam_tip": "Many backups across services = AWS Backup."
+    },
+    {
+      "title": "AWS Storage Gateway",
+      "points": [
+        "Hybrid service connecting on-premises storage to AWS.",
+        "Lets local environments use AWS cloud storage.",
+        "Supports file, volume, and tape models.",
+        "Useful during migrations."
+      ],
+      "exam_tip": "On-prem + AWS storage = Storage Gateway."
+    },
+    {
+      "title": "AWS Elastic Disaster Recovery",
+      "points": [
+        "Continuous replication of on-prem or cloud servers to AWS.",
+        "Fast recovery after disaster.",
+        "Used for business continuity."
+      ],
+      "exam_tip": "Need disaster failover to AWS = Elastic Disaster Recovery."
+    },
+    {
+      "title": "Shared Responsibility Model (Storage)",
+      "points": [
+        "AWS secures infrastructure and hardware.",
+        "Customer secures data, permissions, retention, backups, encryption choices."
+      ],
+      "exam_tip": "Access permissions = Customer responsibility."
+    },
+    {
+      "title": "Common Exam Scenarios",
+      "points": [
+        "Website images/videos = S3.",
+        "Database disk on EC2 = EBS.",
+        "Temporary cache = Instance Store.",
+        "Shared Linux folder = EFS.",
+        "Windows file share = FSx.",
+        "Old archives = Glacier."
+      ],
+      "exam_tip": "Match workload to storage type."
+    },
+    {
+      "title": "Common Exam Traps",
+      "points": [
+        "S3 is object storage, not block storage.",
+        "EBS usually attaches to one instance.",
+        "Instance Store is not persistent.",
+        "EFS is not object storage.",
+        "Glacier is not for hot frequently accessed data."
+      ],
+      "exam_tip": "AWS often tests what a service is NOT."
+    },
+    {
+      "title": "Quick Memory Map",
+      "points": [
+        "S3 = bucket files",
+        "EBS = EC2 hard drive",
+        "EFS = shared Linux drive",
+        "FSx = Windows/specialized file systems",
+        "Instance Store = temporary speed",
+        "Glacier = archive"
+      ],
+      "exam_tip": "Memorize this list cold."
+    }
+  ]
+}

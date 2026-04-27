@@ -1,0 +1,513 @@
+[
+  {
+    "question": "A company runs a transactional database on Amazon EC2. The database requires persistent, low-latency block storage that remains available if the instance is stopped and started again. Which AWS service should they use?",
+    "choices": {
+      "A": "Amazon S3",
+      "B": "Amazon Elastic Block Store (EBS)",
+      "C": "Amazon EFS",
+      "D": "EC2 Instance Store"
+    },
+    "correct": "B",
+    "tip": "Think persistent block storage for EC2.",
+    "explanations": {
+      "A": "Incorrect. S3 is object storage, not block storage for databases.",
+      "B": "Correct. EBS provides persistent block storage volumes for EC2 instances.",
+      "C": "Incorrect. EFS is shared file storage.",
+      "D": "Incorrect. Instance store is temporary and data is lost when stopped or terminated."
+    }
+  },
+  {
+    "question": "A machine learning team needs extremely fast temporary storage attached directly to Amazon EC2 instances for intermediate training data. The data can be lost after the instance stops. Which option is BEST?",
+    "choices": {
+      "A": "Amazon EBS",
+      "B": "Amazon S3 Glacier Deep Archive",
+      "C": "Amazon EC2 Instance Store",
+      "D": "Amazon EFS"
+    },
+    "correct": "C",
+    "tip": "Temporary + highest performance + attached locally.",
+    "explanations": {
+      "A": "Incorrect. EBS is persistent storage.",
+      "B": "Incorrect. Glacier is archival object storage.",
+      "C": "Correct. Instance store offers high-performance temporary block storage.",
+      "D": "Incorrect. EFS is network file storage."
+    }
+  },
+  {
+    "question": "Which statement BEST describes Amazon S3?",
+    "choices": {
+      "A": "A managed block storage service for EC2",
+      "B": "A fully managed object storage service with virtually unlimited scalability",
+      "C": "A shared Linux file system requiring capacity planning",
+      "D": "A local cache attached to EC2 hardware"
+    },
+    "correct": "B",
+    "tip": "S3 = object storage.",
+    "explanations": {
+      "A": "Incorrect. That describes EBS.",
+      "B": "Correct. S3 is scalable managed object storage.",
+      "C": "Incorrect. That is closer to EFS.",
+      "D": "Incorrect. That is not S3."
+    }
+  },
+  {
+    "question": "A company stores backup files that are rarely accessed but must be retrieved quickly when needed. Which Amazon S3 storage class is MOST appropriate?",
+    "choices": {
+      "A": "S3 Standard",
+      "B": "S3 Standard-IA",
+      "C": "S3 Glacier Deep Archive",
+      "D": "S3 One Zone-IA"
+    },
+    "correct": "B",
+    "tip": "Rare access but rapid retrieval.",
+    "explanations": {
+      "A": "Incorrect. Standard is for frequent access.",
+      "B": "Correct. Standard-IA is for infrequent access with rapid retrieval.",
+      "C": "Incorrect. Deep Archive has long retrieval times.",
+      "D": "Incorrect. One Zone-IA stores in one AZ and is less resilient."
+    }
+  },
+  {
+    "question": "A company wants to automatically move older S3 objects to lower-cost storage classes over time. Which feature should they use?",
+    "choices": {
+      "A": "Amazon CloudWatch",
+      "B": "S3 Bucket Policy",
+      "C": "S3 Lifecycle",
+      "D": "AWS Organizations"
+    },
+    "correct": "C",
+    "tip": "Automation for object transitions.",
+    "explanations": {
+      "A": "Incorrect. CloudWatch monitors resources.",
+      "B": "Incorrect. Bucket policies control access.",
+      "C": "Correct. S3 Lifecycle automates transitions and deletions.",
+      "D": "Incorrect. Organizations manages accounts."
+    }
+  },
+  {
+    "question": "A company needs a shared file system that can be mounted by multiple Linux EC2 instances simultaneously and scales automatically. Which AWS service should they choose?",
+    "choices": {
+      "A": "Amazon EFS",
+      "B": "Amazon EBS",
+      "C": "Amazon S3",
+      "D": "EC2 Instance Store"
+    },
+    "correct": "A",
+    "tip": "Shared Linux file storage.",
+    "explanations": {
+      "A": "Correct. EFS is a scalable shared NFS file system.",
+      "B": "Incorrect. EBS is block storage, typically attached to one instance.",
+      "C": "Incorrect. S3 is object storage.",
+      "D": "Incorrect. Instance store is local temporary storage."
+    }
+  },
+  {
+    "question": "A company uses Windows file shares and needs SMB protocol support plus Active Directory integration in AWS. Which service is BEST?",
+    "choices": {
+      "A": "Amazon FSx for Windows File Server",
+      "B": "Amazon EFS",
+      "C": "Amazon S3",
+      "D": "Amazon EBS"
+    },
+    "correct": "A",
+    "tip": "Windows workloads + SMB.",
+    "explanations": {
+      "A": "Correct. FSx for Windows File Server supports SMB and AD integration.",
+      "B": "Incorrect. EFS uses NFS for Linux workloads.",
+      "C": "Incorrect. S3 is object storage.",
+      "D": "Incorrect. EBS is block storage."
+    }
+  },
+  {
+    "question": "Which TWO tasks are customer responsibilities under the AWS Shared Responsibility Model for storage services?",
+    "choices": {
+      "A": "Configuring access permissions",
+      "B": "Maintaining AWS data center power systems",
+      "C": "Managing backup policies",
+      "D": "Replacing failed storage hardware"
+    },
+    "correct": ["A", "C"],
+    "tip": "Customer handles data and access.",
+    "explanations": {
+      "A": "Correct. Customers manage permissions and access controls.",
+      "B": "Incorrect. AWS manages physical infrastructure.",
+      "C": "Correct. Backup strategy is typically customer responsibility.",
+      "D": "Incorrect. AWS replaces failed hardware."
+    }
+  },
+  {
+    "question": "A company wants to back up on-premises files to AWS while keeping local access to frequently used files with minimal workflow changes. Which service should they use?",
+    "choices": {
+      "A": "Amazon S3 File Gateway",
+      "B": "Amazon EC2",
+      "C": "Amazon EBS",
+      "D": "Amazon RDS"
+    },
+    "correct": "A",
+    "tip": "Hybrid file storage bridge.",
+    "explanations": {
+      "A": "Correct. File Gateway provides on-prem file access backed by S3.",
+      "B": "Incorrect. EC2 is compute.",
+      "C": "Incorrect. EBS is block storage for EC2.",
+      "D": "Incorrect. RDS is a database service."
+    }
+  },
+  {
+    "question": "A company needs disaster recovery for on-premises servers with minimal downtime and continuous replication to AWS. Which service is BEST suited?",
+    "choices": {
+      "A": "AWS Elastic Disaster Recovery",
+      "B": "Amazon S3 Standard",
+      "C": "Amazon Inspector",
+      "D": "AWS Trusted Advisor"
+    },
+    "correct": "A",
+    "tip": "DR service with replication.",
+    "explanations": {
+      "A": "Correct. Elastic Disaster Recovery provides continuous replication and rapid recovery.",
+      "B": "Incorrect. S3 is storage, not DR orchestration.",
+      "C": "Incorrect. Inspector is for security scanning.",
+      "D": "Incorrect. Trusted Advisor gives recommendations."
+    }
+  },
+  {
+    "question": "A company needs storage for frequently accessed website images with low latency and high durability. Which Amazon S3 storage class is BEST?",
+    "choices": {
+      "A": "S3 Glacier Flexible Retrieval",
+      "B": "S3 Standard",
+      "C": "S3 One Zone-IA",
+      "D": "S3 Glacier Deep Archive"
+    },
+    "correct": "B",
+    "tip": "Frequent access + fast retrieval.",
+    "explanations": {
+      "A": "Incorrect. Glacier Flexible Retrieval is for archive workloads.",
+      "B": "Correct. S3 Standard is designed for frequently accessed data with low latency.",
+      "C": "Incorrect. One Zone-IA is for infrequent access.",
+      "D": "Incorrect. Deep Archive is for long-term archival."
+    }
+  },
+  {
+    "question": "Which AWS storage service provides object-level versioning to help recover deleted or overwritten files?",
+    "choices": {
+      "A": "Amazon S3",
+      "B": "Amazon EBS",
+      "C": "Amazon EC2 Instance Store",
+      "D": "Amazon Route 53"
+    },
+    "correct": "A",
+    "tip": "Think bucket features.",
+    "explanations": {
+      "A": "Correct. S3 supports versioning to recover previous object versions.",
+      "B": "Incorrect. EBS is block storage.",
+      "C": "Incorrect. Instance store is temporary storage.",
+      "D": "Incorrect. Route 53 is DNS."
+    }
+  },
+  {
+    "question": "A company wants to create a point-in-time backup of an EBS volume. Which feature should they use?",
+    "choices": {
+      "A": "EBS Snapshot",
+      "B": "S3 Lifecycle",
+      "C": "AWS Backup Vault Lock",
+      "D": "EC2 AMI only"
+    },
+    "correct": "A",
+    "tip": "Backup of EBS volume.",
+    "explanations": {
+      "A": "Correct. EBS snapshots are incremental backups stored in Amazon S3.",
+      "B": "Incorrect. Lifecycle is for S3 objects.",
+      "C": "Incorrect. Not the direct answer for EBS volume backup.",
+      "D": "Incorrect. AMIs can include volumes but snapshots are the core feature."
+    }
+  },
+  {
+    "question": "Which storage option is lost if an Amazon EC2 instance is stopped, hibernated, or terminated?",
+    "choices": {
+      "A": "Amazon EBS",
+      "B": "Amazon S3",
+      "C": "EC2 Instance Store",
+      "D": "Amazon EFS"
+    },
+    "correct": "C",
+    "tip": "Temporary local storage.",
+    "explanations": {
+      "A": "Incorrect. EBS persists independently.",
+      "B": "Incorrect. S3 is durable object storage.",
+      "C": "Correct. Instance store data is temporary and tied to host hardware.",
+      "D": "Incorrect. EFS is persistent."
+    }
+  },
+  {
+    "question": "A media company stores archived video footage that is rarely accessed but must be retained for years at the lowest possible cost. Which storage class is BEST?",
+    "choices": {
+      "A": "S3 Standard",
+      "B": "S3 Intelligent-Tiering",
+      "C": "S3 Glacier Deep Archive",
+      "D": "S3 Standard-IA"
+    },
+    "correct": "C",
+    "tip": "Lowest cost long-term retention.",
+    "explanations": {
+      "A": "Incorrect. Standard is higher cost for active data.",
+      "B": "Incorrect. Intelligent-Tiering is for changing access patterns.",
+      "C": "Correct. Glacier Deep Archive is ideal for long-term low-cost archival.",
+      "D": "Incorrect. Standard-IA is for infrequent but quicker retrieval."
+    }
+  },
+  {
+    "question": "Which TWO AWS storage services support file storage use cases?",
+    "choices": {
+      "A": "Amazon EFS",
+      "B": "Amazon FSx",
+      "C": "Amazon S3",
+      "D": "Amazon EBS"
+    },
+    "correct": ["A", "B"],
+    "tip": "Think shared file systems.",
+    "explanations": {
+      "A": "Correct. EFS provides shared file storage.",
+      "B": "Correct. FSx provides managed file systems.",
+      "C": "Incorrect. S3 is object storage.",
+      "D": "Incorrect. EBS is block storage."
+    }
+  },
+  {
+    "question": "A startup does not know how often files will be accessed and wants AWS to automatically move data between cost tiers. Which storage class is BEST?",
+    "choices": {
+      "A": "S3 Intelligent-Tiering",
+      "B": "S3 One Zone-IA",
+      "C": "S3 Glacier Deep Archive",
+      "D": "EBS gp3"
+    },
+    "correct": "A",
+    "tip": "Unknown access patterns.",
+    "explanations": {
+      "A": "Correct. Intelligent-Tiering automatically optimizes cost.",
+      "B": "Incorrect. One Zone-IA is manual choice and less resilient.",
+      "C": "Incorrect. Archive storage with slow retrieval.",
+      "D": "Incorrect. gp3 is EBS block storage."
+    }
+  },
+  {
+    "question": "A company needs a storage solution that multiple Amazon EC2 Linux instances can access concurrently across multiple Availability Zones. Which service is BEST?",
+    "choices": {
+      "A": "Amazon EBS",
+      "B": "Amazon EFS",
+      "C": "EC2 Instance Store",
+      "D": "Amazon S3 Glacier"
+    },
+    "correct": "B",
+    "tip": "Shared Linux storage across AZs.",
+    "explanations": {
+      "A": "Incorrect. EBS is generally attached to one instance.",
+      "B": "Correct. EFS supports shared access and multi-AZ design.",
+      "C": "Incorrect. Instance store is local temporary storage.",
+      "D": "Incorrect. Glacier is archive storage."
+    }
+  },
+  {
+    "question": "Which statement BEST describes Amazon EBS?",
+    "choices": {
+      "A": "Managed object storage for static websites",
+      "B": "Persistent block storage for EC2 instances",
+      "C": "Temporary local storage tied to host hardware",
+      "D": "DNS-based storage routing"
+    },
+    "correct": "B",
+    "tip": "Block storage attached to EC2.",
+    "explanations": {
+      "A": "Incorrect. That's S3 use cases.",
+      "B": "Correct. EBS provides persistent block storage volumes.",
+      "C": "Incorrect. That's instance store.",
+      "D": "Incorrect. Not a storage service."
+    }
+  },
+  {
+    "question": "A company wants centralized backup management across AWS services with policy-based automation. Which service should they use?",
+    "choices": {
+      "A": "AWS Backup",
+      "B": "Amazon Inspector",
+      "C": "AWS Shield",
+      "D": "Amazon CloudFront"
+    },
+    "correct": "A",
+    "tip": "Centralized backup management.",
+    "explanations": {
+      "A": "Correct. AWS Backup centralizes and automates backups across services.",
+      "B": "Incorrect. Inspector is security scanning.",
+      "C": "Incorrect. Shield is DDoS protection.",
+      "D": "Incorrect. CloudFront is CDN."
+    }
+  },
+  {
+    "question": "A company needs storage for data that is accessed immediately after upload, but after 30 days it becomes rarely accessed. Which Amazon S3 feature is MOST cost-effective?",
+    "choices": {
+      "A": "Amazon EBS Snapshots",
+      "B": "S3 Lifecycle policies",
+      "C": "AWS Snowball",
+      "D": "Amazon Route 53 failover"
+    },
+    "correct": "B",
+    "tip": "Think automatic movement between storage tiers.",
+    "explanations": {
+      "A": "Incorrect. EBS snapshots back up EBS volumes, not S3 object tier transitions.",
+      "B": "Correct. S3 Lifecycle policies automatically transition objects to lower-cost classes over time.",
+      "C": "Incorrect. Snowball is for data transfer.",
+      "D": "Incorrect. Route 53 is DNS."
+    }
+  },
+  {
+    "question": "Which AWS storage service is designed for shared file access using the NFS protocol for Linux workloads?",
+    "choices": {
+      "A": "Amazon EFS",
+      "B": "Amazon FSx for Windows File Server",
+      "C": "Amazon S3",
+      "D": "Amazon EBS"
+    },
+    "correct": "A",
+    "tip": "Linux shared file system.",
+    "explanations": {
+      "A": "Correct. Amazon EFS uses NFS and is commonly used for Linux shared storage.",
+      "B": "Incorrect. FSx Windows uses SMB.",
+      "C": "Incorrect. S3 is object storage.",
+      "D": "Incorrect. EBS is block storage."
+    }
+  },
+  {
+    "question": "A company wants durable object storage that can host static website assets such as images, CSS, and HTML files. Which service should they use?",
+    "choices": {
+      "A": "Amazon S3",
+      "B": "Amazon EBS",
+      "C": "Amazon RDS",
+      "D": "Amazon EC2 Instance Store"
+    },
+    "correct": "A",
+    "tip": "Static website files + object storage.",
+    "explanations": {
+      "A": "Correct. S3 is ideal for static content and object storage.",
+      "B": "Incorrect. EBS is block storage.",
+      "C": "Incorrect. RDS is a database.",
+      "D": "Incorrect. Instance store is temporary."
+    }
+  },
+  {
+    "question": "Which TWO characteristics apply to Amazon EC2 Instance Store?",
+    "choices": {
+      "A": "Persistent after instance termination",
+      "B": "Very low-latency local storage",
+      "C": "Temporary storage tied to the host",
+      "D": "Automatically replicated across Regions"
+    },
+    "correct": ["B", "C"],
+    "tip": "Local and temporary.",
+    "explanations": {
+      "A": "Incorrect. Instance store is not persistent.",
+      "B": "Correct. Instance store offers fast local storage.",
+      "C": "Correct. Data is tied to the host and temporary.",
+      "D": "Incorrect. It is not cross-Region replicated."
+    }
+  },
+  {
+    "question": "A company uses Amazon EBS volumes and wants to improve resilience by backing them up regularly. What should they create?",
+    "choices": {
+      "A": "CloudFront distributions",
+      "B": "EBS Snapshots",
+      "C": "Route 53 hosted zones",
+      "D": "IAM roles"
+    },
+    "correct": "B",
+    "tip": "Backup EBS volumes.",
+    "explanations": {
+      "A": "Incorrect. CloudFront is CDN.",
+      "B": "Correct. EBS snapshots are backups of EBS volumes.",
+      "C": "Incorrect. Route 53 is DNS.",
+      "D": "Incorrect. IAM roles manage permissions."
+    }
+  },
+  {
+    "question": "Which AWS service helps migrate on-premises file backups into Amazon S3 while allowing local cached access?",
+    "choices": {
+      "A": "AWS Storage Gateway",
+      "B": "Amazon Inspector",
+      "C": "AWS Lambda",
+      "D": "Amazon Lightsail"
+    },
+    "correct": "A",
+    "tip": "Hybrid storage bridge.",
+    "explanations": {
+      "A": "Correct. Storage Gateway connects on-prem environments with AWS storage.",
+      "B": "Incorrect. Inspector is for security scanning.",
+      "C": "Incorrect. Lambda runs code.",
+      "D": "Incorrect. Lightsail is simplified hosting."
+    }
+  },
+  {
+    "question": "A company cannot predict file access patterns and wants automatic cost optimization for S3 objects. Which storage class is BEST?",
+    "choices": {
+      "A": "S3 Standard",
+      "B": "S3 Intelligent-Tiering",
+      "C": "S3 Glacier Deep Archive",
+      "D": "S3 One Zone-IA"
+    },
+    "correct": "B",
+    "tip": "Unknown access frequency.",
+    "explanations": {
+      "A": "Incorrect. Standard is for frequent access only.",
+      "B": "Correct. Intelligent-Tiering automatically moves data between access tiers.",
+      "C": "Incorrect. Deep Archive is for rarely retrieved data.",
+      "D": "Incorrect. One Zone-IA is manual placement."
+    }
+  },
+  {
+    "question": "Which AWS storage option is MOST appropriate for a Windows application requiring a managed SMB file share?",
+    "choices": {
+      "A": "Amazon FSx for Windows File Server",
+      "B": "Amazon EFS",
+      "C": "Amazon S3",
+      "D": "Amazon EBS gp3"
+    },
+    "correct": "A",
+    "tip": "Windows + SMB.",
+    "explanations": {
+      "A": "Correct. FSx for Windows File Server supports SMB and Windows integrations.",
+      "B": "Incorrect. EFS uses NFS.",
+      "C": "Incorrect. S3 is object storage.",
+      "D": "Incorrect. EBS is block storage."
+    }
+  },
+  {
+    "question": "Which TWO AWS services are considered object storage solutions?",
+    "choices": {
+      "A": "Amazon S3",
+      "B": "S3 Glacier Flexible Retrieval",
+      "C": "Amazon EBS",
+      "D": "Amazon EFS"
+    },
+    "correct": ["A", "B"],
+    "tip": "Think S3 family.",
+    "explanations": {
+      "A": "Correct. Amazon S3 is object storage.",
+      "B": "Correct. Glacier retrieval tiers are part of S3 object storage classes.",
+      "C": "Incorrect. EBS is block storage.",
+      "D": "Incorrect. EFS is file storage."
+    }
+  },
+  {
+    "question": "A business needs to recover on-premises servers quickly after a disaster by continuously replicating workloads to AWS. Which service should they choose?",
+    "choices": {
+      "A": "AWS Elastic Disaster Recovery",
+      "B": "Amazon Macie",
+      "C": "AWS Shield Advanced",
+      "D": "Amazon Athena"
+    },
+    "correct": "A",
+    "tip": "Disaster recovery + replication.",
+    "explanations": {
+      "A": "Correct. AWS Elastic Disaster Recovery supports continuous replication and failover recovery.",
+      "B": "Incorrect. Macie discovers sensitive data.",
+      "C": "Incorrect. Shield is DDoS protection.",
+      "D": "Incorrect. Athena queries data in S3."
+    }
+  }
+]
+

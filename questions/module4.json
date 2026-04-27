@@ -1,0 +1,513 @@
+[
+  {
+    "question": "A company is expanding its application globally and must ensure that customer data remains within a specific country due to legal requirements. Which factor is MOST important when selecting an AWS Region?",
+    "choices": {
+      "A": "Pricing",
+      "B": "Feature availability",
+      "C": "Compliance",
+      "D": "Proximity to users"
+    },
+    "correct": "C",
+    "tip": "Legal rules always come first.",
+    "explanations": {
+      "A": "Incorrect. Pricing matters, but compliance requirements take priority.",
+      "B": "Incorrect. Feature availability is important but cannot override legal requirements.",
+      "C": "Correct. Compliance determines where data must reside due to laws and regulations.",
+      "D": "Incorrect. Proximity improves latency but does not address legal constraints."
+    }
+  },
+  {
+    "question": "Which factor helps reduce latency when choosing an AWS Region?",
+    "choices": {
+      "A": "Compliance",
+      "B": "Proximity to users",
+      "C": "Pricing",
+      "D": "Number of Availability Zones"
+    },
+    "correct": "B",
+    "tip": "Closer = faster.",
+    "explanations": {
+      "A": "Incorrect. Compliance relates to legal requirements.",
+      "B": "Correct. Choosing a Region closer to users reduces latency.",
+      "C": "Incorrect. Pricing does not affect latency.",
+      "D": "Incorrect. Availability Zones impact redundancy, not distance."
+    }
+  },
+  {
+    "question": "Which TWO factors should be considered when selecting an AWS Region? (Select TWO.)",
+    "choices": {
+      "A": "Compliance requirements",
+      "B": "Proximity to end users",
+      "C": "CEO personal preference",
+      "D": "Number of developers available"
+    },
+    "correct": ["A", "B"],
+    "tip": "Think legal + performance.",
+    "explanations": {
+      "A": "Correct. Compliance is critical for data governance.",
+      "B": "Correct. Proximity reduces latency and improves user experience.",
+      "C": "Incorrect. Personal preference is not a valid technical factor.",
+      "D": "Incorrect. Developer count does not determine Region selection."
+    }
+  },
+  {
+    "question": "What is an AWS Availability Zone?",
+    "choices": {
+      "A": "A global data center",
+      "B": "A separate geographic Region",
+      "C": "An isolated location within a Region",
+      "D": "A caching system for content delivery"
+    },
+    "correct": "C",
+    "tip": "AZ = inside a Region.",
+    "explanations": {
+      "A": "Incorrect. A Region contains multiple data centers.",
+      "B": "Incorrect. Regions contain Availability Zones.",
+      "C": "Correct. AZs are isolated locations within a Region.",
+      "D": "Incorrect. That describes edge locations or CloudFront."
+    }
+  },
+  {
+    "question": "Which design improves high availability within a single AWS Region?",
+    "choices": {
+      "A": "Deploying resources in one Availability Zone",
+      "B": "Using multiple Availability Zones",
+      "C": "Using only edge locations",
+      "D": "Deploying only in one Region"
+    },
+    "correct": "B",
+    "tip": "Multi-AZ = resilience.",
+    "explanations": {
+      "A": "Incorrect. Single AZ creates a single point of failure.",
+      "B": "Correct. Multi-AZ ensures redundancy and failover.",
+      "C": "Incorrect. Edge locations are for content delivery.",
+      "D": "Incorrect. This does not address intra-Region failure."
+    }
+  },
+  {
+    "question": "Which AWS service uses edge locations to deliver content with low latency?",
+    "choices": {
+      "A": "Amazon EC2",
+      "B": "Amazon CloudFront",
+      "C": "Amazon SQS",
+      "D": "AWS Lambda"
+    },
+    "correct": "B",
+    "tip": "CDN = CloudFront.",
+    "explanations": {
+      "A": "Incorrect. EC2 is compute.",
+      "B": "Correct. CloudFront uses edge locations to cache and deliver content.",
+      "C": "Incorrect. SQS is messaging.",
+      "D": "Incorrect. Lambda is compute."
+    }
+  },
+  {
+    "question": "Which statement BEST describes edge locations?",
+    "choices": {
+      "A": "They host EC2 instances",
+      "B": "They store backup databases",
+      "C": "They cache content closer to users",
+      "D": "They replace AWS Regions"
+    },
+    "correct": "C",
+    "tip": "Edge = closer to users.",
+    "explanations": {
+      "A": "Incorrect. EC2 runs in Regions/AZs.",
+      "B": "Incorrect. Edge locations are not for storage backups.",
+      "C": "Correct. They cache and deliver content closer to users.",
+      "D": "Incorrect. They complement Regions, not replace them."
+    }
+  },
+  {
+    "question": "Which TWO benefits are achieved by deploying resources across multiple Regions? (Select TWO.)",
+    "choices": {
+      "A": "Improved fault tolerance",
+      "B": "Reduced latency globally",
+      "C": "Lower development complexity",
+      "D": "Elimination of all downtime"
+    },
+    "correct": ["A", "B"],
+    "tip": "Multi-Region = resilience + global speed.",
+    "explanations": {
+      "A": "Correct. Multi-Region improves fault tolerance.",
+      "B": "Correct. It reduces latency for global users.",
+      "C": "Incorrect. It increases complexity.",
+      "D": "Incorrect. Downtime risk is reduced but not eliminated."
+    }
+  },
+  {
+    "question": "What is the primary purpose of AWS CloudFormation?",
+    "choices": {
+      "A": "Monitoring system performance",
+      "B": "Automating infrastructure deployment using code",
+      "C": "Running container workloads",
+      "D": "Managing DNS routing"
+    },
+    "correct": "B",
+    "tip": "IaC = automation.",
+    "explanations": {
+      "A": "Incorrect. Monitoring is handled by CloudWatch.",
+      "B": "Correct. CloudFormation enables infrastructure as code.",
+      "C": "Incorrect. ECS/EKS handle containers.",
+      "D": "Incorrect. Route 53 manages DNS."
+    }
+  },
+  {
+    "question": "Which scenario BEST demonstrates the benefit of infrastructure as code (IaC)?",
+    "choices": {
+      "A": "Manually configuring servers in each Region",
+      "B": "Creating identical environments using templates",
+      "C": "Monitoring logs in real time",
+      "D": "Scaling applications manually"
+    },
+    "correct": "B",
+    "tip": "IaC = repeatability.",
+    "explanations": {
+      "A": "Incorrect. Manual setup is error-prone.",
+      "B": "Correct. IaC ensures consistent deployments.",
+      "C": "Incorrect. Monitoring is not IaC.",
+      "D": "Incorrect. Scaling is separate from IaC."
+    }
+  },
+  {
+    "question": "A company wants to ensure its application remains available even if an entire AWS Region fails. Which architecture should it use?",
+    "choices": {
+      "A": "Single Availability Zone deployment",
+      "B": "Multi-AZ deployment",
+      "C": "Multi-Region deployment",
+      "D": "Edge location caching only"
+    },
+    "correct": "C",
+    "tip": "Whole Region failure = go beyond Region.",
+    "explanations": {
+      "A": "Incorrect. A single AZ cannot handle even minor failures.",
+      "B": "Incorrect. Multi-AZ protects within a Region, not against Region-wide failures.",
+      "C": "Correct. Multi-Region deployment allows failover if an entire Region goes down.",
+      "D": "Incorrect. Edge locations improve latency, not full system availability."
+    }
+  },
+  {
+    "question": "Which TWO components are part of the AWS Global Infrastructure? (Select TWO.)",
+    "choices": {
+      "A": "Availability Zones",
+      "B": "Edge locations",
+      "C": "IAM users",
+      "D": "Security groups"
+    },
+    "correct": ["A", "B"],
+    "tip": "Think physical/global components.",
+    "explanations": {
+      "A": "Correct. Availability Zones are core infrastructure components.",
+      "B": "Correct. Edge locations are part of AWS global delivery network.",
+      "C": "Incorrect. IAM users are identity management, not infrastructure.",
+      "D": "Incorrect. Security groups are networking controls."
+    }
+  },
+  {
+    "question": "Which AWS service routes users to the closest endpoint using DNS?",
+    "choices": {
+      "A": "Amazon CloudFront",
+      "B": "Amazon Route 53",
+      "C": "AWS Lambda",
+      "D": "Amazon SQS"
+    },
+    "correct": "B",
+    "tip": "DNS = Route 53.",
+    "explanations": {
+      "A": "Incorrect. CloudFront delivers cached content.",
+      "B": "Correct. Route 53 is a DNS service that routes users.",
+      "C": "Incorrect. Lambda runs code.",
+      "D": "Incorrect. SQS is messaging."
+    }
+  },
+  {
+    "question": "What is a primary benefit of using Amazon CloudFront?",
+    "choices": {
+      "A": "Running virtual machines",
+      "B": "Reducing latency by caching content at edge locations",
+      "C": "Managing user authentication",
+      "D": "Storing relational databases"
+    },
+    "correct": "B",
+    "tip": "CloudFront = speed.",
+    "explanations": {
+      "A": "Incorrect. EC2 runs virtual machines.",
+      "B": "Correct. CloudFront caches content closer to users to reduce latency.",
+      "C": "Incorrect. IAM handles authentication.",
+      "D": "Incorrect. RDS handles databases."
+    }
+  },
+  {
+    "question": "Which concept ensures a system continues operating even when components fail?",
+    "choices": {
+      "A": "Elasticity",
+      "B": "Agility",
+      "C": "High availability",
+      "D": "Scalability"
+    },
+    "correct": "C",
+    "tip": "Keep running even during failure.",
+    "explanations": {
+      "A": "Incorrect. Elasticity refers to scaling resources.",
+      "B": "Incorrect. Agility refers to adapting quickly.",
+      "C": "Correct. High availability ensures continuous operation.",
+      "D": "Incorrect. Scalability refers to handling growth."
+    }
+  },
+  {
+    "question": "Which TWO statements describe the benefits of multi-AZ deployment? (Select TWO.)",
+    "choices": {
+      "A": "Improves fault tolerance within a Region",
+      "B": "Eliminates the need for backups",
+      "C": "Provides redundancy across data centers",
+      "D": "Reduces need for load balancing"
+    },
+    "correct": ["A", "C"],
+    "tip": "Multi-AZ = redundancy.",
+    "explanations": {
+      "A": "Correct. Multi-AZ improves fault tolerance.",
+      "B": "Incorrect. Backups are still necessary.",
+      "C": "Correct. AZs are separate data centers providing redundancy.",
+      "D": "Incorrect. Load balancing is still needed."
+    }
+  },
+  {
+    "question": "Which factor might cause a company to choose a Region that is NOT closest to its users?",
+    "choices": {
+      "A": "Lower latency requirements",
+      "B": "Compliance requirements",
+      "C": "Faster internet speed",
+      "D": "More Availability Zones"
+    },
+    "correct": "B",
+    "tip": "Legal beats performance.",
+    "explanations": {
+      "A": "Incorrect. Latency favors closer Regions.",
+      "B": "Correct. Compliance laws may require specific Regions.",
+      "C": "Incorrect. Internet speed is not the deciding factor.",
+      "D": "Incorrect. AZ count does not override compliance."
+    }
+  },
+  {
+    "question": "Which AWS service allows you to define infrastructure in a template and deploy it automatically?",
+    "choices": {
+      "A": "AWS CLI",
+      "B": "AWS CloudFormation",
+      "C": "Amazon EC2",
+      "D": "Amazon Route 53"
+    },
+    "correct": "B",
+    "tip": "Template = IaC.",
+    "explanations": {
+      "A": "Incorrect. CLI executes commands, not templates.",
+      "B": "Correct. CloudFormation defines and deploys infrastructure as code.",
+      "C": "Incorrect. EC2 is compute.",
+      "D": "Incorrect. Route 53 is DNS."
+    }
+  },
+  {
+    "question": "Which TWO methods can be used to interact with AWS APIs? (Select TWO.)",
+    "choices": {
+      "A": "AWS CLI",
+      "B": "AWS SDKs",
+      "C": "Amazon CloudFront",
+      "D": "Amazon ECR"
+    },
+    "correct": ["A", "B"],
+    "tip": "APIs = programmatic tools.",
+    "explanations": {
+      "A": "Correct. CLI allows command-line interaction with AWS APIs.",
+      "B": "Correct. SDKs integrate AWS into applications.",
+      "C": "Incorrect. CloudFront is CDN.",
+      "D": "Incorrect. ECR stores container images."
+    }
+  },
+  {
+    "question": "Why is infrastructure as code (IaC) important in AWS?",
+    "choices": {
+      "A": "It eliminates all infrastructure costs",
+      "B": "It ensures consistent and repeatable deployments",
+      "C": "It removes the need for security configurations",
+      "D": "It replaces all AWS services"
+    },
+    "correct": "B",
+    "tip": "IaC = consistency.",
+    "explanations": {
+      "A": "Incorrect. IaC does not reduce costs directly.",
+      "B": "Correct. IaC ensures consistent, repeatable deployments.",
+      "C": "Incorrect. Security still must be configured.",
+      "D": "Incorrect. IaC is a method, not a replacement."
+    }
+  },
+  {
+    "question": "A company wants to design an application that can recover quickly from failures with minimal downtime. Which design principle should they follow?",
+    "choices": {
+      "A": "Loose coupling",
+      "B": "High availability",
+      "C": "Elasticity",
+      "D": "Pay-as-you-go pricing"
+    },
+    "correct": "B",
+    "tip": "Recover fast = stay available.",
+    "explanations": {
+      "A": "Incorrect. Loose coupling reduces dependencies but does not guarantee availability.",
+      "B": "Correct. High availability ensures systems remain operational during failures.",
+      "C": "Incorrect. Elasticity is about scaling.",
+      "D": "Incorrect. Pricing is unrelated to recovery."
+    }
+  },
+  {
+    "question": "Which AWS service helps improve application performance by caching content closer to users globally?",
+    "choices": {
+      "A": "Amazon S3",
+      "B": "Amazon EC2",
+      "C": "Amazon CloudFront",
+      "D": "Amazon RDS"
+    },
+    "correct": "C",
+    "tip": "Think CDN.",
+    "explanations": {
+      "A": "Incorrect. S3 stores objects.",
+      "B": "Incorrect. EC2 runs compute.",
+      "C": "Correct. CloudFront is a CDN that caches content globally.",
+      "D": "Incorrect. RDS is a database service."
+    }
+  },
+  {
+    "question": "Which TWO benefits are provided by edge locations? (Select TWO.)",
+    "choices": {
+      "A": "Reduced latency",
+      "B": "Improved content delivery speed",
+      "C": "Compute resource provisioning",
+      "D": "Database replication"
+    },
+    "correct": ["A", "B"],
+    "tip": "Edge = speed.",
+    "explanations": {
+      "A": "Correct. Edge locations reduce latency.",
+      "B": "Correct. They improve content delivery speed.",
+      "C": "Incorrect. EC2 handles compute.",
+      "D": "Incorrect. Databases are separate services."
+    }
+  },
+  {
+    "question": "A developer needs to automate infrastructure deployment using templates. Which AWS service should they use?",
+    "choices": {
+      "A": "AWS CloudFormation",
+      "B": "Amazon Route 53",
+      "C": "AWS Lambda",
+      "D": "Amazon CloudFront"
+    },
+    "correct": "A",
+    "tip": "Templates = CloudFormation.",
+    "explanations": {
+      "A": "Correct. CloudFormation uses templates to deploy infrastructure.",
+      "B": "Incorrect. Route 53 is DNS.",
+      "C": "Incorrect. Lambda runs code.",
+      "D": "Incorrect. CloudFront is CDN."
+    }
+  },
+  {
+    "question": "Which AWS tool allows users to interact with AWS services using programming languages?",
+    "choices": {
+      "A": "AWS SDK",
+      "B": "AWS Management Console",
+      "C": "Amazon EC2",
+      "D": "Amazon SQS"
+    },
+    "correct": "A",
+    "tip": "Code = SDK.",
+    "explanations": {
+      "A": "Correct. SDKs allow programmatic access to AWS services.",
+      "B": "Incorrect. Console is GUI.",
+      "C": "Incorrect. EC2 is compute.",
+      "D": "Incorrect. SQS is messaging."
+    }
+  },
+  {
+    "question": "Which design principle involves breaking applications into independent components to reduce failure impact?",
+    "choices": {
+      "A": "High availability",
+      "B": "Loose coupling",
+      "C": "Elasticity",
+      "D": "Global reach"
+    },
+    "correct": "B",
+    "tip": "Separate parts = safer system.",
+    "explanations": {
+      "A": "Incorrect. High availability focuses on uptime.",
+      "B": "Correct. Loose coupling reduces dependency between components.",
+      "C": "Incorrect. Elasticity is scaling.",
+      "D": "Incorrect. Global reach is geographic."
+    }
+  },
+  {
+    "question": "A company wants to route traffic to the healthiest endpoint automatically. Which AWS service should they use?",
+    "choices": {
+      "A": "Amazon CloudFront",
+      "B": "Amazon Route 53",
+      "C": "Amazon EC2",
+      "D": "Amazon SQS"
+    },
+    "correct": "B",
+    "tip": "Health checks + routing.",
+    "explanations": {
+      "A": "Incorrect. CloudFront caches content.",
+      "B": "Correct. Route 53 supports health checks and routing policies.",
+      "C": "Incorrect. EC2 is compute.",
+      "D": "Incorrect. SQS is messaging."
+    }
+  },
+  {
+    "question": "Which TWO features are part of AWS CloudFormation? (Select TWO.)",
+    "choices": {
+      "A": "Infrastructure as code",
+      "B": "Automatic resource provisioning",
+      "C": "Content caching",
+      "D": "DNS routing"
+    },
+    "correct": ["A", "B"],
+    "tip": "CloudFormation builds infra.",
+    "explanations": {
+      "A": "Correct. CloudFormation supports IaC.",
+      "B": "Correct. It provisions resources automatically.",
+      "C": "Incorrect. CloudFront handles caching.",
+      "D": "Incorrect. Route 53 handles DNS."
+    }
+  },
+  {
+    "question": "What is the main purpose of AWS Regions?",
+    "choices": {
+      "A": "To provide global caching locations",
+      "B": "To isolate resources geographically for fault tolerance and compliance",
+      "C": "To manage user permissions",
+      "D": "To store container images"
+    },
+    "correct": "B",
+    "tip": "Regions = isolation + location.",
+    "explanations": {
+      "A": "Incorrect. Edge locations handle caching.",
+      "B": "Correct. Regions provide isolation and support compliance needs.",
+      "C": "Incorrect. IAM manages permissions.",
+      "D": "Incorrect. ECR stores container images."
+    }
+  },
+  {
+    "question": "Which scenario best demonstrates elasticity in AWS?",
+    "choices": {
+      "A": "Adding more servers during peak traffic and removing them after",
+      "B": "Deploying applications in multiple Regions",
+      "C": "Using IAM roles for security",
+      "D": "Storing backups in Amazon S3"
+    },
+    "correct": "A",
+    "tip": "Scale up AND down.",
+    "explanations": {
+      "A": "Correct. Elasticity automatically adjusts resources based on demand.",
+      "B": "Incorrect. That is global distribution.",
+      "C": "Incorrect. IAM is security.",
+      "D": "Incorrect. S3 is storage."
+    }
+  }
+]
+

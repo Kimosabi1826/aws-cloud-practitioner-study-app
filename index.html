@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AWS Cloud Practitioner Quiz - Version 6</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="app">
+    <div class="card">
+      <h1>AWS Cloud Practitioner</h1>
+      <p class="subtext">
+        Certification Practice &middot; 13 Modules &middot; Voice &middot; Study Sheets
+      </p>
+
+      <div class="top-bar">
+        <div class="pill" id="scoreBox">Score: 0 / 0</div>
+        <div class="pill" id="questionCounter">Question 0 / 0</div>
+        <div class="pill" id="modeBox">Mode: Module Quiz</div>
+        <div class="pill" id="questionTypeBox">Type: Single Answer</div>
+      </div>
+
+      <div class="progress-wrap">
+        <div class="progress-bar" id="progressBar"></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="controls-grid">
+        <div class="control-group">
+          <label for="moduleSelect">Module</label>
+          <select id="moduleSelect"></select>
+        </div>
+
+        <div class="control-group toggle-control">
+          <label for="shuffleQuestionsCheckbox">Randomize Questions</label>
+          <label class="toggle-switch">
+            <input type="checkbox" id="shuffleQuestionsCheckbox" checked />
+            <span class="toggle-track"><span class="toggle-thumb"></span></span>
+          </label>
+        </div>
+
+        <div class="control-group toggle-control">
+          <label for="shuffleAnswersCheckbox">Randomize Answers</label>
+          <label class="toggle-switch">
+            <input type="checkbox" id="shuffleAnswersCheckbox" checked />
+            <span class="toggle-track"><span class="toggle-thumb"></span></span>
+          </label>
+        </div>
+
+        <div class="control-group">
+          <label for="mixedExamCount">Mixed Exam Size</label>
+          <select id="mixedExamCount">
+            <option value="5">5 Questions</option>
+            <option value="10">10 Questions</option>
+            <option value="15">15 Questions</option>
+            <option value="20" selected>20 Questions</option>
+            <option value="25">25 Questions</option>
+            <option value="30">30 Questions</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="actions top-actions">
+        <button class="action-btn" id="loadModuleBtn">Load Module Quiz</button>
+        <button class="action-btn purple-btn" id="startMixedExamBtn">Start Final Mixed Exam</button>
+        <button class="action-btn green-btn" id="studyCheatSheetBtn">Study Cheat Sheet</button>
+        <button class="action-btn orange-btn hidden" id="reviewMissedBtn">Review Missed Questions</button>
+      </div>
+
+
+    </div>
+
+    <div class="card" id="quizCard">
+      <div class="question-number" id="questionNumber"></div>
+      <div class="question-text" id="questionText"></div>
+      <div class="small-note" id="selectionHelpText">Choose the best answer.</div>
+
+      <div class="choices" id="choicesContainer"></div>
+
+      <div class="actions">
+        <button class="action-btn gray-btn" id="speakBtn">🔊 Read Question</button>
+        <button class="action-btn gray-btn" id="hintBtn">💡 Show Tip</button>
+        <button class="action-btn gray-btn" id="restartBtn">🔁 Restart Current Quiz</button>
+        <button class="action-btn hidden next-primary" id="nextBtn">➡ Next Question</button>
+      </div>
+
+      <div class="panel hint hidden" id="hintPanel">
+        <h3>Tip</h3>
+        <p id="hintText"></p>
+      </div>
+
+      <div class="panel feedback hidden" id="feedbackPanel">
+        <h3 id="feedbackTitle"></h3>
+        <p id="correctAnswerText"></p>
+
+        <h3>Why each option is right or wrong</h3>
+        <ul class="explanations" id="explanationsList"></ul>
+      </div>
+    </div>
+
+    <div class="card hidden" id="cheatSheetCard">
+      <div class="question-number" id="cheatSheetModuleTitle">Module Cheat Sheet</div>
+      <div class="question-text" id="cheatSheetTitle">Study Notes</div>
+
+      <div class="panel" id="cheatSheetContent">
+        <h3>Coming next</h3>
+        <p>
+          This module cheat sheet area is ready. We will load key concepts, must-know services,
+          common traps, and fast memory lines here for each module.
+        </p>
+      </div>
+
+      <div class="actions">
+        <button class="action-btn" id="backToQuizBtn">⬅ Back to Quiz</button>
+      </div>
+    </div>
+
+    <div class="card hidden" id="finalCard">
+      <div class="final-score" id="finalScore"></div>
+      <h2 id="finalMessage"></h2>
+
+      <div class="final-stats">
+        <div class="pill" id="finalCorrectCount">Correct: 0</div>
+        <div class="pill" id="finalMissedCount">Missed: 0</div>
+        <div class="pill" id="finalModeText">Mode: -</div>
+      </div>
+
+      <p class="footer-note">
+        Version 6 includes quiz mode, study cheat sheets, missed-question review mode, random question order, random answer order, mixed exam support, strict-mode multi-select questions, and dynamic module loading for up to 13 modules.
+      </p>
+
+      <div class="actions">
+        <button class="action-btn" id="finalRestartBtn">Restart Current Quiz</button>
+        <button class="action-btn orange-btn hidden" id="finalReviewMissedBtn">Review Missed Questions</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,167 @@
+{
+  "module": "Module 7 - AWS Databases and Database Services",
+  "sections": [
+    {
+      "title": "Core Idea",
+      "points": [
+        "Databases store, organize, retrieve, and manage data.",
+        "AWS offers purpose-built databases for different workloads.",
+        "Choose the database based on access pattern, scale, structure, and performance needs."
+      ],
+      "exam_tip": "AWS exams often test matching workload to the correct database type."
+    },
+    {
+      "title": "Main Database Categories",
+      "points": [
+        "Relational = structured tables with SQL.",
+        "NoSQL = flexible schema, key-value/document.",
+        "In-memory = ultra-fast caching.",
+        "Graph = relationships between data.",
+        "Document = JSON-like records."
+      ],
+      "exam_tip": "Know the category before memorizing service names."
+    },
+    {
+      "title": "Amazon RDS",
+      "points": [
+        "Managed relational database service.",
+        "Supports MySQL, PostgreSQL, MariaDB, Oracle, SQL Server.",
+        "AWS handles patching, backups, hardware provisioning.",
+        "Good for traditional applications needing SQL."
+      ],
+      "exam_tip": "Need managed SQL database = Amazon RDS."
+    },
+    {
+      "title": "Amazon Aurora",
+      "points": [
+        "High-performance relational database compatible with MySQL and PostgreSQL.",
+        "More scalable and faster than standard MySQL in many workloads.",
+        "Replicates across multiple Availability Zones.",
+        "Enterprise-grade availability."
+      ],
+      "exam_tip": "Need high-performance relational database = Aurora."
+    },
+    {
+      "title": "Amazon DynamoDB",
+      "points": [
+        "Fully managed NoSQL database.",
+        "Key-value and document data models.",
+        "Single-digit millisecond performance.",
+        "Automatically scales."
+      ],
+      "exam_tip": "Need serverless NoSQL at scale = DynamoDB."
+    },
+    {
+      "title": "Amazon ElastiCache",
+      "points": [
+        "Managed in-memory caching service.",
+        "Supports Redis and Memcached.",
+        "Used to reduce database load and improve speed.",
+        "Great for sessions, leaderboards, hot data."
+      ],
+      "exam_tip": "Need faster reads / cache layer = ElastiCache."
+    },
+    {
+      "title": "Amazon DocumentDB",
+      "points": [
+        "Managed document database.",
+        "MongoDB-compatible workloads.",
+        "Good for JSON-style flexible data."
+      ],
+      "exam_tip": "MongoDB-style app = DocumentDB."
+    },
+    {
+      "title": "Amazon Neptune",
+      "points": [
+        "Managed graph database.",
+        "Used for connected datasets.",
+        "Examples: fraud detection, recommendation engines, social networks."
+      ],
+      "exam_tip": "Relationships between items = Neptune."
+    },
+    {
+      "title": "Amazon Redshift",
+      "points": [
+        "Managed data warehouse service.",
+        "Used for analytics on huge datasets.",
+        "Supports SQL queries and BI dashboards."
+      ],
+      "exam_tip": "Business intelligence + analytics = Redshift."
+    },
+    {
+      "title": "AWS Database Migration Service (AWS DMS)",
+      "points": [
+        "Migrates databases to AWS.",
+        "Supports minimal downtime migrations.",
+        "Can keep source database running during migration."
+      ],
+      "exam_tip": "Move database to AWS = DMS."
+    },
+    {
+      "title": "AWS Backup",
+      "points": [
+        "Centralized backup management across AWS services.",
+        "Automates schedules and retention policies.",
+        "Supports databases and storage services."
+      ],
+      "exam_tip": "Need one backup solution across services = AWS Backup."
+    },
+    {
+      "title": "High Availability Terms",
+      "points": [
+        "Multi-AZ = standby failover for resilience.",
+        "Read Replicas = scale read traffic.",
+        "Backups/Snapshots = recovery."
+      ],
+      "exam_tip": "Failover = Multi-AZ | Read scaling = Read Replica."
+    },
+    {
+      "title": "Managed Service Advantage",
+      "points": [
+        "AWS handles infrastructure.",
+        "AWS handles patching and maintenance.",
+        "Customer manages schema, users, permissions, data."
+      ],
+      "exam_tip": "AWS = of the cloud | Customer = in the cloud."
+    },
+    {
+      "title": "Common Exam Scenarios",
+      "points": [
+        "Orders/payments with tables = RDS.",
+        "Need faster MySQL-compatible database = Aurora.",
+        "Massive unpredictable scale = DynamoDB.",
+        "Cache slow database = ElastiCache.",
+        "Connected fraud accounts = Neptune.",
+        "MongoDB app = DocumentDB.",
+        "Petabyte analytics = Redshift."
+      ],
+      "exam_tip": "Look for workload clues."
+    },
+    {
+      "title": "Common Exam Traps",
+      "points": [
+        "DynamoDB is NoSQL, not relational.",
+        "ElastiCache is cache, not primary database.",
+        "RDS is transactional DB, not analytics warehouse.",
+        "Neptune is graph, not document DB.",
+        "Redshift is analytics, not OLTP transactional system."
+      ],
+      "exam_tip": "AWS loves asking what service does NOT fit."
+    },
+    {
+      "title": "Quick Memory Map",
+      "points": [
+        "RDS = managed SQL",
+        "Aurora = faster SQL",
+        "DynamoDB = NoSQL scale",
+        "ElastiCache = speed cache",
+        "DocumentDB = Mongo style",
+        "Neptune = graph",
+        "Redshift = analytics",
+        "DMS = migrate"
+      ],
+      "exam_tip": "Memorize this list cold."
+    }
+  ]
+}
+

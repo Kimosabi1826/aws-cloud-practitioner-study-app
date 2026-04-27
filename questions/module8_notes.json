@@ -1,0 +1,230 @@
+{
+  "module": "Module 8 - AI, Machine Learning, Analytics, and Data Services",
+  "sections": [
+    {
+      "title": "Core Idea",
+      "points": [
+        "AWS provides managed AI, machine learning, analytics, and search services.",
+        "Use prebuilt AI services when you need fast results.",
+        "Use custom ML platforms when building your own models."
+      ],
+      "exam_tip": "AWS exams often ask which service matches a business use case."
+    },
+    {
+      "title": "Artificial Intelligence vs Machine Learning",
+      "points": [
+        "Artificial Intelligence (AI) = systems performing tasks that mimic human intelligence.",
+        "Machine Learning (ML) = subset of AI where systems learn patterns from data.",
+        "Classical programming uses coded rules.",
+        "ML learns from historical data and predicts on new data."
+      ],
+      "exam_tip": "Rules = classical programming | Learns from data = ML"
+    },
+    {
+      "title": "Training vs Inference",
+      "points": [
+        "Training = teaching a model using historical data.",
+        "Inference = using trained model to make predictions.",
+        "Example: Train on spam emails, infer on new emails."
+      ],
+      "exam_tip": "Build model = Training | Use model = Inference"
+    },
+    {
+      "title": "Generative AI",
+      "points": [
+        "Creates new text, images, code, audio, and more.",
+        "Often powered by large foundation models.",
+        "Used for chatbots, assistants, summarization, coding help."
+      ],
+      "exam_tip": "Creates new content = Generative AI"
+    },
+    {
+      "title": "Foundation Models",
+      "points": [
+        "Large pre-trained models trained on broad datasets.",
+        "Can perform many tasks with prompts or fine-tuning.",
+        "Used in modern generative AI solutions."
+      ],
+      "exam_tip": "Large reusable AI model = Foundation Model"
+    },
+    {
+      "title": "Amazon Bedrock",
+      "points": [
+        "Managed service providing access to multiple foundation models.",
+        "Single API for generative AI development.",
+        "No infrastructure management required."
+      ],
+      "exam_tip": "Need generative AI models quickly = Bedrock"
+    },
+    {
+      "title": "Amazon SageMaker AI",
+      "points": [
+        "Managed platform to build, train, and deploy custom ML models.",
+        "Supports full ML lifecycle.",
+        "Used by data scientists and ML engineers."
+      ],
+      "exam_tip": "Custom machine learning platform = SageMaker"
+    },
+    {
+      "title": "SageMaker JumpStart",
+      "points": [
+        "Provides prebuilt models and starter ML solutions.",
+        "Speeds up ML experimentation and deployment."
+      ],
+      "exam_tip": "Fast start for ML = JumpStart"
+    },
+    {
+      "title": "Amazon Q Business",
+      "points": [
+        "Generative AI assistant for enterprise knowledge search.",
+        "Connects to internal business data sources."
+      ],
+      "exam_tip": "Ask company knowledge questions = Amazon Q Business"
+    },
+    {
+      "title": "Amazon Q Developer",
+      "points": [
+        "AI coding and developer assistant.",
+        "Helps with code generation, troubleshooting, AWS guidance."
+      ],
+      "exam_tip": "Developer productivity AI = Amazon Q Developer"
+    },
+    {
+      "title": "Amazon Comprehend",
+      "points": [
+        "Natural language processing service.",
+        "Sentiment analysis, key phrase extraction, entity recognition."
+      ],
+      "exam_tip": "Analyze text meaning = Comprehend"
+    },
+    {
+      "title": "Amazon Polly",
+      "points": [
+        "Converts text into lifelike speech."
+      ],
+      "exam_tip": "Text to speech = Polly"
+    },
+    {
+      "title": "Amazon Transcribe",
+      "points": [
+        "Converts speech into text."
+      ],
+      "exam_tip": "Speech to text = Transcribe"
+    },
+    {
+      "title": "Amazon Translate",
+      "points": [
+        "Language translation service."
+      ],
+      "exam_tip": "Translate languages = Translate"
+    },
+    {
+      "title": "Amazon Lex",
+      "points": [
+        "Builds chatbots and conversational voice/text interfaces."
+      ],
+      "exam_tip": "Chatbot = Lex"
+    },
+    {
+      "title": "Amazon Textract",
+      "points": [
+        "Extracts text, tables, and forms from documents."
+      ],
+      "exam_tip": "OCR + forms = Textract"
+    },
+    {
+      "title": "Amazon Rekognition",
+      "points": [
+        "Analyzes images and video.",
+        "Detects objects, faces, scenes, text."
+      ],
+      "exam_tip": "Computer vision = Rekognition"
+    },
+    {
+      "title": "Amazon Personalize",
+      "points": [
+        "Builds recommendation systems.",
+        "Used for product or content suggestions."
+      ],
+      "exam_tip": "Recommendations = Personalize"
+    },
+    {
+      "title": "Amazon Kendra",
+      "points": [
+        "Intelligent enterprise search service.",
+        "Used for searching documents, websites, FAQs."
+      ],
+      "exam_tip": "Enterprise search = Kendra"
+    },
+    {
+      "title": "Streaming and Analytics",
+      "points": [
+        "Amazon Kinesis = ingest/process streaming data.",
+        "Kinesis Data Firehose = deliver streams to S3, Redshift, OpenSearch.",
+        "AWS Glue = ETL and data catalog.",
+        "Amazon Athena = SQL queries on S3.",
+        "Amazon QuickSight = dashboards and BI.",
+        "Amazon OpenSearch Service = search/log analytics.",
+        "Amazon EMR = big data with Hadoop/Spark.",
+        "Amazon Redshift = analytics data warehouse."
+      ],
+      "exam_tip": "Streaming = Kinesis | SQL on S3 = Athena | Dashboards = QuickSight"
+    },
+    {
+      "title": "ETL vs ELT",
+      "points": [
+        "ETL = Extract, Transform, Load.",
+        "Move data from sources, clean it, then store it.",
+        "Common in analytics pipelines."
+      ],
+      "exam_tip": "ETL is a classic exam term."
+    },
+    {
+      "title": "Common Exam Scenarios",
+      "points": [
+        "Need chatbot = Lex",
+        "Need text sentiment = Comprehend",
+        "Need speech output = Polly",
+        "Need transcript from call recording = Transcribe",
+        "Need invoice OCR = Textract",
+        "Need image detection = Rekognition",
+        "Need product recommendations = Personalize",
+        "Need custom ML model = SageMaker",
+        "Need generative AI model access = Bedrock",
+        "Need SQL on S3 = Athena",
+        "Need dashboards = QuickSight"
+      ],
+      "exam_tip": "Match use case keywords to service names."
+    },
+    {
+      "title": "Common Exam Traps",
+      "points": [
+        "Polly is text-to-speech, not speech-to-text.",
+        "Transcribe is speech-to-text, not translation.",
+        "Athena queries S3 data, not transactional databases.",
+        "QuickSight visualizes data, not stores data.",
+        "SageMaker builds models, Bedrock uses foundation models."
+      ],
+      "exam_tip": "AWS often tests similar-sounding services."
+    },
+    {
+      "title": "Quick Memory Map",
+      "points": [
+        "Polly = speak",
+        "Transcribe = hear",
+        "Translate = languages",
+        "Comprehend = understand text",
+        "Lex = chatbot",
+        "Textract = documents",
+        "Rekognition = images/video",
+        "Personalize = recommendations",
+        "Bedrock = GenAI",
+        "SageMaker = build ML",
+        "Athena = SQL on S3",
+        "QuickSight = dashboards"
+      ],
+      "exam_tip": "Memorize this list cold."
+    }
+  ]
+}
+

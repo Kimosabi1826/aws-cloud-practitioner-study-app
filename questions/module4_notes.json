@@ -1,0 +1,264 @@
+{
+  "module": "Module 4 - Global Infrastructure, Edge, and Automation",
+  "sections": [
+    {
+      "title": "AWS Global Expansion Concept",
+      "points": [
+        "AWS allows you to deploy applications globally using Regions and edge locations.",
+        "Global expansion requires planning for performance, compliance, and cost.",
+        "Applications should be designed for scalability and consistency across locations."
+      ],
+      "exam_tip": "Global users → use multiple Regions + edge services."
+    },
+    {
+      "title": "AWS Regions",
+      "points": [
+        "A Region is a geographic area with multiple data centers.",
+        "Each Region is isolated from others.",
+        "Data does not leave a Region unless explicitly configured.",
+        "Regions help meet compliance and latency requirements."
+      ],
+      "exam_tip": "Data residency or legal requirement → choose correct Region."
+    },
+    {
+      "title": "Availability Zones (AZs)",
+      "points": [
+        "AZs are isolated data centers within a Region.",
+        "Each Region has multiple AZs.",
+        "AZs provide high availability and fault tolerance.",
+        "Each AZ has independent power, networking, and connectivity."
+      ],
+      "exam_tip": "High availability = multiple AZs (same Region)."
+    },
+    {
+      "title": "Edge Locations",
+      "points": [
+        "Edge locations cache content close to users.",
+        "Used by services like CloudFront and Route 53.",
+        "Reduce latency by serving content locally.",
+        "Separate from Regions."
+      ],
+      "exam_tip": "Faster content delivery → Edge locations."
+    },
+    {
+      "title": "Amazon CloudFront",
+      "points": [
+        "CloudFront is a Content Delivery Network (CDN).",
+        "Distributes content globally using edge locations.",
+        "Caches frequently accessed content.",
+        "Improves performance and reduces latency."
+      ],
+      "exam_tip": "Images/video loading slow → use CloudFront."
+    },
+    {
+      "title": "Amazon Route 53",
+      "points": [
+        "Route 53 is a DNS service.",
+        "Translates domain names into IP addresses.",
+        "Routes users to the best endpoint.",
+        "Supports health checks and routing policies."
+      ],
+      "exam_tip": "Domain routing → Route 53."
+    },
+    {
+      "title": "Choosing an AWS Region",
+      "points": [
+        "Compliance requirements (MOST important).",
+        "Proximity to users (low latency).",
+        "Feature availability (not all services in all Regions).",
+        "Pricing differences between Regions."
+      ],
+      "exam_tip": "Order matters: Compliance → Proximity → Features → Cost."
+    },
+    {
+      "title": "Compliance Considerations",
+      "points": [
+        "Some data must stay in specific countries.",
+        "Examples include GDPR and financial regulations.",
+        "Regions must match legal requirements.",
+        "Data sovereignty laws may restrict movement."
+      ],
+      "exam_tip": "Legal requirement ALWAYS overrides everything else."
+    },
+    {
+      "title": "Proximity (Latency)",
+      "points": [
+        "Closer Regions reduce latency.",
+        "Better user experience for applications.",
+        "Important for real-time apps.",
+        "Distance affects response time."
+      ],
+      "exam_tip": "Users far away → higher latency."
+    },
+    {
+      "title": "Feature Availability",
+      "points": [
+        "Not all AWS services exist in all Regions.",
+        "New features roll out gradually.",
+        "Special Regions like GovCloud have unique services.",
+        "Check service availability before deployment."
+      ],
+      "exam_tip": "Missing service → wrong Region choice."
+    },
+    {
+      "title": "Pricing Differences",
+      "points": [
+        "AWS pricing varies by Region.",
+        "Energy, taxes, and infrastructure costs affect pricing.",
+        "Some Regions are cheaper than others.",
+        "Pricing impacts overall architecture decisions."
+      ],
+      "exam_tip": "Same service ≠ same price across Regions."
+    },
+    {
+      "title": "Multi-AZ Architecture",
+      "points": [
+        "Deploy resources across multiple AZs.",
+        "Provides redundancy and failover.",
+        "Ensures application stays available.",
+        "Improves fault tolerance."
+      ],
+      "exam_tip": "Single AZ = risk. Multi-AZ = best practice."
+    },
+    {
+      "title": "Multi-Region Architecture",
+      "points": [
+        "Deploy across multiple Regions.",
+        "Provides disaster recovery.",
+        "Used for global applications.",
+        "Protects against Region failure."
+      ],
+      "exam_tip": "Entire Region failure → multi-Region saves you."
+    },
+    {
+      "title": "High Availability",
+      "points": [
+        "System remains operational with minimal downtime.",
+        "Achieved using multiple AZs or Regions.",
+        "Includes redundancy and failover strategies."
+      ],
+      "exam_tip": "Downtime prevention → high availability."
+    },
+    {
+      "title": "Agility",
+      "points": [
+        "Ability to quickly deploy and adapt.",
+        "Cloud enables rapid changes.",
+        "Supports fast development cycles."
+      ],
+      "exam_tip": "Fast deployment → agility."
+    },
+    {
+      "title": "Elasticity",
+      "points": [
+        "Ability to scale resources automatically.",
+        "Scale up during demand.",
+        "Scale down when demand drops.",
+        "Optimizes cost and performance."
+      ],
+      "exam_tip": "Auto scaling = elasticity."
+    },
+    {
+      "title": "AWS Global Edge Network",
+      "points": [
+        "Network of edge locations worldwide.",
+        "Used for low latency delivery.",
+        "Supports CloudFront and Route 53.",
+        "Improves global performance."
+      ],
+      "exam_tip": "Global speed → edge network."
+    },
+    {
+      "title": "Infrastructure as Code (IaC)",
+      "points": [
+        "Define infrastructure using code files.",
+        "Automates resource creation.",
+        "Ensures consistency across environments.",
+        "Reduces human error."
+      ],
+      "exam_tip": "Repeatable deployments → IaC."
+    },
+    {
+      "title": "AWS CloudFormation",
+      "points": [
+        "CloudFormation is an IaC service.",
+        "Uses templates to define resources.",
+        "Automatically provisions infrastructure.",
+        "Ensures consistent deployments."
+      ],
+      "exam_tip": "Same setup multiple times → CloudFormation."
+    },
+    {
+      "title": "CloudFormation Benefits",
+      "points": [
+        "Automation of infrastructure.",
+        "Consistency across environments.",
+        "Reduced manual errors.",
+        "Easy replication across Regions/accounts."
+      ],
+      "exam_tip": "Manual setup = error-prone → use CloudFormation."
+    },
+    {
+      "title": "AWS CLI",
+      "points": [
+        "Command-line tool for AWS.",
+        "Used to automate tasks.",
+        "Supports scripting.",
+        "Good for developers."
+      ],
+      "exam_tip": "Automation via scripts → CLI."
+    },
+    {
+      "title": "AWS SDKs",
+      "points": [
+        "Allow applications to interact with AWS.",
+        "Available in multiple programming languages.",
+        "Used for programmatic access.",
+        "Integrates AWS into apps."
+      ],
+      "exam_tip": "App talking to AWS → SDK."
+    },
+    {
+      "title": "AWS Management Console",
+      "points": [
+        "Web-based interface.",
+        "Easy to use for beginners.",
+        "Good for visual management.",
+        "Not ideal for automation."
+      ],
+      "exam_tip": "Manual clicks → Console."
+    },
+    {
+      "title": "Access Methods Summary",
+      "points": [
+        "Console = manual UI.",
+        "CLI = automation scripts.",
+        "SDK = app integration.",
+        "CloudFormation = infrastructure automation."
+      ],
+      "exam_tip": "Know WHEN to use each one."
+    },
+    {
+      "title": "Real Exam Patterns",
+      "points": [
+        "Low latency → CloudFront + edge locations.",
+        "High availability → Multi-AZ.",
+        "Disaster recovery → Multi-Region.",
+        "Repeatable deployment → CloudFormation.",
+        "Legal requirement → Region selection."
+      ],
+      "exam_tip": "AWS questions are about choosing the RIGHT tool."
+    },
+    {
+      "title": "Common Exam Traps",
+      "points": [
+        "Edge locations are NOT Regions.",
+        "CloudFront is NOT storage.",
+        "Route 53 is NOT compute.",
+        "CloudFormation does NOT run applications.",
+        "Multi-AZ is NOT the same as multi-Region."
+      ],
+      "exam_tip": "AWS loves confusing similar concepts."
+    }
+  ]
+}
