@@ -1,0 +1,98 @@
+[
+  {
+    "title": "Authentication vs Authorization",
+    "points": [
+      "Authentication = verifies identity (who you are).",
+      "Examples: username/password, MFA, access keys.",
+      "Authorization = determines permissions (what you can do).",
+      "Example: User can view S3 bucket but cannot delete it."
+    ]
+  },
+  {
+    "title": "AWS Shared Responsibility Model",
+    "points": [
+      "AWS = Security OF the cloud.",
+      "Customer = Security IN the cloud.",
+      "AWS manages hardware, networking, Regions, data centers.",
+      "Customers manage data, IAM, configurations, OS patches on EC2, applications."
+    ]
+  },
+  {
+    "title": "IAM Core Concepts",
+    "points": [
+      "IAM = Identity and Access Management.",
+      "Users = permanent identities for people/apps.",
+      "Groups = collection of users with shared permissions.",
+      "Roles = temporary access with assumed permissions.",
+      "Policies = JSON documents defining Allow or Deny."
+    ]
+  },
+  {
+    "title": "Least Privilege + Root User",
+    "points": [
+      "Least Privilege = give only minimum permissions needed.",
+      "Root user has full account access.",
+      "Use strong password + enable MFA on root.",
+      "Do not use root for daily tasks."
+    ]
+  },
+  {
+    "title": "Network Protection",
+    "points": [
+      "Security Groups = instance-level virtual firewall.",
+      "Allow inbound/outbound traffic rules.",
+      "ELB distributes traffic and helps absorb spikes.",
+      "AWS Shield Standard = automatic common DDoS protection."
+    ]
+  },
+  {
+    "title": "AWS WAF",
+    "points": [
+      "WAF = Web Application Firewall.",
+      "Filters HTTP/HTTPS requests.",
+      "Blocks malicious IPs, SQL injection, XSS.",
+      "Uses Web ACL rules."
+    ]
+  },
+  {
+    "title": "Encryption Basics",
+    "points": [
+      "Encryption = locking data using keys.",
+      "Decryption = unlocking data.",
+      "At Rest = stored data (S3, EBS, RDS, DynamoDB).",
+      "In Transit = moving data over network."
+    ]
+  },
+  {
+    "title": "Data Protection Services",
+    "points": [
+      "AWS KMS = create/manage encryption keys.",
+      "ACM = AWS Certificate Manager for SSL/TLS certificates.",
+      "Macie = discovers sensitive data in Amazon S3.",
+      "S3 supports encryption by default for new objects."
+    ]
+  },
+  {
+    "title": "Threat Detection Services",
+    "points": [
+      "Inspector = scans vulnerabilities on EC2, containers, Lambda.",
+      "GuardDuty = threat detection using logs + ML.",
+      "Detective = investigates findings visually.",
+      "Security Hub = central dashboard for findings."
+    ]
+  },
+  {
+    "title": "Exam Memory Triggers",
+    "points": [
+      "DDoS? = Shield.",
+      "Web filtering? = WAF.",
+      "Keys? = KMS.",
+      "Certificates? = ACM.",
+      "Sensitive S3 data? = Macie.",
+      "Threat detection? = GuardDuty.",
+      "Investigate incident? = Detective.",
+      "Central security view? = Security Hub."
+    ]
+  }
+]
+

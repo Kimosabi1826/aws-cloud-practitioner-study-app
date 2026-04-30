@@ -1,0 +1,513 @@
+[
+  {
+    "question": "What does authentication mean?",
+    "choices": {
+      "A": "Granting permissions",
+      "B": "Verifying identity",
+      "C": "Encrypting data",
+      "D": "Monitoring threats"
+    },
+    "correct": "B",
+    "tip": "Who are you?",
+    "explanations": {
+      "A": "Incorrect. Granting permissions is authorization.",
+      "B": "Correct. Authentication verifies identity using credentials like passwords or MFA.",
+      "C": "Incorrect. Encryption protects data.",
+      "D": "Incorrect. Monitoring threats is security detection."
+    }
+  },
+  {
+    "question": "What does authorization mean?",
+    "choices": {
+      "A": "Confirming password",
+      "B": "Determining allowed actions",
+      "C": "Encrypting traffic",
+      "D": "Creating users"
+    },
+    "correct": "B",
+    "tip": "What can you do?",
+    "explanations": {
+      "A": "Incorrect. Confirming identity is authentication.",
+      "B": "Correct. Authorization determines what actions a user is allowed to perform.",
+      "C": "Incorrect. Encryption secures data in transit.",
+      "D": "Incorrect. Creating users is an admin task."
+    }
+  },
+  {
+    "question": "In the AWS Shared Responsibility Model, AWS is responsible for:",
+    "choices": {
+      "A": "IAM passwords",
+      "B": "Customer data classification",
+      "C": "Physical data center security",
+      "D": "EC2 guest OS patching"
+    },
+    "correct": "C",
+    "tip": "Security OF the cloud.",
+    "explanations": {
+      "A": "Incorrect. Customers manage IAM credentials.",
+      "B": "Incorrect. Customers classify and protect their data.",
+      "C": "Correct. AWS secures facilities, hardware, and core infrastructure.",
+      "D": "Incorrect. Customers patch guest operating systems on EC2."
+    }
+  },
+  {
+    "question": "Which is the customer's responsibility on Amazon EC2?",
+    "choices": {
+      "A": "Physical servers",
+      "B": "Hypervisor maintenance",
+      "C": "Guest operating system patching",
+      "D": "Data center guards"
+    },
+    "correct": "C",
+    "tip": "Inside the instance = customer.",
+    "explanations": {
+      "A": "Incorrect. AWS manages physical servers.",
+      "B": "Incorrect. AWS manages the hypervisor.",
+      "C": "Correct. Customers manage the EC2 guest OS, apps, and configurations.",
+      "D": "Incorrect. AWS handles facility security."
+    }
+  },
+  {
+    "question": "Which AWS service manages users, roles, and permissions?",
+    "choices": {
+      "A": "GuardDuty",
+      "B": "IAM",
+      "C": "WAF",
+      "D": "Macie"
+    },
+    "correct": "B",
+    "tip": "Identity service.",
+    "explanations": {
+      "A": "Incorrect. GuardDuty detects threats.",
+      "B": "Correct. IAM manages identities and permissions.",
+      "C": "Incorrect. WAF filters web traffic.",
+      "D": "Incorrect. Macie helps discover sensitive S3 data."
+    }
+  },
+  {
+    "question": "What security best practice should be enabled for the root user?",
+    "choices": {
+      "A": "Delete root user",
+      "B": "Share credentials with team",
+      "C": "MFA",
+      "D": "Use daily for all tasks"
+    },
+    "correct": "C",
+    "tip": "Protect root access.",
+    "explanations": {
+      "A": "Incorrect. The root user cannot be deleted.",
+      "B": "Incorrect. Never share credentials.",
+      "C": "Correct. Enable multi-factor authentication for extra security.",
+      "D": "Incorrect. Root user should not be used for daily tasks."
+    }
+  },
+  {
+    "question": "What is the principle of least privilege?",
+    "choices": {
+      "A": "Give everyone admin access",
+      "B": "Give only needed permissions",
+      "C": "Deny all forever",
+      "D": "Use one shared login"
+    },
+    "correct": "B",
+    "tip": "Minimum access only.",
+    "explanations": {
+      "A": "Incorrect. Too much access increases risk.",
+      "B": "Correct. Users should receive only permissions needed to do their jobs.",
+      "C": "Incorrect. Some access is still needed.",
+      "D": "Incorrect. Shared logins are poor security practice."
+    }
+  },
+  {
+    "question": "Which IAM identity provides temporary permissions?",
+    "choices": {
+      "A": "IAM User",
+      "B": "IAM Group",
+      "C": "IAM Role",
+      "D": "Root User"
+    },
+    "correct": "C",
+    "tip": "Temporary access.",
+    "explanations": {
+      "A": "Incorrect. IAM users have long-term credentials.",
+      "B": "Incorrect. Groups organize users.",
+      "C": "Correct. IAM roles are assumed temporarily to gain permissions.",
+      "D": "Incorrect. Root user is permanent account owner access."
+    }
+  },
+  {
+    "question": "Which AWS service gives common DDoS protection at no extra cost?",
+    "choices": {
+      "A": "AWS Shield Standard",
+      "B": "Amazon Inspector",
+      "C": "Secrets Manager",
+      "D": "Amazon Macie"
+    },
+    "correct": "A",
+    "tip": "Built-in DDoS defense.",
+    "explanations": {
+      "A": "Correct. AWS Shield Standard automatically protects against common DDoS attacks.",
+      "B": "Incorrect. Inspector scans vulnerabilities.",
+      "C": "Incorrect. Secrets Manager stores secrets.",
+      "D": "Incorrect. Macie finds sensitive S3 data."
+    }
+  },
+  {
+    "question": "Which AWS service filters web traffic using rules and web ACLs?",
+    "choices": {
+      "A": "AWS WAF",
+      "B": "IAM",
+      "C": "KMS",
+      "D": "Detective"
+    },
+    "correct": "A",
+    "tip": "Web firewall.",
+    "explanations": {
+      "A": "Correct. AWS WAF filters incoming web requests using rules and web ACLs.",
+      "B": "Incorrect. IAM manages access.",
+      "C": "Incorrect. KMS manages encryption keys.",
+      "D": "Incorrect. Detective investigates threats."
+    }
+  },
+  {
+    "question": "Which AWS service manages encryption keys?",
+    "choices": {
+      "A": "AWS KMS",
+      "B": "IAM",
+      "C": "CloudTrail",
+      "D": "Shield"
+    },
+    "correct": "A",
+    "tip": "Keys = KMS.",
+    "explanations": {
+      "A": "Correct. AWS Key Management Service (KMS) creates and manages encryption keys.",
+      "B": "Incorrect. IAM manages users, roles, and permissions.",
+      "C": "Incorrect. CloudTrail logs API activity.",
+      "D": "Incorrect. Shield provides DDoS protection."
+    }
+  },
+  {
+    "question": "Which AWS service helps protect data in transit using SSL/TLS certificates?",
+    "choices": {
+      "A": "AWS Certificate Manager",
+      "B": "Macie",
+      "C": "Inspector",
+      "D": "GuardDuty"
+    },
+    "correct": "A",
+    "tip": "Certificates = ACM.",
+    "explanations": {
+      "A": "Correct. AWS Certificate Manager provisions and manages SSL/TLS certificates.",
+      "B": "Incorrect. Macie discovers sensitive S3 data.",
+      "C": "Incorrect. Inspector scans for vulnerabilities.",
+      "D": "Incorrect. GuardDuty detects suspicious activity."
+    }
+  },
+  {
+    "question": "Which AWS service helps discover sensitive data stored in Amazon S3?",
+    "choices": {
+      "A": "Macie",
+      "B": "IAM",
+      "C": "WAF",
+      "D": "Shield"
+    },
+    "correct": "A",
+    "tip": "Sensitive S3 data.",
+    "explanations": {
+      "A": "Correct. Amazon Macie uses machine learning to discover and protect sensitive data in S3.",
+      "B": "Incorrect. IAM controls access.",
+      "C": "Incorrect. WAF filters web requests.",
+      "D": "Incorrect. Shield protects from DDoS attacks."
+    }
+  },
+  {
+    "question": "Which AWS service scans workloads for vulnerabilities?",
+    "choices": {
+      "A": "Inspector",
+      "B": "CloudFront",
+      "C": "Route 53",
+      "D": "KMS"
+    },
+    "correct": "A",
+    "tip": "Security scanner.",
+    "explanations": {
+      "A": "Correct. Amazon Inspector scans workloads for software vulnerabilities and unintended exposure.",
+      "B": "Incorrect. CloudFront is a CDN.",
+      "C": "Incorrect. Route 53 is DNS.",
+      "D": "Incorrect. KMS manages keys."
+    }
+  },
+  {
+    "question": "Which AWS service provides intelligent threat detection using logs and machine learning?",
+    "choices": {
+      "A": "GuardDuty",
+      "B": "Inspector",
+      "C": "Macie",
+      "D": "ACM"
+    },
+    "correct": "A",
+    "tip": "Threat detection.",
+    "explanations": {
+      "A": "Correct. Amazon GuardDuty detects suspicious activity using AWS logs and threat intelligence.",
+      "B": "Incorrect. Inspector focuses on vulnerabilities.",
+      "C": "Incorrect. Macie focuses on sensitive S3 data.",
+      "D": "Incorrect. ACM manages certificates."
+    }
+  },
+  {
+    "question": "Which AWS service helps investigate suspicious activity by analyzing relationships between resources?",
+    "choices": {
+      "A": "Detective",
+      "B": "IAM",
+      "C": "Shield",
+      "D": "WAF"
+    },
+    "correct": "A",
+    "tip": "Investigate incidents.",
+    "explanations": {
+      "A": "Correct. Amazon Detective helps analyze and investigate security findings.",
+      "B": "Incorrect. IAM manages identities.",
+      "C": "Incorrect. Shield is DDoS protection.",
+      "D": "Incorrect. WAF filters web traffic."
+    }
+  },
+  {
+    "question": "Which AWS service gives a centralized view of security alerts across AWS accounts?",
+    "choices": {
+      "A": "Security Hub",
+      "B": "CloudWatch",
+      "C": "EC2",
+      "D": "Lambda"
+    },
+    "correct": "A",
+    "tip": "Central security dashboard.",
+    "explanations": {
+      "A": "Correct. AWS Security Hub centralizes and prioritizes security findings.",
+      "B": "Incorrect. CloudWatch monitors metrics and logs.",
+      "C": "Incorrect. EC2 is compute.",
+      "D": "Incorrect. Lambda runs serverless code."
+    }
+  },
+  {
+    "question": "What does MFA stand for?",
+    "choices": {
+      "A": "Multi-Factor Authentication",
+      "B": "Managed File Access",
+      "C": "Main Firewall Authorization",
+      "D": "Multiple Function API"
+    },
+    "correct": "A",
+    "tip": "Extra login layer.",
+    "explanations": {
+      "A": "Correct. MFA adds an additional authentication factor beyond password only.",
+      "B": "Incorrect. Not an AWS security term.",
+      "C": "Incorrect. Not correct terminology.",
+      "D": "Incorrect. Not related to login security."
+    }
+  },
+  {
+    "question": "Which is an example of data at rest?",
+    "choices": {
+      "A": "A file stored in Amazon S3",
+      "B": "HTTPS traffic to a website",
+      "C": "Streaming video over the internet",
+      "D": "API request in transit"
+    },
+    "correct": "A",
+    "tip": "Stored data.",
+    "explanations": {
+      "A": "Correct. Data stored in S3 is data at rest.",
+      "B": "Incorrect. HTTPS traffic is data in transit.",
+      "C": "Incorrect. Streaming is in transit.",
+      "D": "Incorrect. Requests moving across network are in transit."
+    }
+  },
+  {
+    "question": "Which is an example of data in transit?",
+    "choices": {
+      "A": "Encrypted backup stored in S3",
+      "B": "Data moving between browser and website",
+      "C": "Archived file on EBS volume",
+      "D": "Snapshot stored for recovery"
+    },
+    "correct": "B",
+    "tip": "Moving data.",
+    "explanations": {
+      "A": "Incorrect. Stored backup is data at rest.",
+      "B": "Correct. Data traveling across a network is data in transit.",
+      "C": "Incorrect. Stored files are data at rest.",
+      "D": "Incorrect. Snapshots are stored data."
+    }
+  },
+  {
+    "question": "Which AWS service records API calls and account activity for auditing?",
+    "choices": {
+      "A": "CloudTrail",
+      "B": "GuardDuty",
+      "C": "Inspector",
+      "D": "Macie"
+    },
+    "correct": "A",
+    "tip": "Audit logs.",
+    "explanations": {
+      "A": "Correct. AWS CloudTrail records API calls and account activity for governance, compliance, and auditing.",
+      "B": "Incorrect. GuardDuty analyzes logs for threats.",
+      "C": "Incorrect. Inspector scans for vulnerabilities.",
+      "D": "Incorrect. Macie discovers sensitive S3 data."
+    }
+  },
+  {
+    "question": "Which AWS service monitors metrics, alarms, and logs?",
+    "choices": {
+      "A": "CloudWatch",
+      "B": "Shield",
+      "C": "IAM",
+      "D": "KMS"
+    },
+    "correct": "A",
+    "tip": "Monitoring service.",
+    "explanations": {
+      "A": "Correct. Amazon CloudWatch monitors metrics, logs, events, and alarms.",
+      "B": "Incorrect. Shield is DDoS protection.",
+      "C": "Incorrect. IAM manages identities.",
+      "D": "Incorrect. KMS manages encryption keys."
+    }
+  },
+  {
+    "question": "Which IAM feature is used to attach permissions directly to a user, group, or role?",
+    "choices": {
+      "A": "Policies",
+      "B": "Buckets",
+      "C": "Instances",
+      "D": "Snapshots"
+    },
+    "correct": "A",
+    "tip": "Permissions documents.",
+    "explanations": {
+      "A": "Correct. IAM policies are JSON permission documents attached to users, groups, or roles.",
+      "B": "Incorrect. Buckets are S3 storage containers.",
+      "C": "Incorrect. Instances are EC2 virtual servers.",
+      "D": "Incorrect. Snapshots are backups."
+    }
+  },
+  {
+    "question": "Why is using the root account for daily tasks discouraged?",
+    "choices": {
+      "A": "It has limited permissions",
+      "B": "It cannot access billing",
+      "C": "It has full unrestricted privileges",
+      "D": "It expires every 24 hours"
+    },
+    "correct": "C",
+    "tip": "Too much power.",
+    "explanations": {
+      "A": "Incorrect. Root has the highest permissions.",
+      "B": "Incorrect. Root can access billing.",
+      "C": "Correct. Root has unrestricted access, so it should be protected and rarely used.",
+      "D": "Incorrect. Root credentials do not expire daily."
+    }
+  },
+  {
+    "question": "Which security control helps block malicious SQL injection attempts on a web app?",
+    "choices": {
+      "A": "AWS WAF",
+      "B": "IAM",
+      "C": "KMS",
+      "D": "Route 53"
+    },
+    "correct": "A",
+    "tip": "Web request filtering.",
+    "explanations": {
+      "A": "Correct. AWS WAF can block malicious patterns such as SQL injection and cross-site scripting.",
+      "B": "Incorrect. IAM manages access.",
+      "C": "Incorrect. KMS manages encryption keys.",
+      "D": "Incorrect. Route 53 is DNS."
+    }
+  },
+  {
+    "question": "Which AWS service protects against common network and transport layer DDoS attacks automatically?",
+    "choices": {
+      "A": "AWS Shield Standard",
+      "B": "Amazon Macie",
+      "C": "CloudWatch",
+      "D": "Detective"
+    },
+    "correct": "A",
+    "tip": "Automatic DDoS protection.",
+    "explanations": {
+      "A": "Correct. AWS Shield Standard is enabled automatically for common DDoS protections.",
+      "B": "Incorrect. Macie protects sensitive data in S3.",
+      "C": "Incorrect. CloudWatch monitors systems.",
+      "D": "Incorrect. Detective investigates findings."
+    }
+  },
+  {
+    "question": "Which encryption state refers to stored files or databases?",
+    "choices": {
+      "A": "Data in transit",
+      "B": "Data at rest",
+      "C": "Data in memory only",
+      "D": "Data in motionless mode"
+    },
+    "correct": "B",
+    "tip": "Stored data.",
+    "explanations": {
+      "A": "Incorrect. Transit means moving across a network.",
+      "B": "Correct. Data at rest means stored data such as S3 objects or database records.",
+      "C": "Incorrect. Not the standard AWS term here.",
+      "D": "Incorrect. Not a real security term."
+    }
+  },
+  {
+    "question": "Which encryption state refers to data moving across a network?",
+    "choices": {
+      "A": "Data at rest",
+      "B": "Data in transit",
+      "C": "Cold storage",
+      "D": "Archived state"
+    },
+    "correct": "B",
+    "tip": "Moving data.",
+    "explanations": {
+      "A": "Incorrect. At rest means stored.",
+      "B": "Correct. Data in transit is data traveling over networks.",
+      "C": "Incorrect. Cold storage is storage tier terminology.",
+      "D": "Incorrect. Archived is storage lifecycle wording."
+    }
+  },
+  {
+    "question": "Which AWS service would help a company review multiple security findings in one place?",
+    "choices": {
+      "A": "Security Hub",
+      "B": "S3",
+      "C": "Lambda",
+      "D": "EC2 Auto Scaling"
+    },
+    "correct": "A",
+    "tip": "Central findings dashboard.",
+    "explanations": {
+      "A": "Correct. AWS Security Hub aggregates and prioritizes security findings from multiple services.",
+      "B": "Incorrect. S3 is object storage.",
+      "C": "Incorrect. Lambda runs code.",
+      "D": "Incorrect. Auto Scaling manages capacity."
+    }
+  },
+  {
+    "question": "Which statement BEST describes the AWS Shared Responsibility Model?",
+    "choices": {
+      "A": "AWS handles all security tasks for customers",
+      "B": "Customers handle all physical security",
+      "C": "AWS secures the cloud, customers secure what they run in the cloud",
+      "D": "Security is optional in AWS"
+    },
+    "correct": "C",
+    "tip": "OF the cloud vs IN the cloud.",
+    "explanations": {
+      "A": "Incorrect. Customers still have responsibilities.",
+      "B": "Incorrect. AWS manages physical security.",
+      "C": "Correct. AWS secures infrastructure, while customers secure their data, identities, and configurations.",
+      "D": "Incorrect. Security is essential, not optional."
+    }
+  }
+]
+
