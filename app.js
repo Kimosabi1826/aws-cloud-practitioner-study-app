@@ -12,6 +12,7 @@ let currentQuizSize = 0;
 let maxQuestions = 0;
 let bestVoice = null;
 let selectedAnswers = [];
+let currentCheatSheetData = null;
 
 const MODULES_MANIFEST_PATH = "questions/modules.json";
 
@@ -531,7 +532,7 @@ function evaluateAnswer(selectedOriginalLetters) {
   if (explanationsList) {
     explanationsList.innerHTML = "";
     q.displayChoices.forEach((choice) => {
-      const explanation = q.explanations[choice.originalLetter];
+      const explanation = q.explanations[choice.originalLetter] || "No explanation added yet.";
       const li = document.createElement("li");
       li.innerHTML = `<strong>${choice.displayLetter}.</strong> ${explanation}`;
       explanationsList.appendChild(li);
@@ -669,32 +670,23 @@ function startMissedReviewMode() {
   renderQuestion();
 }
 
-async function speakCurrentQuestion() {
-  if (!questions.length || currentQuestionIndex >= maxQuestions) return;
-
-  const q = questions[currentQuestionIndex];
-
+async function speakText(text, errorMessage) {
   if (!("speechSynthesis" in window)) {
     alert("Your browser does not support text-to-speech.");
+    return;
+  }
+
+  const cleanText = String(text || "").trim();
+  if (!cleanText) {
+    alert("There is nothing to read yet.");
     return;
   }
 
   await waitForVoices();
   loadVoices();
 
-  const correctAnswers = getCorrectAnswersArray(q);
-  const selectInstruction =
-    correctAnswers.length > 1
-      ? `Select ${correctAnswers.length} answers. `
-      : "Choose the best answer. ";
-
   const utterance = new SpeechSynthesisUtterance();
-  utterance.text =
-    `Question ${currentQuestionIndex + 1}. ${q.question}. ${selectInstruction}` +
-    q.displayChoices
-      .map((choice) => `Option ${choice.displayLetter}. ${choice.text}.`)
-      .join(" ");
-
+  utterance.text = cleanText;
   utterance.rate = 0.92;
   utterance.pitch = 1.0;
   utterance.volume = 1;
@@ -703,17 +695,65 @@ async function speakCurrentQuestion() {
     utterance.voice = bestVoice;
   }
 
-  utterance.onstart = () => {
-    console.log("Speech started");
-  };
-
   utterance.onerror = (event) => {
     console.error("Speech error:", event);
-    alert("Speech failed in this browser. Try Microsoft Edge.");
+    alert(errorMessage || "Speech failed in this browser. Try Microsoft Edge.");
   };
 
   window.speechSynthesis.cancel();
   window.speechSynthesis.speak(utterance);
+}
+
+async function speakCurrentQuestion() {
+  if (!questions.length || currentQuestionIndex >= maxQuestions) return;
+
+  const q = questions[currentQuestionIndex];
+
+  const correctAnswers = getCorrectAnswersArray(q);
+  const selectInstruction =
+    correctAnswers.length > 1
+      ? `Select ${correctAnswers.length} answers. `
+      : "Choose the best answer. ";
+
+  const speechText =
+    `Question ${currentQuestionIndex + 1}. ${q.question}. ${selectInstruction}` +
+    q.displayChoices
+      .map((choice) => `Option ${choice.displayLetter}. ${choice.text}.`)
+      .join(" ");
+
+  await speakText(speechText, "Question speech failed in this browser. Try Microsoft Edge.");
+}
+
+function buildCheatSheetSpeechText(data) {
+  const selectedLabel =
+    moduleSelect?.options[moduleSelect.selectedIndex]?.textContent || "Selected module";
+
+  if (!data || !Array.isArray(data.sections) || data.sections.length === 0) {
+    return `${selectedLabel}. Cheat sheet has not been added yet.`;
+  }
+
+  const parts = [`${selectedLabel}. Study Cheat Sheet.`];
+
+  data.sections.forEach((section, sectionIndex) => {
+    parts.push(`Section ${sectionIndex + 1}. ${section.title || "Section"}.`);
+
+    if (Array.isArray(section.points)) {
+      section.points.forEach((point) => {
+        parts.push(point);
+      });
+    }
+
+    if (section.exam_tip) {
+      parts.push(`Exam tip. ${section.exam_tip}`);
+    }
+  });
+
+  return parts.join(" ");
+}
+
+async function speakCurrentCheatSheet() {
+  const speechText = buildCheatSheetSpeechText(currentCheatSheetData);
+  await speakText(speechText, "Cheat sheet speech failed in this browser. Try Microsoft Edge.");
 }
 
 async function loadModuleQuiz() {
@@ -792,32 +832,63 @@ function escapeHtml(value) {
 function renderCheatSheetSections(data) {
   if (!cheatSheetContent) return;
 
+  currentCheatSheetData = data;
+
   if (!data || !Array.isArray(data.sections) || data.sections.length === 0) {
     cheatSheetContent.innerHTML = `
+      <div class="actions">
+        <button class="action-btn gray-btn" id="readCheatSheetBtn">🔊 Read Cheat Sheet</button>
+      </div>
       <h3>⚠ Cheat Sheet Not Added Yet</h3>
       <p>This module does not have study notes yet.</p>
       <p>We can build it next.</p>
     `;
+
+    const readCheatSheetBtn = document.getElementById("readCheatSheetBtn");
+    if (readCheatSheetBtn) {
+      readCheatSheetBtn.addEventListener("click", speakCurrentCheatSheet);
+    }
     return;
   }
 
-  cheatSheetContent.innerHTML = data.sections
-    .map((section) => {
-      const safeTitle = escapeHtml(section.title || "Section");
-      const points = Array.isArray(section.points) ? section.points : [];
-      const examTip = section.exam_tip ? `<p class="exam-tip"><strong>Exam Tip:</strong> ${escapeHtml(section.exam_tip)}</p>` : "";
+  cheatSheetContent.innerHTML = `
+    <div class="actions">
+      <button class="action-btn gray-btn" id="readCheatSheetBtn">🔊 Read Cheat Sheet</button>
+      <button class="action-btn orange-btn" id="stopCheatSheetBtn">⏹ Stop Reading</button>
+    </div>
+    ${data.sections
+      .map((section) => {
+        const safeTitle = escapeHtml(section.title || "Section");
+        const points = Array.isArray(section.points) ? section.points : [];
+        const examTip = section.exam_tip
+          ? `<p class="exam-tip"><strong>Exam Tip:</strong> ${escapeHtml(section.exam_tip)}</p>`
+          : "";
 
-      return `
-        <div class="cheat-block">
-          <h3>${safeTitle}</h3>
-          <ul>
-            ${points.map((point) => `<li>${escapeHtml(point)}</li>`).join("")}
-          </ul>
-          ${examTip}
-        </div>
-      `;
-    })
-    .join("");
+        return `
+          <div class="cheat-block">
+            <h3>${safeTitle}</h3>
+            <ul>
+              ${points.map((point) => `<li>${escapeHtml(point)}</li>`).join("")}
+            </ul>
+            ${examTip}
+          </div>
+        `;
+      })
+      .join("")}
+  `;
+
+  const readCheatSheetBtn = document.getElementById("readCheatSheetBtn");
+  const stopCheatSheetBtn = document.getElementById("stopCheatSheetBtn");
+
+  if (readCheatSheetBtn) {
+    readCheatSheetBtn.addEventListener("click", speakCurrentCheatSheet);
+  }
+
+  if (stopCheatSheetBtn && "speechSynthesis" in window) {
+    stopCheatSheetBtn.addEventListener("click", () => {
+      window.speechSynthesis.cancel();
+    });
+  }
 }
 
 async function loadCheatSheet() {
@@ -832,6 +903,7 @@ async function loadCheatSheet() {
   cheatSheetContent.innerHTML = "<p>Loading cheat sheet...</p>";
 
   if (!filePath.endsWith(".json")) {
+    currentCheatSheetData = null;
     cheatSheetContent.innerHTML = `
       <h3>⚠ Cheat Sheet Not Added Yet</h3>
       <p>This module path is not valid.</p>
@@ -846,12 +918,21 @@ async function loadCheatSheet() {
     renderCheatSheetSections(data);
   } catch (error) {
     console.warn("Cheat sheet load skipped or failed:", error.message);
+    currentCheatSheetData = null;
     cheatSheetContent.innerHTML = `
+      <div class="actions">
+        <button class="action-btn gray-btn" id="readCheatSheetBtn">🔊 Read Cheat Sheet</button>
+      </div>
       <h3>⚠ Cheat Sheet Not Added Yet</h3>
       <p>We looked for:</p>
       <p><code>${escapeHtml(notesPath)}</code></p>
       <p>Create that file when you're ready and this screen will load it automatically.</p>
     `;
+
+    const readCheatSheetBtn = document.getElementById("readCheatSheetBtn");
+    if (readCheatSheetBtn) {
+      readCheatSheetBtn.addEventListener("click", speakCurrentCheatSheet);
+    }
   }
 }
 
@@ -869,6 +950,10 @@ async function showCheatSheet() {
 }
 
 function backToQuiz() {
+  if ("speechSynthesis" in window) {
+    window.speechSynthesis.cancel();
+  }
+
   currentMode = "Module Quiz";
   hideAllMainCards();
 
