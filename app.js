@@ -55,11 +55,9 @@ const finalCorrectCount = document.getElementById("finalCorrectCount");
 const finalMissedCount = document.getElementById("finalMissedCount");
 const finalModeText = document.getElementById("finalModeText");
 
-/* Optional newer UI elements */
 const questionTypeBox = document.getElementById("questionTypeBox");
 const selectionHelpText = document.getElementById("selectionHelpText");
 
-/* Cheat sheet UI */
 const studyCheatSheetBtn = document.getElementById("studyCheatSheetBtn");
 const cheatSheetCard = document.getElementById("cheatSheetCard");
 const cheatSheetModuleTitle = document.getElementById("cheatSheetModuleTitle");
@@ -289,6 +287,7 @@ function resetQuizState() {
   if (quizCard) quizCard.classList.remove("hidden");
   if (feedbackPanel) feedbackPanel.classList.add("hidden");
   if (hintPanel) hintPanel.classList.add("hidden");
+
   if (nextBtn) {
     nextBtn.classList.add("hidden");
     nextBtn.textContent = "➡ Next Question";
@@ -302,9 +301,7 @@ function resetQuizState() {
 function updateTopBar() {
   const totalQuestions = maxQuestions || questions.length || 0;
 
-  if (scoreBox) {
-    scoreBox.textContent = `Score: ${score} / ${answeredCount}`;
-  }
+  if (scoreBox) scoreBox.textContent = `Score: ${score} / ${answeredCount}`;
 
   if (questionCounter) {
     if (currentMode === "Study Mode") {
@@ -314,9 +311,7 @@ function updateTopBar() {
     }
   }
 
-  if (modeBox) {
-    modeBox.textContent = `Mode: ${currentMode}`;
-  }
+  if (modeBox) modeBox.textContent = `Mode: ${currentMode}`;
 
   let progressPercent = 0;
   if (currentMode === "Study Mode") {
@@ -325,9 +320,7 @@ function updateTopBar() {
     progressPercent = (currentQuestionIndex / totalQuestions) * 100;
   }
 
-  if (progressBar) {
-    progressBar.style.width = `${progressPercent}%`;
-  }
+  if (progressBar) progressBar.style.width = `${progressPercent}%`;
 }
 
 function setTemporarySelectedStyle(button, isSelected) {
@@ -344,28 +337,18 @@ function updateQuestionTypeUi(questionObj) {
   if (!questionTypeBox && !selectionHelpText) return;
 
   if (currentMode === "Study Mode") {
-    if (questionTypeBox) {
-      questionTypeBox.textContent = "Type: Cheat Sheet";
-    }
-    if (selectionHelpText) {
-      selectionHelpText.textContent = "Study notes for the selected module.";
-    }
+    if (questionTypeBox) questionTypeBox.textContent = "Type: Cheat Sheet";
+    if (selectionHelpText) selectionHelpText.textContent = "Study notes for the selected module.";
     return;
   }
 
   const correctAnswers = getCorrectAnswersArray(questionObj);
 
   if (correctAnswers.length === 1) {
-    if (questionTypeBox) {
-      questionTypeBox.textContent = "Type: Single Answer";
-    }
-    if (selectionHelpText) {
-      selectionHelpText.textContent = "Choose the best answer.";
-    }
+    if (questionTypeBox) questionTypeBox.textContent = "Type: Single Answer";
+    if (selectionHelpText) selectionHelpText.textContent = "Choose the best answer.";
   } else {
-    if (questionTypeBox) {
-      questionTypeBox.textContent = `Type: Select ${correctAnswers.length}`;
-    }
+    if (questionTypeBox) questionTypeBox.textContent = `Type: Select ${correctAnswers.length}`;
     if (selectionHelpText) {
       selectionHelpText.textContent = `Select exactly ${correctAnswers.length} answers, then press Submit Answer.`;
     }
@@ -392,22 +375,13 @@ function renderQuestion() {
   questionLocked = false;
   selectedAnswers = [];
 
-  if (questionNumber) {
-    questionNumber.textContent = `Question ${currentQuestionIndex + 1}`;
-  }
-  if (questionText) {
-    questionText.textContent = q.question;
-  }
-
-  if (choicesContainer) {
-    choicesContainer.innerHTML = "";
-  }
+  if (questionNumber) questionNumber.textContent = `Question ${currentQuestionIndex + 1}`;
+  if (questionText) questionText.textContent = q.question;
+  if (choicesContainer) choicesContainer.innerHTML = "";
   if (hintPanel) hintPanel.classList.add("hidden");
   if (feedbackPanel) feedbackPanel.classList.add("hidden");
+  if (hintText) hintText.textContent = q.tip;
 
-  if (hintText) {
-    hintText.textContent = q.tip;
-  }
   updateQuestionTypeUi(q);
 
   q.displayChoices.forEach((choice) => {
@@ -421,9 +395,7 @@ function renderQuestion() {
       btn.addEventListener("click", () => handleSingleAnswer(choice.originalLetter));
     }
 
-    if (choicesContainer) {
-      choicesContainer.appendChild(btn);
-    }
+    if (choicesContainer) choicesContainer.appendChild(btn);
   });
 
   if (nextBtn) {
@@ -456,9 +428,7 @@ function toggleMultiSelect(originalLetter, button) {
     setTemporarySelectedStyle(button, true);
   }
 
-  if (nextBtn) {
-    nextBtn.disabled = selectedAnswers.length !== requiredSelections;
-  }
+  if (nextBtn) nextBtn.disabled = selectedAnswers.length !== requiredSelections;
 }
 
 function handleSingleAnswer(selectedOriginalLetter) {
@@ -481,9 +451,7 @@ function evaluateAnswer(selectedOriginalLetters) {
     clearButtonState(btn);
     btn.disabled = true;
 
-    if (correctAnswers.includes(choice.originalLetter)) {
-      btn.classList.add("correct");
-    }
+    if (correctAnswers.includes(choice.originalLetter)) btn.classList.add("correct");
 
     if (
       selectedOriginalLetters.includes(choice.originalLetter) &&
@@ -539,9 +507,7 @@ function evaluateAnswer(selectedOriginalLetters) {
     });
   }
 
-  if (feedbackPanel) {
-    feedbackPanel.classList.remove("hidden");
-  }
+  if (feedbackPanel) feedbackPanel.classList.remove("hidden");
 
   if (nextBtn) {
     if (currentQuestionIndex + 1 < maxQuestions) {
@@ -578,27 +544,15 @@ function goToNextQuestion() {
 
 function showFinalScreen() {
   hideAllMainCards();
-  if (finalCard) {
-    finalCard.classList.remove("hidden");
-  }
-  if (progressBar) {
-    progressBar.style.width = "100%";
-  }
+  if (finalCard) finalCard.classList.remove("hidden");
+  if (progressBar) progressBar.style.width = "100%";
 
   const totalQuestions = maxQuestions || questions.length || 0;
 
-  if (finalScore) {
-    finalScore.textContent = `Final Score: ${score} / ${totalQuestions}`;
-  }
-  if (finalCorrectCount) {
-    finalCorrectCount.textContent = `Correct: ${score}`;
-  }
-  if (finalMissedCount) {
-    finalMissedCount.textContent = `Missed: ${missedQuestions.length}`;
-  }
-  if (finalModeText) {
-    finalModeText.textContent = `Mode: ${currentMode}`;
-  }
+  if (finalScore) finalScore.textContent = `Final Score: ${score} / ${totalQuestions}`;
+  if (finalCorrectCount) finalCorrectCount.textContent = `Correct: ${score}`;
+  if (finalMissedCount) finalMissedCount.textContent = `Missed: ${missedQuestions.length}`;
+  if (finalModeText) finalModeText.textContent = `Mode: ${currentMode}`;
 
   let message = "";
   const ratio = totalQuestions ? score / totalQuestions : 0;
@@ -613,9 +567,7 @@ function showFinalScreen() {
     message = "No sugar-coating: you need another round.";
   }
 
-  if (finalMessage) {
-    finalMessage.textContent = message;
-  }
+  if (finalMessage) finalMessage.textContent = message;
 
   if (missedQuestions.length > 0) {
     if (reviewMissedBtn) reviewMissedBtn.classList.remove("hidden");
@@ -696,8 +648,13 @@ async function speakText(text, errorMessage) {
   }
 
   utterance.onerror = (event) => {
-    console.error("Speech error:", event);
-    alert(errorMessage || "Speech failed in this browser. Try Microsoft Edge.");
+    console.warn("Speech event:", event.error);
+
+    if (event.error === "canceled" || event.error === "interrupted") {
+      return;
+    }
+
+    alert(errorMessage || "Speech failed in this browser.");
   };
 
   window.speechSynthesis.cancel();
@@ -717,11 +674,9 @@ async function speakCurrentQuestion() {
 
   const speechText =
     `Question ${currentQuestionIndex + 1}. ${q.question}. ${selectInstruction}` +
-    q.displayChoices
-      .map((choice) => `Option ${choice.displayLetter}. ${choice.text}.`)
-      .join(" ");
+    q.displayChoices.map((choice) => `Option ${choice.displayLetter}. ${choice.text}.`).join(" ");
 
-  await speakText(speechText, "Question speech failed in this browser. Try Microsoft Edge.");
+  await speakText(speechText, "Question speech failed in this browser.");
 }
 
 function buildCheatSheetSpeechText(data) {
@@ -753,15 +708,13 @@ function buildCheatSheetSpeechText(data) {
 
 async function speakCurrentCheatSheet() {
   const speechText = buildCheatSheetSpeechText(currentCheatSheetData);
-  await speakText(speechText, "Cheat sheet speech failed in this browser. Try Microsoft Edge.");
+  await speakText(speechText, "Cheat sheet speech failed in this browser.");
 }
 
 async function loadModuleQuiz() {
   try {
     const filePath = moduleSelect.value;
-    if (!filePath) {
-      throw new Error("No module selected.");
-    }
+    if (!filePath) throw new Error("No module selected.");
 
     currentSourceFiles = [filePath];
     currentMode = "Module Quiz";
@@ -782,9 +735,7 @@ async function loadModuleQuiz() {
 async function startMixedExam() {
   try {
     const filePath = moduleSelect.value;
-    if (!filePath) {
-      throw new Error("No module selected.");
-    }
+    if (!filePath) throw new Error("No module selected.");
 
     currentSourceFiles = [filePath];
     currentMode = "Final Mixed Exam";
@@ -795,9 +746,7 @@ async function startMixedExam() {
       combinedQuestions = combinedQuestions.concat(fileQuestions);
     }
 
-    if (combinedQuestions.length === 0) {
-      throw new Error("No questions found for mixed exam.");
-    }
+    if (combinedQuestions.length === 0) throw new Error("No questions found for mixed exam.");
 
     combinedQuestions = shuffleArray(combinedQuestions);
 
@@ -815,10 +764,6 @@ async function startMixedExam() {
     showLoadError(error);
   }
 }
-
-/* ==============================
-   Cheat Sheet Mode
-============================== */
 
 function escapeHtml(value) {
   return String(value)
@@ -845,9 +790,7 @@ function renderCheatSheetSections(data) {
     `;
 
     const readCheatSheetBtn = document.getElementById("readCheatSheetBtn");
-    if (readCheatSheetBtn) {
-      readCheatSheetBtn.addEventListener("click", speakCurrentCheatSheet);
-    }
+    if (readCheatSheetBtn) readCheatSheetBtn.addEventListener("click", speakCurrentCheatSheet);
     return;
   }
 
@@ -880,9 +823,7 @@ function renderCheatSheetSections(data) {
   const readCheatSheetBtn = document.getElementById("readCheatSheetBtn");
   const stopCheatSheetBtn = document.getElementById("stopCheatSheetBtn");
 
-  if (readCheatSheetBtn) {
-    readCheatSheetBtn.addEventListener("click", speakCurrentCheatSheet);
-  }
+  if (readCheatSheetBtn) readCheatSheetBtn.addEventListener("click", speakCurrentCheatSheet);
 
   if (stopCheatSheetBtn && "speechSynthesis" in window) {
     stopCheatSheetBtn.addEventListener("click", () => {
@@ -930,9 +871,7 @@ async function loadCheatSheet() {
     `;
 
     const readCheatSheetBtn = document.getElementById("readCheatSheetBtn");
-    if (readCheatSheetBtn) {
-      readCheatSheetBtn.addEventListener("click", speakCurrentCheatSheet);
-    }
+    if (readCheatSheetBtn) readCheatSheetBtn.addEventListener("click", speakCurrentCheatSheet);
   }
 }
 
@@ -940,9 +879,7 @@ async function showCheatSheet() {
   currentMode = "Study Mode";
   hideAllMainCards();
 
-  if (cheatSheetCard) {
-    cheatSheetCard.classList.remove("hidden");
-  }
+  if (cheatSheetCard) cheatSheetCard.classList.remove("hidden");
 
   updateQuestionTypeUi({ correct: ["A", "B"] });
   updateTopBar();
@@ -950,16 +887,12 @@ async function showCheatSheet() {
 }
 
 function backToQuiz() {
-  if ("speechSynthesis" in window) {
-    window.speechSynthesis.cancel();
-  }
+  if ("speechSynthesis" in window) window.speechSynthesis.cancel();
 
   currentMode = "Module Quiz";
   hideAllMainCards();
 
-  if (quizCard) {
-    quizCard.classList.remove("hidden");
-  }
+  if (quizCard) quizCard.classList.remove("hidden");
 
   if (questions.length > 0) {
     updateQuestionTypeUi(questions[currentQuestionIndex] || questions[0]);
@@ -971,11 +904,12 @@ function backToQuiz() {
 function showLoadError(error) {
   alert(
     "Could not load question file.\n\n" +
-    "If you opened index.html directly by double-clicking it, some browsers block fetch for local JSON files.\n\n" +
-    "Best fix: run a local server.\n\n" +
-    "Python example:\npython -m http.server 8000\n\n" +
-    "Then open:\nhttp://localhost:8000\n\n" +
-    "Error: " + error.message
+      "If you opened index.html directly by double-clicking it, some browsers block fetch for local JSON files.\n\n" +
+      "Best fix: run a local server.\n\n" +
+      "Python example:\npython -m http.server 8000\n\n" +
+      "Then open:\nhttp://localhost:8000\n\n" +
+      "Error: " +
+      error.message
   );
   console.error(error);
 }
@@ -997,13 +931,8 @@ if (finalReviewMissedBtn) finalReviewMissedBtn.addEventListener("click", startMi
 if (loadModuleBtn) loadModuleBtn.addEventListener("click", loadModuleQuiz);
 if (startMixedExamBtn) startMixedExamBtn.addEventListener("click", startMixedExam);
 
-if (studyCheatSheetBtn) {
-  studyCheatSheetBtn.addEventListener("click", showCheatSheet);
-}
-
-if (backToQuizBtn) {
-  backToQuizBtn.addEventListener("click", backToQuiz);
-}
+if (studyCheatSheetBtn) studyCheatSheetBtn.addEventListener("click", showCheatSheet);
+if (backToQuizBtn) backToQuizBtn.addEventListener("click", backToQuiz);
 
 window.addEventListener("DOMContentLoaded", async () => {
   loadVoices();
