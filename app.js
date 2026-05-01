@@ -1,4 +1,3 @@
-You were right. This version keeps your working module loading untouched and only adds the safe upgrades.
 
 ```js
 let questionBank = {};
