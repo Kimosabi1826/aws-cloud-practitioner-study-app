@@ -15,8 +15,17 @@ let selectedAnswers = [];
 let currentCheatSheetData = null;
 let cheatSheetPlaylist = [];
 let currentCheatSheetIndex = 0;
+let speechSessionId = 0;
+let speechTimer = null;
+let cheatSheetAutoReading = false;
 
 const MODULES_MANIFEST_PATH = "questions/modules.json";
+
+const SPEECH_PAUSES = {
+  short: 300,
+  medium: 550,
+  long: 850
+};
 
 const questionNumber = document.getElementById("questionNumber");
 const questionText = document.getElementById("questionText");
@@ -129,11 +138,6 @@ function formatSpeechText(text) {
   return String(text || "")
     .replace(/\s+/g, " ")
     .replace(/=/g, " means ")
-    .replace(/\?/g, "? ... ")
-    .replace(/\./g, ". ... ")
-    .replace(/:/g, ". ")
-    .replace(/;/g, ". ")
-    .replace(/,/g, ", ")
     .replace(/\bAWS\b/g, "A W S")
     .replace(/\bIAM\b/g, "I A M")
     .replace(/\bMFA\b/g, "M F A")
@@ -145,6 +149,131 @@ function formatSpeechText(text) {
     .replace(/\bRDS\b/g, "R D S")
     .replace(/\bDDoS\b/g, "D D O S")
     .trim();
+}
+
+function clearSpeechTimer() {
+  if (speechTimer) {
+    clearTimeout(speechTimer);
+    speechTimer = null;
+  }
+}
+
+function stopAllSpeech() {
+  speechSessionId++;
+  cheatSheetAutoReading = false;
+  clearSpeechTimer();
+
+  if ("speechSynthesis" in window) {
+    window.speechSynthesis.cancel();
+  }
+}
+
+function waitSpeechPause(ms, sessionId) {
+  return new Promise((resolve) => {
+    if (!Number.isFinite(ms) || ms <= 0) {
+      resolve(sessionId === speechSessionId);
+      return;
+    }
+
+    clearSpeechTimer();
+
+    speechTimer = setTimeout(() => {
+      speechTimer = null;
+      resolve(sessionId === speechSessionId);
+    }, ms);
+  });
+}
+
+function makeSpeechPartsFromText(text) {
+  const clean = String(text || "").trim();
+  if (!clean) return [];
+
+  return clean
+    .split(/(?<=[.!?])\s+/)
+    .map((part) => part.trim())
+    .filter(Boolean)
+    .flatMap((sentence) => [sentence, SPEECH_PAUSES.medium]);
+}
+
+async function speakSpeechParts(parts, errorMessage, onEndCallback) {
+  if (!("speechSynthesis" in window)) {
+    alert("Your browser does not support text-to-speech.");
+    return false;
+  }
+
+  const speechParts = Array.isArray(parts) ? parts : [parts];
+  const hasText = speechParts.some((part) => typeof part === "string" && formatSpeechText(part));
+
+  if (!hasText) {
+    alert("There is nothing to read yet.");
+    return false;
+  }
+
+  stopAllSpeech();
+  speechSessionId++;
+  const activeSessionId = speechSessionId;
+
+  await waitForVoices();
+  loadVoices();
+
+  const ready = await waitSpeechPause(120, activeSessionId);
+  if (!ready || activeSessionId !== speechSessionId) return false;
+
+  for (const part of speechParts) {
+    if (activeSessionId !== speechSessionId) return false;
+
+    if (typeof part === "number") {
+      const stillActive = await waitSpeechPause(part, activeSessionId);
+      if (!stillActive || activeSessionId !== speechSessionId) return false;
+      continue;
+    }
+
+    const cleanText = formatSpeechText(part);
+    if (!cleanText) continue;
+
+    const completed = await new Promise((resolve) => {
+      const utterance = new SpeechSynthesisUtterance();
+      utterance.text = cleanText;
+      utterance.rate = 0.86;
+      utterance.pitch = 0.95;
+      utterance.volume = 1;
+
+      if (bestVoice) {
+        utterance.voice = bestVoice;
+      }
+
+      utterance.onend = () => {
+        resolve(activeSessionId === speechSessionId);
+      };
+
+      utterance.onerror = (event) => {
+        const ignoredErrors = ["canceled", "interrupted", "aborted"];
+
+        console.warn("Speech event:", event.error);
+
+        if (!ignoredErrors.includes(event.error) && activeSessionId === speechSessionId) {
+          alert(errorMessage || "Speech failed in this browser.");
+        }
+
+        resolve(false);
+      };
+
+      window.speechSynthesis.speak(utterance);
+    });
+
+    if (!completed || activeSessionId !== speechSessionId) return false;
+  }
+
+  if (activeSessionId === speechSessionId && typeof onEndCallback === "function") {
+    onEndCallback();
+  }
+
+  return true;
+}
+
+async function speakText(text, errorMessage, onEndCallback) {
+  const parts = makeSpeechPartsFromText(text);
+  return speakSpeechParts(parts, errorMessage, onEndCallback);
 }
 
 function deepClone(obj) {
@@ -302,6 +431,8 @@ function hideAllMainCards() {
 }
 
 function resetQuizState() {
+  stopAllSpeech();
+
   currentQuestionIndex = 0;
   score = 0;
   answeredCount = 0;
@@ -366,7 +497,9 @@ function updateQuestionTypeUi(questionObj) {
 
   if (currentMode === "Study Mode") {
     if (questionTypeBox) questionTypeBox.textContent = "Type: Cheat Sheet";
-    if (selectionHelpText) selectionHelpText.textContent = "Use Previous / Next to move through notes.";
+    if (selectionHelpText) {
+      selectionHelpText.textContent = "Use Auto Read, Previous, Next, or Stop to control the notes.";
+    }
     return;
   }
 
@@ -571,6 +704,8 @@ function goToNextQuestion() {
 }
 
 function showFinalScreen() {
+  stopAllSpeech();
+
   hideAllMainCards();
   if (finalCard) finalCard.classList.remove("hidden");
   if (progressBar) progressBar.style.width = "100%";
@@ -650,54 +785,6 @@ function startMissedReviewMode() {
   renderQuestion();
 }
 
-async function speakText(text, errorMessage, onEndCallback) {
-  if (!("speechSynthesis" in window)) {
-    alert("Your browser does not support text-to-speech.");
-    return;
-  }
-
-  const cleanText = formatSpeechText(text);
-  if (!cleanText) {
-    alert("There is nothing to read yet.");
-    return;
-  }
-
-  await waitForVoices();
-  loadVoices();
-
-  const utterance = new SpeechSynthesisUtterance();
-  utterance.text = cleanText;
-  utterance.rate = 0.78;
-  utterance.pitch = 0.9;
-  utterance.volume = 1;
-
-  if (bestVoice) {
-    utterance.voice = bestVoice;
-  }
-
-  utterance.onend = () => {
-    if (typeof onEndCallback === "function") {
-      onEndCallback();
-    }
-  };
-
-  utterance.onerror = (event) => {
-    console.warn("Speech event:", event.error);
-
-    if (event.error === "canceled" || event.error === "interrupted") {
-      return;
-    }
-
-    alert(errorMessage || "Speech failed in this browser.");
-  };
-
-  window.speechSynthesis.cancel();
-
-  setTimeout(() => {
-    window.speechSynthesis.speak(utterance);
-  }, 180);
-}
-
 async function speakCurrentQuestion() {
   if (!questions.length || currentQuestionIndex >= maxQuestions) return;
 
@@ -709,13 +796,20 @@ async function speakCurrentQuestion() {
       ? `Select ${correctAnswers.length} answers.`
       : "Choose the best answer.";
 
-  const speechText =
-    `Question ${currentQuestionIndex + 1}. ${q.question}. ${selectInstruction}. ` +
-    q.displayChoices
-      .map((choice) => `Option ${choice.displayLetter}. ${choice.text}.`)
-      .join(" ");
+  const speechParts = [
+    `Question ${currentQuestionIndex + 1}.`,
+    SPEECH_PAUSES.short,
+    q.question,
+    SPEECH_PAUSES.long,
+    selectInstruction,
+    SPEECH_PAUSES.long,
+    ...q.displayChoices.flatMap((choice) => [
+      `Option ${choice.displayLetter}. ${choice.text}.`,
+      SPEECH_PAUSES.medium
+    ])
+  ];
 
-  await speakText(speechText, "Question speech failed in this browser.");
+  await speakSpeechParts(speechParts, "Question speech failed in this browser.");
 }
 
 function buildCheatSheetPlaylist(data) {
@@ -733,7 +827,14 @@ function buildCheatSheetPlaylist(data) {
     playlist.push({
       index: index,
       title: title,
-      text: [`Section ${index + 1}.`, title, ...points, tip].filter(Boolean).join(". ")
+      parts: [
+        `Section ${index + 1}.`,
+        SPEECH_PAUSES.short,
+        title,
+        SPEECH_PAUSES.long,
+        ...points.flatMap((point) => [point, SPEECH_PAUSES.medium]),
+        ...(tip ? [SPEECH_PAUSES.long, tip] : [])
+      ]
     });
   });
 
@@ -776,36 +877,47 @@ function updateCheatSheetNowPlaying() {
   updateTopBar();
 }
 
-async function speakCurrentCheatSheetItem(autoNext = true) {
+async function speakCurrentCheatSheetItem(shouldAutoContinue = false) {
   if (!cheatSheetPlaylist.length) {
     await speakText("No cheat sheet notes loaded yet.", "Cheat sheet speech failed in this browser.");
     return;
   }
 
+  cheatSheetAutoReading = shouldAutoContinue;
+
   const item = cheatSheetPlaylist[currentCheatSheetIndex];
   highlightCheatSheetBlock(item.index);
   updateCheatSheetNowPlaying();
 
-  await speakText(item.text, "Cheat sheet speech failed in this browser.", () => {
-    if (autoNext && currentCheatSheetIndex < cheatSheetPlaylist.length - 1) {
+  await speakSpeechParts(item.parts, "Cheat sheet speech failed in this browser.", () => {
+    if (
+      cheatSheetAutoReading &&
+      currentMode === "Study Mode" &&
+      currentCheatSheetIndex < cheatSheetPlaylist.length - 1
+    ) {
       currentCheatSheetIndex++;
-      setTimeout(() => {
-        speakCurrentCheatSheetItem(true);
-      }, 500);
+      updateCheatSheetNowPlaying();
+
+      speechTimer = setTimeout(() => {
+        speechTimer = null;
+
+        if (cheatSheetAutoReading && currentMode === "Study Mode") {
+          speakCurrentCheatSheetItem(true);
+        }
+      }, 650);
     }
   });
 }
 
 function stopCheatSheetReading() {
-  if ("speechSynthesis" in window) {
-    window.speechSynthesis.cancel();
-  }
+  stopAllSpeech();
+  updateCheatSheetNowPlaying();
 }
 
 async function nextCheatSheetItem() {
   if (!cheatSheetPlaylist.length) return;
 
-  stopCheatSheetReading();
+  stopAllSpeech();
   currentCheatSheetIndex = Math.min(currentCheatSheetIndex + 1, cheatSheetPlaylist.length - 1);
   await speakCurrentCheatSheetItem(false);
 }
@@ -813,7 +925,7 @@ async function nextCheatSheetItem() {
 async function previousCheatSheetItem() {
   if (!cheatSheetPlaylist.length) return;
 
-  stopCheatSheetReading();
+  stopAllSpeech();
   currentCheatSheetIndex = Math.max(currentCheatSheetIndex - 1, 0);
   await speakCurrentCheatSheetItem(false);
 }
@@ -887,6 +999,7 @@ function renderCheatSheetSections(data) {
   currentCheatSheetData = data;
   cheatSheetPlaylist = buildCheatSheetPlaylist(data);
   currentCheatSheetIndex = 0;
+  cheatSheetAutoReading = false;
 
   if (!data || !Array.isArray(data.sections) || data.sections.length === 0) {
     cheatSheetContent.innerHTML = `
@@ -901,7 +1014,7 @@ function renderCheatSheetSections(data) {
 
     const readCheatSheetBtn = document.getElementById("readCheatSheetBtn");
     if (readCheatSheetBtn) {
-      readCheatSheetBtn.addEventListener("click", () => speakCurrentCheatSheetItem(true));
+      readCheatSheetBtn.addEventListener("click", () => speakCurrentCheatSheetItem(false));
     }
 
     updateCheatSheetNowPlaying();
@@ -911,7 +1024,8 @@ function renderCheatSheetSections(data) {
   cheatSheetContent.innerHTML = `
     <div class="actions">
       <button class="action-btn gray-btn" id="prevCheatSheetBtn">⏮ Previous</button>
-      <button class="action-btn green-btn" id="readCheatSheetBtn">▶ Auto Read</button>
+      <button class="action-btn green-btn" id="readCurrentCheatSheetBtn">🔊 Read Current</button>
+      <button class="action-btn purple-btn" id="autoReadCheatSheetBtn">▶ Auto Read</button>
       <button class="action-btn purple-btn" id="nextCheatSheetBtn">⏭ Next</button>
       <button class="action-btn orange-btn" id="stopCheatSheetBtn">⏹ Stop</button>
     </div>
@@ -937,14 +1051,20 @@ function renderCheatSheetSections(data) {
       .join("")}
   `;
 
-  const readCheatSheetBtn = document.getElementById("readCheatSheetBtn");
+  const readCurrentCheatSheetBtn = document.getElementById("readCurrentCheatSheetBtn");
+  const autoReadCheatSheetBtn = document.getElementById("autoReadCheatSheetBtn");
   const stopCheatSheetBtn = document.getElementById("stopCheatSheetBtn");
   const nextCheatSheetBtn = document.getElementById("nextCheatSheetBtn");
   const prevCheatSheetBtn = document.getElementById("prevCheatSheetBtn");
 
-  if (readCheatSheetBtn) {
-    readCheatSheetBtn.addEventListener("click", () => speakCurrentCheatSheetItem(true));
+  if (readCurrentCheatSheetBtn) {
+    readCurrentCheatSheetBtn.addEventListener("click", () => speakCurrentCheatSheetItem(false));
   }
+
+  if (autoReadCheatSheetBtn) {
+    autoReadCheatSheetBtn.addEventListener("click", () => speakCurrentCheatSheetItem(true));
+  }
+
   if (stopCheatSheetBtn) stopCheatSheetBtn.addEventListener("click", stopCheatSheetReading);
   if (nextCheatSheetBtn) nextCheatSheetBtn.addEventListener("click", nextCheatSheetItem);
   if (prevCheatSheetBtn) prevCheatSheetBtn.addEventListener("click", previousCheatSheetItem);
@@ -996,12 +1116,16 @@ async function loadCheatSheet() {
 
     const readCheatSheetBtn = document.getElementById("readCheatSheetBtn");
     if (readCheatSheetBtn) {
-      readCheatSheetBtn.addEventListener("click", () => speakCurrentCheatSheetItem(true));
+      readCheatSheetBtn.addEventListener("click", () => speakCurrentCheatSheetItem(false));
     }
+
+    updateCheatSheetNowPlaying();
   }
 }
 
 async function showCheatSheet() {
+  stopAllSpeech();
+
   currentMode = "Study Mode";
   hideAllMainCards();
 
@@ -1013,7 +1137,7 @@ async function showCheatSheet() {
 }
 
 function backToQuiz() {
-  stopCheatSheetReading();
+  stopAllSpeech();
   clearCheatSheetHighlight();
 
   currentMode = "Module Quiz";
