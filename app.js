@@ -1,5 +1,4 @@
 
-```js
 let questionBank = {};
 let modulesManifest = [];
 let questions = [];
