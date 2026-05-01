@@ -1,28 +1,6 @@
-Absolutely. I made the script smoother and more polished: no spoken “Pause,” cleaner labels, better final messages, better mode names, keyboard shortcuts, safer answer rendering, and a built-in theme/headline upgrade.
+You were right. This version keeps your working module loading untouched and only adds the safe upgrades.
 
 ```js
-const MODE_PRACTICE = "Practice Quiz";
-const MODE_MIXED = "Mixed Exam";
-const MODE_MISSED = "Missed Review";
-const MODE_STUDY = "Study Notes";
-
-const MODULES_MANIFEST_PATH = "questions/modules.json";
-const SPEECH_SETTINGS_KEY = "cloudExamTrainerSpeechSettings";
-
-const DEFAULT_SPEECH_SETTINGS = {
-  rate: 0.92,
-  pitch: 1,
-  volume: 1
-};
-
-const SPEECH_PAUSES = {
-  afterHeading: 450,
-  afterQuestion: 700,
-  afterInstruction: 800,
-  afterOption: 650,
-  afterPoint: 500
-};
-
 let questionBank = {};
 let modulesManifest = [];
 let questions = [];
@@ -31,7 +9,7 @@ let score = 0;
 let answeredCount = 0;
 let questionLocked = false;
 let missedQuestions = [];
-let currentMode = MODE_PRACTICE;
+let currentMode = "Module Quiz";
 let currentSourceFiles = [];
 let currentQuizSize = 0;
 let maxQuestions = 0;
@@ -42,7 +20,14 @@ let cheatSheetPlaylist = [];
 let currentCheatSheetIndex = 0;
 let speechRunId = 0;
 let speechTimeouts = [];
-let speechSettings = loadSpeechSettings();
+
+const MODULES_MANIFEST_PATH = "questions/modules.json";
+
+const SPEECH_PAUSES = {
+  short: 350,
+  medium: 600,
+  long: 850
+};
 
 const questionNumber = document.getElementById("questionNumber");
 const questionText = document.getElementById("questionText");
@@ -93,150 +78,89 @@ const cheatSheetTitle = document.getElementById("cheatSheetTitle");
 const cheatSheetContent = document.getElementById("cheatSheetContent");
 const backToQuizBtn = document.getElementById("backToQuizBtn");
 
-function loadSpeechSettings() {
-  try {
-    const savedSettings = JSON.parse(localStorage.getItem(SPEECH_SETTINGS_KEY));
-    return {
-      ...DEFAULT_SPEECH_SETTINGS,
-      ...(savedSettings || {})
-    };
-  } catch (error) {
-    return { ...DEFAULT_SPEECH_SETTINGS };
-  }
-}
+function applyInterfaceCopy() {
+  document.title = "AWS Cloud Practitioner Exam Trainer";
 
-function saveSpeechSettings(nextSettings) {
-  speechSettings = {
-    ...speechSettings,
-    ...nextSettings
-  };
+  const headline = document.querySelector("[data-app-title], .app-title, h1");
+  if (headline) headline.textContent = "AWS Cloud Practitioner";
 
-  try {
-    localStorage.setItem(SPEECH_SETTINGS_KEY, JSON.stringify(speechSettings));
-  } catch (error) {
-    console.warn("Speech settings could not be saved:", error.message);
-  }
-}
-
-function getFirstElement(selectors) {
-  for (const selector of selectors) {
-    const element = selector.startsWith("#")
-      ? document.getElementById(selector.slice(1))
-      : document.querySelector(selector);
-
-    if (element) return element;
-  }
-
-  return null;
-}
-
-function applyUiCopyAndTheme() {
-  document.title = "Cloud Exam Trainer";
-
-  const headline = getFirstElement(["#appTitle", "[data-app-title]", ".app-title", "h1"]);
-  if (headline) headline.textContent = "Cloud Exam Trainer";
-
-  const subtitle = getFirstElement(["#appSubtitle", "[data-app-subtitle]", ".app-subtitle"]);
+  const subtitle = document.querySelector("[data-app-subtitle], .app-subtitle, .subtitle");
   if (subtitle) {
-    subtitle.textContent = "Practice questions, study notes, missed review, and focused exam prep.";
+    subtitle.textContent = "Certification Practice - 13 Modules - Voice - Study Sheets";
   }
 
-  if (hintBtn) hintBtn.textContent = "Show Hint";
+  if (hintBtn) hintBtn.textContent = "Show Tip";
   if (speakBtn) speakBtn.textContent = "Read Question";
   if (nextBtn) nextBtn.textContent = "Next Question";
-  if (restartBtn) restartBtn.textContent = "Restart";
-  if (finalRestartBtn) finalRestartBtn.textContent = "Restart";
+  if (restartBtn) restartBtn.textContent = "Restart Current Quiz";
+  if (finalRestartBtn) finalRestartBtn.textContent = "Restart Quiz";
   if (reviewMissedBtn) reviewMissedBtn.textContent = "Review Missed";
   if (finalReviewMissedBtn) finalReviewMissedBtn.textContent = "Review Missed";
-  if (loadModuleBtn) loadModuleBtn.textContent = "Load Module";
-  if (startMixedExamBtn) startMixedExamBtn.textContent = "Start Mixed Exam";
-  if (studyCheatSheetBtn) studyCheatSheetBtn.textContent = "Study Notes";
+  if (loadModuleBtn) loadModuleBtn.textContent = "Load Module Quiz";
+  if (startMixedExamBtn) startMixedExamBtn.textContent = "Start Final Mixed Exam";
+  if (studyCheatSheetBtn) studyCheatSheetBtn.textContent = "Study Cheat Sheet";
   if (backToQuizBtn) backToQuizBtn.textContent = "Back to Quiz";
+}
 
-  if (document.getElementById("cloudExamTrainerTheme")) return;
+function applyVisualPolish() {
+  if (document.getElementById("safeQuizVisualPolish")) return;
 
   const style = document.createElement("style");
-  style.id = "cloudExamTrainerTheme";
+  style.id = "safeQuizVisualPolish";
   style.textContent = `
     :root {
-      --bg: #0b1120;
-      --panel: #111827;
-      --panel-soft: #172033;
-      --panel-raised: #1f2937;
-      --border: #334155;
-      --border-strong: #475569;
-      --text: #f8fafc;
-      --muted: #9ca3af;
-      --primary: #38bdf8;
-      --primary-strong: #0284c7;
-      --success: #22c55e;
-      --danger: #ef4444;
-      --warning: #f59e0b;
-      --accent: #a78bfa;
+      --quiz-bg: #07111f;
+      --quiz-card: #111827;
+      --quiz-card-soft: #162033;
+      --quiz-border: #2d4263;
+      --quiz-border-strong: #3b82f6;
+      --quiz-text: #f8fafc;
+      --quiz-muted: #93a4bb;
+      --quiz-primary: #2563eb;
+      --quiz-primary-hover: #1d4ed8;
+      --quiz-success: #10b981;
+      --quiz-warning: #f59e0b;
+      --quiz-danger: #ef4444;
+      --quiz-purple: #7c3aed;
     }
 
     body {
       background:
-        radial-gradient(circle at top left, rgba(56, 189, 248, 0.12), transparent 32%),
-        linear-gradient(135deg, #0b1120 0%, #111827 52%, #141b2d 100%);
-      color: var(--text);
+        radial-gradient(circle at top left, rgba(37, 99, 235, 0.16), transparent 34%),
+        linear-gradient(135deg, #07111f 0%, #0f172a 55%, #111827 100%);
+      color: var(--quiz-text);
       letter-spacing: 0;
     }
 
-    h1, h2, h3 {
-      color: var(--text);
+    h1,
+    h2,
+    h3 {
+      color: var(--quiz-text);
       letter-spacing: 0;
     }
 
     .card,
+    .panel,
     .quiz-card,
     #quizCard,
     #finalCard,
     #cheatSheetCard {
       background: rgba(17, 24, 39, 0.94);
-      border: 1px solid var(--border);
+      border: 1px solid var(--quiz-border);
       border-radius: 8px;
-      box-shadow: 0 24px 70px rgba(0, 0, 0, 0.32);
-    }
-
-    .choice-btn {
-      background: #0f172a;
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      color: var(--text);
-      transition: border-color 160ms ease, background 160ms ease, transform 160ms ease;
-    }
-
-    .choice-btn:hover:not(:disabled) {
-      background: #162235;
-      border-color: var(--primary);
-      transform: translateY(-1px);
-    }
-
-    .choice-btn.spoken-choice {
-      background: rgba(56, 189, 248, 0.14) !important;
-      border-color: rgba(56, 189, 248, 0.85) !important;
-      box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.16);
-    }
-
-    .choice-btn.correct {
-      background: rgba(34, 197, 94, 0.16) !important;
-      border-color: rgba(34, 197, 94, 0.82) !important;
-    }
-
-    .choice-btn.wrong {
-      background: rgba(239, 68, 68, 0.15) !important;
-      border-color: rgba(239, 68, 68, 0.82) !important;
-    }
-
-    .choice-btn.neutral-dim {
-      opacity: 0.58;
+      box-shadow: 0 22px 70px rgba(0, 0, 0, 0.3);
     }
 
     button,
     .action-btn {
       border-radius: 8px;
       letter-spacing: 0;
+      transition: transform 160ms ease, background 160ms ease, border-color 160ms ease;
+    }
+
+    button:hover:not(:disabled),
+    .action-btn:hover:not(:disabled) {
+      transform: translateY(-1px);
     }
 
     button:disabled,
@@ -245,56 +169,94 @@ function applyUiCopyAndTheme() {
       opacity: 0.58;
     }
 
-    .green-btn,
-    .primary-btn {
-      background: var(--primary-strong);
-      color: white;
+    select,
+    #moduleSelect,
+    #mixedExamCount {
+      background-color: #0f172a !important;
+      color: #f8fafc !important;
+      border: 1px solid #31507a !important;
+      border-radius: 8px;
     }
 
-    .purple-btn {
-      background: #7c3aed;
-      color: white;
+    select option,
+    #moduleSelect option,
+    #mixedExamCount option {
+      background-color: #0f172a !important;
+      color: #f8fafc !important;
     }
 
-    .orange-btn {
-      background: #c2410c;
-      color: white;
+    select:focus,
+    #moduleSelect:focus,
+    #mixedExamCount:focus {
+      outline: 2px solid rgba(56, 189, 248, 0.45);
+      outline-offset: 2px;
     }
 
-    .gray-btn {
-      background: #334155;
-      color: white;
+    .choice-btn {
+      background: #0f172a;
+      border: 1px solid #334155;
+      border-radius: 8px;
+      color: var(--quiz-text);
+    }
+
+    .choice-btn:hover:not(:disabled) {
+      background: #162235;
+      border-color: #38bdf8;
+    }
+
+    .choice-btn.correct {
+      background: rgba(16, 185, 129, 0.16) !important;
+      border-color: rgba(16, 185, 129, 0.9) !important;
+    }
+
+    .choice-btn.wrong {
+      background: rgba(239, 68, 68, 0.16) !important;
+      border-color: rgba(239, 68, 68, 0.9) !important;
+    }
+
+    .choice-btn.neutral-dim {
+      opacity: 0.58;
     }
 
     .result-good {
-      color: var(--success);
+      color: var(--quiz-success);
     }
 
     .result-bad {
-      color: var(--danger);
+      color: var(--quiz-danger);
     }
 
-    .exam-tip {
-      border-left: 3px solid var(--warning);
-      background: rgba(245, 158, 11, 0.11);
-      padding: 0.85rem 1rem;
-      border-radius: 6px;
+    #progressBar {
+      background: linear-gradient(90deg, #38bdf8, #10b981);
+    }
+
+    #hintPanel,
+    #feedbackPanel {
+      background: rgba(15, 23, 42, 0.72);
+      border-color: var(--quiz-border);
     }
 
     .cheat-block {
-      border: 1px solid var(--border);
-      border-radius: 8px;
       background: rgba(15, 23, 42, 0.72);
+      border: 1px solid #334155;
+      border-radius: 8px;
     }
 
     .active-cheat-block {
       background: rgba(56, 189, 248, 0.14) !important;
-      border-color: rgba(56, 189, 248, 0.72) !important;
-      box-shadow: 0 0 22px rgba(56, 189, 248, 0.2) !important;
+      border-color: rgba(56, 189, 248, 0.7) !important;
+      box-shadow: 0 0 20px rgba(56, 189, 248, 0.2) !important;
+    }
+
+    .exam-tip {
+      border-left: 3px solid var(--quiz-warning);
+      background: rgba(245, 158, 11, 0.1);
+      padding: 0.85rem 1rem;
+      border-radius: 6px;
     }
 
     .small-note {
-      color: var(--muted);
+      color: var(--quiz-muted);
     }
   `;
 
@@ -333,29 +295,23 @@ function waitForVoices(timeoutMs = 1500) {
     }
 
     let finished = false;
-    let timeoutId = null;
-    const previousHandler = window.speechSynthesis.onvoiceschanged;
 
     const done = () => {
       if (finished) return;
       finished = true;
-
-      if (timeoutId) clearTimeout(timeoutId);
-      window.speechSynthesis.onvoiceschanged = previousHandler;
-
-      loadVoices();
       resolve(window.speechSynthesis.getVoices());
     };
 
+    const previousHandler = window.speechSynthesis.onvoiceschanged;
     window.speechSynthesis.onvoiceschanged = () => {
+      loadVoices();
       done();
-
       if (typeof previousHandler === "function") {
         previousHandler();
       }
     };
 
-    timeoutId = setTimeout(done, timeoutMs);
+    setTimeout(done, timeoutMs);
   });
 }
 
@@ -367,66 +323,42 @@ if ("speechSynthesis" in window) {
 function stopSpeaking() {
   speechRunId++;
 
-  speechTimeouts.forEach((timeoutRecord) => {
+  const pendingTimeouts = [...speechTimeouts];
+  speechTimeouts = [];
+
+  pendingTimeouts.forEach((timeoutRecord) => {
     clearTimeout(timeoutRecord.id);
     timeoutRecord.resolve(false);
   });
-
-  speechTimeouts = [];
-  clearSpokenChoiceHighlight();
 
   if ("speechSynthesis" in window) {
     window.speechSynthesis.cancel();
   }
 }
 
-function waitSpeechDelay(ms) {
-  if (!Number.isFinite(ms) || ms <= 0) {
-    return Promise.resolve(true);
-  }
-
+function waitSpeechDelay(ms, runId) {
   return new Promise((resolve) => {
-    let finished = false;
+    if (!Number.isFinite(ms) || ms <= 0) {
+      resolve(runId === speechRunId);
+      return;
+    }
 
     const timeoutRecord = {
       id: null,
-      resolve: (value = true) => {
-        if (finished) return;
-        finished = true;
-        speechTimeouts = speechTimeouts.filter((item) => item !== timeoutRecord);
-        resolve(value);
-      }
+      resolve: null
     };
 
-    timeoutRecord.id = setTimeout(() => timeoutRecord.resolve(true), ms);
+    timeoutRecord.resolve = (result = true) => {
+      speechTimeouts = speechTimeouts.filter((record) => record !== timeoutRecord);
+      resolve(result);
+    };
+
+    timeoutRecord.id = setTimeout(() => {
+      timeoutRecord.resolve(runId === speechRunId);
+    }, ms);
+
     speechTimeouts.push(timeoutRecord);
   });
-}
-
-function createUtterance(text, errorMessage, resolve) {
-  const utterance = new SpeechSynthesisUtterance(text);
-
-  utterance.rate = speechSettings.rate;
-  utterance.pitch = speechSettings.pitch;
-  utterance.volume = speechSettings.volume;
-
-  if (bestVoice) {
-    utterance.voice = bestVoice;
-  }
-
-  utterance.onend = () => resolve(true);
-
-  utterance.onerror = (event) => {
-    console.warn("Speech event:", event.error);
-
-    if (event.error !== "canceled" && event.error !== "interrupted") {
-      alert(errorMessage || "Speech failed in this browser.");
-    }
-
-    resolve(false);
-  };
-
-  return utterance;
 }
 
 async function speakSpeechParts(parts, errorMessage, onEndCallback) {
@@ -436,11 +368,11 @@ async function speakSpeechParts(parts, errorMessage, onEndCallback) {
   }
 
   const speechParts = Array.isArray(parts) ? parts : [parts];
-  const hasSpeakableText = speechParts.some(
+  const hasTextToRead = speechParts.some(
     (part) => typeof part === "string" && formatSpeechText(part)
   );
 
-  if (!hasSpeakableText) {
+  if (!hasTextToRead) {
     alert("There is nothing to read yet.");
     return false;
   }
@@ -452,20 +384,15 @@ async function speakSpeechParts(parts, errorMessage, onEndCallback) {
   await waitForVoices();
   loadVoices();
 
-  const ready = await waitSpeechDelay(120);
+  const ready = await waitSpeechDelay(120, runId);
   if (!ready || runId !== speechRunId) return false;
 
   for (const part of speechParts) {
     if (runId !== speechRunId) return false;
 
-    if (typeof part === "function") {
-      part();
-      continue;
-    }
-
     if (typeof part === "number") {
-      const completedDelay = await waitSpeechDelay(part);
-      if (!completedDelay || runId !== speechRunId) return false;
+      const stillActive = await waitSpeechDelay(part, runId);
+      if (!stillActive || runId !== speechRunId) return false;
       continue;
     }
 
@@ -473,14 +400,33 @@ async function speakSpeechParts(parts, errorMessage, onEndCallback) {
     if (!cleanText) continue;
 
     const completed = await new Promise((resolve) => {
-      const utterance = createUtterance(cleanText, errorMessage, resolve);
+      const utterance = new SpeechSynthesisUtterance();
+      utterance.text = cleanText;
+      utterance.rate = 0.92;
+      utterance.pitch = 1;
+      utterance.volume = 1;
+
+      if (bestVoice) {
+        utterance.voice = bestVoice;
+      }
+
+      utterance.onend = () => resolve(true);
+
+      utterance.onerror = (event) => {
+        console.warn("Speech event:", event.error);
+
+        if (event.error !== "canceled" && event.error !== "interrupted") {
+          alert(errorMessage || "Speech failed in this browser.");
+        }
+
+        resolve(false);
+      };
+
       window.speechSynthesis.speak(utterance);
     });
 
     if (!completed || runId !== speechRunId) return false;
   }
-
-  clearSpokenChoiceHighlight();
 
   if (typeof onEndCallback === "function") {
     onEndCallback();
@@ -489,37 +435,24 @@ async function speakSpeechParts(parts, errorMessage, onEndCallback) {
   return true;
 }
 
-async function speakText(text, errorMessage, onEndCallback) {
-  return speakSpeechParts([text], errorMessage, onEndCallback);
-}
-
 function formatSpeechText(text) {
   return String(text || "")
     .replace(/\s+/g, " ")
-    .replace(/\s*([?.:;])\s*/g, "$1 ")
     .replace(/=/g, " means ")
+    .replace(/\?/g, "? ")
+    .replace(/\./g, ". ")
+    .replace(/:/g, ": ")
+    .replace(/;/g, "; ")
     .replace(/\bAWS\b/g, "A W S")
     .replace(/\bIAM\b/g, "I A M")
     .replace(/\bMFA\b/g, "M F A")
     .replace(/\bKMS\b/g, "K M S")
     .replace(/\bACM\b/g, "A C M")
     .replace(/\bWAF\b/g, "W A F")
-    .replace(/\bVPC\b/g, "V P C")
-    .replace(/\bNACL\b/g, "N A C L")
-    .replace(/\bARN\b/g, "A R N")
-    .replace(/\bEBS\b/g, "E B S")
-    .replace(/\bEFS\b/g, "E F S")
-    .replace(/\bALB\b/g, "A L B")
-    .replace(/\bNLB\b/g, "N L B")
-    .replace(/\bAPI\b/g, "A P I")
-    .replace(/\bCLI\b/g, "C L I")
-    .replace(/\bSDK\b/g, "S D K")
-    .replace(/\bDNS\b/g, "D N S")
-    .replace(/\bCIDR\b/g, "C I D R")
     .replace(/\bS3\b/g, "S 3")
     .replace(/\bEC2\b/g, "E C 2")
     .replace(/\bRDS\b/g, "R D S")
-    .replace(/\bDDoS\b/gi, "D D O S")
+    .replace(/\bDDoS\b/g, "D D O S")
     .trim();
 }
 
@@ -529,17 +462,14 @@ function deepClone(obj) {
 
 function shuffleArray(inputArray) {
   const array = [...inputArray];
-
   for (let i = array.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
     [array[i], array[j]] = [array[j], array[i]];
   }
-
   return array;
 }
 
 function getCorrectAnswersArray(questionObj) {
-  if (!questionObj) return [];
   return Array.isArray(questionObj.correct) ? [...questionObj.correct] : [questionObj.correct];
 }
 
@@ -560,7 +490,6 @@ function getDisplayLetterForOriginal(questionObj, originalLetter) {
   const match = questionObj.displayChoices.find(
     (choice) => choice.originalLetter === originalLetter
   );
-
   return match ? match.displayLetter : originalLetter;
 }
 
@@ -571,43 +500,20 @@ function getDisplayLettersForCorrectAnswers(questionObj) {
 }
 
 function clearButtonState(button) {
-  button.classList.remove("correct", "wrong", "neutral-dim", "spoken-choice");
+  button.classList.remove("correct", "wrong", "neutral-dim");
   button.style.borderColor = "";
   button.style.background = "";
-}
-
-function clearSpokenChoiceHighlight() {
-  document.querySelectorAll(".choice-btn").forEach((button) => {
-    button.classList.remove("spoken-choice");
-  });
-}
-
-function highlightSpokenChoice(originalLetter) {
-  clearSpokenChoiceHighlight();
-
-  const q = questions[currentQuestionIndex];
-  if (!q || !Array.isArray(q.displayChoices)) return;
-
-  const choiceIndex = q.displayChoices.findIndex(
-    (choice) => choice.originalLetter === originalLetter
-  );
-
-  if (choiceIndex < 0) return;
-
-  const button = document.querySelectorAll(".choice-btn")[choiceIndex];
-  if (button) button.classList.add("spoken-choice");
 }
 
 function prepareQuestion(questionObj) {
   const prepared = deepClone(questionObj);
 
-  if (!shuffleAnswersCheckbox || !shuffleAnswersCheckbox.checked) {
+  if (!shuffleAnswersCheckbox.checked) {
     prepared.displayChoices = Object.entries(prepared.choices).map(([letter, text]) => ({
       originalLetter: letter,
       displayLetter: letter,
       text: text
     }));
-
     return prepared;
   }
 
@@ -617,10 +523,11 @@ function prepareQuestion(questionObj) {
   }));
 
   const shuffledChoices = shuffleArray(choiceEntries);
+  const displayLetters = ["A", "B", "C", "D"];
 
   prepared.displayChoices = shuffledChoices.map((item, index) => ({
     originalLetter: item.originalLetter,
-    displayLetter: String.fromCharCode(65 + index),
+    displayLetter: displayLetters[index],
     text: item.text
   }));
 
@@ -630,7 +537,7 @@ function prepareQuestion(questionObj) {
 function prepareQuestionSet(rawQuestions) {
   let workingSet = rawQuestions.map(prepareQuestion);
 
-  if (shuffleQuestionsCheckbox && shuffleQuestionsCheckbox.checked) {
+  if (shuffleQuestionsCheckbox.checked) {
     workingSet = shuffleArray(workingSet);
   }
 
@@ -639,11 +546,9 @@ function prepareQuestionSet(rawQuestions) {
 
 async function fetchJsonFile(filePath) {
   const response = await fetch(filePath);
-
   if (!response.ok) {
     throw new Error(`Failed to load file: ${filePath}`);
   }
-
   return response.json();
 }
 
@@ -653,7 +558,6 @@ async function fetchQuestionFile(filePath) {
   }
 
   const data = await fetchJsonFile(filePath);
-
   if (!Array.isArray(data) || data.length === 0) {
     throw new Error(`Question file is empty or invalid: ${filePath}`);
   }
@@ -717,7 +621,6 @@ function resetQuizState() {
   selectedAnswers = [];
 
   hideAllMainCards();
-
   if (quizCard) quizCard.classList.remove("hidden");
   if (feedbackPanel) feedbackPanel.classList.add("hidden");
   if (hintPanel) hintPanel.classList.add("hidden");
@@ -738,25 +641,22 @@ function updateTopBar() {
   if (scoreBox) scoreBox.textContent = `Score: ${score} / ${answeredCount}`;
 
   if (questionCounter) {
-    if (currentMode === MODE_STUDY) {
+    if (currentMode === "Study Mode") {
       questionCounter.textContent = cheatSheetPlaylist.length
         ? `Note ${currentCheatSheetIndex + 1} / ${cheatSheetPlaylist.length}`
-        : "Note 0 / 0";
+        : "Question 0 / 0";
     } else {
-      questionCounter.textContent = `Question ${
-        totalQuestions ? currentQuestionIndex + 1 : 0
-      } / ${totalQuestions}`;
+      questionCounter.textContent = `Question ${totalQuestions ? currentQuestionIndex + 1 : 0} / ${totalQuestions}`;
     }
   }
 
   if (modeBox) modeBox.textContent = `Mode: ${currentMode}`;
 
   let progressPercent = 0;
-
-  if (currentMode === MODE_STUDY && cheatSheetPlaylist.length > 0) {
+  if (currentMode === "Study Mode" && cheatSheetPlaylist.length > 0) {
     progressPercent = ((currentCheatSheetIndex + 1) / cheatSheetPlaylist.length) * 100;
   } else if (totalQuestions > 0) {
-    progressPercent = (answeredCount / totalQuestions) * 100;
+    progressPercent = (currentQuestionIndex / totalQuestions) * 100;
   }
 
   if (progressBar) progressBar.style.width = `${progressPercent}%`;
@@ -773,11 +673,11 @@ function setTemporarySelectedStyle(button, isSelected) {
 }
 
 function updateQuestionTypeUi(questionObj) {
-  if (!questionObj || (!questionTypeBox && !selectionHelpText)) return;
+  if (!questionTypeBox && !selectionHelpText) return;
 
-  if (currentMode === MODE_STUDY) {
-    if (questionTypeBox) questionTypeBox.textContent = "Type: Study Notes";
-    if (selectionHelpText) selectionHelpText.textContent = "Use Previous and Next to move through notes.";
+  if (currentMode === "Study Mode") {
+    if (questionTypeBox) questionTypeBox.textContent = "Type: Cheat Sheet";
+    if (selectionHelpText) selectionHelpText.textContent = "Use Previous / Next to move through notes.";
     return;
   }
 
@@ -792,25 +692,6 @@ function updateQuestionTypeUi(questionObj) {
       selectionHelpText.textContent = `Select exactly ${correctAnswers.length} answers, then press Submit Answer.`;
     }
   }
-}
-
-function createChoiceButton(choice, isMulti) {
-  const btn = document.createElement("button");
-  btn.className = "choice-btn";
-
-  const label = document.createElement("strong");
-  label.textContent = `${choice.displayLetter}.`;
-
-  btn.appendChild(label);
-  btn.appendChild(document.createTextNode(` ${choice.text}`));
-
-  if (isMulti) {
-    btn.addEventListener("click", () => toggleMultiSelect(choice.originalLetter, btn));
-  } else {
-    btn.addEventListener("click", () => handleSingleAnswer(choice.originalLetter));
-  }
-
-  return btn;
 }
 
 function renderQuestion() {
@@ -832,19 +713,27 @@ function renderQuestion() {
 
   questionLocked = false;
   selectedAnswers = [];
-  clearSpokenChoiceHighlight();
 
   if (questionNumber) questionNumber.textContent = `Question ${currentQuestionIndex + 1}`;
   if (questionText) questionText.textContent = q.question;
   if (choicesContainer) choicesContainer.innerHTML = "";
   if (hintPanel) hintPanel.classList.add("hidden");
   if (feedbackPanel) feedbackPanel.classList.add("hidden");
-  if (hintText) hintText.textContent = q.tip || "No hint added yet.";
+  if (hintText) hintText.textContent = q.tip;
 
   updateQuestionTypeUi(q);
 
   q.displayChoices.forEach((choice) => {
-    const btn = createChoiceButton(choice, isMulti);
+    const btn = document.createElement("button");
+    btn.className = "choice-btn";
+    btn.innerHTML = `<strong>${choice.displayLetter}.</strong> ${choice.text}`;
+
+    if (isMulti) {
+      btn.addEventListener("click", () => toggleMultiSelect(choice.originalLetter, btn));
+    } else {
+      btn.addEventListener("click", () => handleSingleAnswer(choice.originalLetter));
+    }
+
     if (choicesContainer) choicesContainer.appendChild(btn);
   });
 
@@ -888,7 +777,6 @@ function handleSingleAnswer(selectedOriginalLetter) {
 
 function evaluateAnswer(selectedOriginalLetters) {
   if (questionLocked) return;
-
   questionLocked = true;
 
   const q = questions[currentQuestionIndex];
@@ -921,18 +809,24 @@ function evaluateAnswer(selectedOriginalLetters) {
 
   const isCorrect = arraysMatchIgnoringOrder(selectedOriginalLetters, correctAnswers);
 
-  if (isCorrect) {
-    score++;
-    if (feedbackTitle) feedbackTitle.innerHTML = `<span class="result-good">Correct</span>`;
-  } else {
+  if (feedbackTitle) {
+    if (isCorrect) {
+      score++;
+      feedbackTitle.innerHTML = `<span class="result-good">Correct</span>`;
+    } else {
+      feedbackTitle.innerHTML = `<span class="result-bad">Incorrect</span>`;
+      missedQuestions.push(deepClone(q));
+    }
+  } else if (!isCorrect) {
     missedQuestions.push(deepClone(q));
-    if (feedbackTitle) feedbackTitle.innerHTML = `<span class="result-bad">Incorrect</span>`;
+  } else {
+    score++;
   }
 
   const correctDisplayLetters = getDisplayLettersForCorrectAnswers(q);
   const correctAnswerTextParts = correctAnswers.map((originalLetter, index) => {
     const displayLetter = correctDisplayLetters[index];
-    return `<strong>${escapeHtml(displayLetter)}</strong> - ${escapeHtml(q.choices[originalLetter])}`;
+    return `<strong>${displayLetter}</strong> - ${q.choices[originalLetter]}`;
   });
 
   if (correctAnswerText) {
@@ -944,15 +838,10 @@ function evaluateAnswer(selectedOriginalLetters) {
 
   if (explanationsList) {
     explanationsList.innerHTML = "";
-
     q.displayChoices.forEach((choice) => {
-      const explanation = q.explanations?.[choice.originalLetter] || "No explanation added yet.";
+      const explanation = q.explanations[choice.originalLetter] || "No explanation added yet.";
       const li = document.createElement("li");
-      const label = document.createElement("strong");
-
-      label.textContent = `${choice.displayLetter}.`;
-      li.appendChild(label);
-      li.appendChild(document.createTextNode(` ${explanation}`));
+      li.innerHTML = `<strong>${choice.displayLetter}.</strong> ${explanation}`;
       explanationsList.appendChild(li);
     });
   }
@@ -976,13 +865,11 @@ function evaluateAnswer(selectedOriginalLetters) {
 
 function goToNextQuestion() {
   const q = questions[currentQuestionIndex];
-  if (!q) return;
 
   if (!questionLocked && isMultiSelectQuestion(q)) {
     if (selectedAnswers.length === getCorrectAnswersArray(q).length) {
       evaluateAnswer(selectedAnswers);
     }
-
     return;
   }
 
@@ -997,13 +884,12 @@ function goToNextQuestion() {
 function showFinalScreen() {
   stopSpeaking();
   hideAllMainCards();
-
   if (finalCard) finalCard.classList.remove("hidden");
   if (progressBar) progressBar.style.width = "100%";
 
   const totalQuestions = maxQuestions || questions.length || 0;
 
-  if (finalScore) finalScore.textContent = `Scorecard: ${score} / ${totalQuestions}`;
+  if (finalScore) finalScore.textContent = `Final Score: ${score} / ${totalQuestions}`;
   if (finalCorrectCount) finalCorrectCount.textContent = `Correct: ${score}`;
   if (finalMissedCount) finalMissedCount.textContent = `Missed: ${missedQuestions.length}`;
   if (finalModeText) finalModeText.textContent = `Mode: ${currentMode}`;
@@ -1046,8 +932,8 @@ function restartQuiz() {
   questions = prepareQuestionSet(rawCurrent);
   maxQuestions = questions.length;
   currentQuizSize = questions.length;
-  currentMode = MODE_PRACTICE;
 
+  currentMode = "Module Quiz";
   resetQuizState();
   renderQuestion();
 }
@@ -1058,7 +944,7 @@ function startMissedReviewMode() {
     return;
   }
 
-  currentMode = MODE_MISSED;
+  currentMode = "Missed Review";
   questions = prepareQuestionSet(
     missedQuestions.map((q) => ({
       question: q.question,
@@ -1076,31 +962,35 @@ function startMissedReviewMode() {
   renderQuestion();
 }
 
+async function speakText(text, errorMessage, onEndCallback) {
+  return speakSpeechParts([text], errorMessage, onEndCallback);
+}
+
 async function speakCurrentQuestion() {
   if (!questions.length || currentQuestionIndex >= maxQuestions) return;
 
   const q = questions[currentQuestionIndex];
-  const correctAnswers = getCorrectAnswersArray(q);
 
-  const parts = [
-    () => clearSpokenChoiceHighlight(),
-    `Question ${currentQuestionIndex + 1}.`,
-    SPEECH_PAUSES.afterHeading,
-    q.question,
-    SPEECH_PAUSES.afterQuestion,
+  const correctAnswers = getCorrectAnswersArray(q);
+  const selectInstruction =
     correctAnswers.length > 1
       ? `Select ${correctAnswers.length} answers.`
-      : "Choose the best answer.",
-    SPEECH_PAUSES.afterInstruction,
+      : "Choose the best answer.";
+
+  const speechParts = [
+    `Question ${currentQuestionIndex + 1}.`,
+    SPEECH_PAUSES.short,
+    q.question,
+    SPEECH_PAUSES.long,
+    selectInstruction,
+    SPEECH_PAUSES.long,
     ...q.displayChoices.flatMap((choice) => [
-      () => highlightSpokenChoice(choice.originalLetter),
       `Option ${choice.displayLetter}. ${choice.text}.`,
-      SPEECH_PAUSES.afterOption
-    ]),
-    () => clearSpokenChoiceHighlight()
+      SPEECH_PAUSES.medium
+    ])
   ];
 
-  await speakSpeechParts(parts, "Question speech failed in this browser.");
+  await speakSpeechParts(speechParts, "Question speech failed in this browser.");
 }
 
 function buildCheatSheetPlaylist(data) {
@@ -1116,15 +1006,15 @@ function buildCheatSheetPlaylist(data) {
     const tip = section.exam_tip ? `Exam tip. ${section.exam_tip}` : "";
 
     playlist.push({
-      index,
-      title,
+      index: index,
+      title: title,
       parts: [
-        `Study note ${index + 1}.`,
-        SPEECH_PAUSES.afterHeading,
+        `Section ${index + 1}.`,
+        SPEECH_PAUSES.short,
         title,
-        SPEECH_PAUSES.afterQuestion,
-        ...points.flatMap((point) => [point, SPEECH_PAUSES.afterPoint]),
-        ...(tip ? [SPEECH_PAUSES.afterInstruction, tip] : [])
+        SPEECH_PAUSES.long,
+        ...points.flatMap((point) => [point, SPEECH_PAUSES.medium]),
+        ...(tip ? [SPEECH_PAUSES.long, tip] : [])
       ]
     });
   });
@@ -1148,9 +1038,9 @@ function highlightCheatSheetBlock(index) {
   if (!block) return;
 
   block.classList.add("active-cheat-block");
-  block.style.background = "rgba(56, 189, 248, 0.14)";
-  block.style.borderColor = "rgba(56, 189, 248, 0.72)";
-  block.style.boxShadow = "0 0 22px rgba(56, 189, 248, 0.2)";
+  block.style.background = "rgba(56,189,248,0.14)";
+  block.style.borderColor = "rgba(56,189,248,0.7)";
+  block.style.boxShadow = "0 0 20px rgba(56,189,248,0.2)";
   block.scrollIntoView({ behavior: "smooth", block: "center" });
 }
 
@@ -1170,16 +1060,15 @@ function updateCheatSheetNowPlaying() {
 
 async function speakCurrentCheatSheetItem() {
   if (!cheatSheetPlaylist.length) {
-    await speakText("No study notes loaded yet.", "Study notes speech failed in this browser.");
+    await speakText("No cheat sheet notes loaded yet.", "Cheat sheet speech failed in this browser.");
     return;
   }
 
   const item = cheatSheetPlaylist[currentCheatSheetIndex];
-
   highlightCheatSheetBlock(item.index);
   updateCheatSheetNowPlaying();
 
-  await speakSpeechParts(item.parts || [item.text], "Study notes speech failed in this browser.");
+  await speakSpeechParts(item.parts, "Cheat sheet speech failed in this browser.");
 }
 
 function stopCheatSheetReading() {
@@ -1204,15 +1093,11 @@ async function previousCheatSheetItem() {
 
 async function loadModuleQuiz() {
   try {
-    if (!moduleSelect) throw new Error("Module selector not found.");
-
     const filePath = moduleSelect.value;
     if (!filePath) throw new Error("No module selected.");
 
-    stopSpeaking();
-
     currentSourceFiles = [filePath];
-    currentMode = MODE_PRACTICE;
+    currentMode = "Module Quiz";
 
     const data = await fetchQuestionFile(filePath);
     questions = prepareQuestionSet(data);
@@ -1229,41 +1114,24 @@ async function loadModuleQuiz() {
 
 async function startMixedExam() {
   try {
-    if (!moduleSelect) throw new Error("Module selector not found.");
-
     const filePath = moduleSelect.value;
     if (!filePath) throw new Error("No module selected.");
 
-    stopSpeaking();
-
-    currentSourceFiles = modulesManifest.length
-      ? modulesManifest.map((moduleItem) => moduleItem.file)
-      : [filePath];
-
-    currentMode = MODE_MIXED;
+    currentSourceFiles = [filePath];
+    currentMode = "Final Mixed Exam";
 
     let combinedQuestions = [];
-
     for (const sourceFile of currentSourceFiles) {
       const fileQuestions = await fetchQuestionFile(sourceFile);
       combinedQuestions = combinedQuestions.concat(fileQuestions);
     }
 
-    if (combinedQuestions.length === 0) {
-      throw new Error("No questions found for mixed exam.");
-    }
+    if (combinedQuestions.length === 0) throw new Error("No questions found for mixed exam.");
 
     combinedQuestions = shuffleArray(combinedQuestions);
 
-    const requestedCount = mixedExamCount
-      ? Number(mixedExamCount.value)
-      : combinedQuestions.length;
-
-    const safeRequestedCount = Number.isFinite(requestedCount) && requestedCount > 0
-      ? requestedCount
-      : combinedQuestions.length;
-
-    const finalCount = Math.min(safeRequestedCount, combinedQuestions.length);
+    const requestedCount = Number(mixedExamCount.value);
+    const finalCount = Math.min(requestedCount, combinedQuestions.length);
 
     questions = prepareQuestionSet(combinedQuestions.slice(0, finalCount));
 
@@ -1271,7 +1139,6 @@ async function startMixedExam() {
     currentQuizSize = questions.length;
 
     resetQuizState();
-    currentMode = MODE_MIXED;
     renderQuestion();
   } catch (error) {
     showLoadError(error);
@@ -1300,14 +1167,13 @@ function renderCheatSheetSections(data) {
         <button class="action-btn gray-btn" id="readCheatSheetBtn">Read Current</button>
       </div>
       <p class="small-note" id="cheatSheetNowPlaying">No notes loaded.</p>
-      <h3>Study Notes Not Added Yet</h3>
+      <h3>Cheat Sheet Not Added Yet</h3>
       <p>This module does not have study notes yet.</p>
-      <p>We can build them next.</p>
+      <p>We can build it next.</p>
     `;
 
     const readCheatSheetBtn = document.getElementById("readCheatSheetBtn");
     if (readCheatSheetBtn) readCheatSheetBtn.addEventListener("click", speakCurrentCheatSheetItem);
-
     updateCheatSheetNowPlaying();
     return;
   }
@@ -1358,18 +1224,19 @@ function renderCheatSheetSections(data) {
 async function loadCheatSheet() {
   if (!moduleSelect || !cheatSheetContent || !cheatSheetModuleTitle || !cheatSheetTitle) return;
 
-  const selectedLabel = moduleSelect.options[moduleSelect.selectedIndex]?.textContent || "Module";
+  const selectedLabel =
+    moduleSelect.options[moduleSelect.selectedIndex]?.textContent || "Module";
   const filePath = moduleSelect.value || "";
 
   cheatSheetModuleTitle.textContent = selectedLabel;
-  cheatSheetTitle.textContent = "Study Notes";
-  cheatSheetContent.innerHTML = "<p>Loading study notes...</p>";
+  cheatSheetTitle.textContent = "Study Cheat Sheet";
+  cheatSheetContent.innerHTML = "<p>Loading cheat sheet...</p>";
 
   if (!filePath.endsWith(".json")) {
     currentCheatSheetData = null;
     cheatSheetPlaylist = [];
     cheatSheetContent.innerHTML = `
-      <h3>Study Notes Not Added Yet</h3>
+      <h3>Cheat Sheet Not Added Yet</h3>
       <p>This module path is not valid.</p>
     `;
     return;
@@ -1381,40 +1248,34 @@ async function loadCheatSheet() {
     const data = await fetchJsonFile(notesPath);
     renderCheatSheetSections(data);
   } catch (error) {
-    console.warn("Study notes load skipped or failed:", error.message);
-
+    console.warn("Cheat sheet load skipped or failed:", error.message);
     currentCheatSheetData = null;
     cheatSheetPlaylist = [];
-
     cheatSheetContent.innerHTML = `
       <div class="actions">
         <button class="action-btn gray-btn" id="readCheatSheetBtn">Read Current</button>
       </div>
       <p class="small-note" id="cheatSheetNowPlaying">No notes loaded.</p>
-      <h3>Study Notes Not Added Yet</h3>
+      <h3>Cheat Sheet Not Added Yet</h3>
       <p>We looked for:</p>
       <p><code>${escapeHtml(notesPath)}</code></p>
-      <p>Create that file when you are ready and this screen will load it automatically.</p>
+      <p>Create that file when you're ready and this screen will load it automatically.</p>
     `;
 
     const readCheatSheetBtn = document.getElementById("readCheatSheetBtn");
     if (readCheatSheetBtn) readCheatSheetBtn.addEventListener("click", speakCurrentCheatSheetItem);
-
     updateCheatSheetNowPlaying();
   }
 }
 
 async function showCheatSheet() {
-  stopSpeaking();
-
-  currentMode = MODE_STUDY;
+  currentMode = "Study Mode";
   hideAllMainCards();
 
   if (cheatSheetCard) cheatSheetCard.classList.remove("hidden");
 
   updateQuestionTypeUi({ correct: ["A", "B"] });
   updateTopBar();
-
   await loadCheatSheet();
 }
 
@@ -1422,7 +1283,7 @@ function backToQuiz() {
   stopCheatSheetReading();
   clearCheatSheetHighlight();
 
-  currentMode = MODE_PRACTICE;
+  currentMode = "Module Quiz";
   hideAllMainCards();
 
   if (quizCard) quizCard.classList.remove("hidden");
@@ -1444,72 +1305,7 @@ function showLoadError(error) {
       "Error: " +
       error.message
   );
-
   console.error(error);
-}
-
-function getKeyboardChoice(eventKey, questionObj) {
-  const normalizedKey = eventKey.toLowerCase();
-
-  if (/^[a-z]$/.test(normalizedKey)) {
-    return questionObj.displayChoices.find(
-      (choice) => choice.displayLetter.toLowerCase() === normalizedKey
-    );
-  }
-
-  const numericIndex = Number(eventKey) - 1;
-
-  if (Number.isInteger(numericIndex) && numericIndex >= 0) {
-    return questionObj.displayChoices[numericIndex];
-  }
-
-  return null;
-}
-
-function handleQuizKeyboard(event) {
-  const activeTag = document.activeElement?.tagName?.toLowerCase();
-
-  if (["input", "select", "textarea", "button"].includes(activeTag)) {
-    return;
-  }
-
-  if (!quizCard || quizCard.classList.contains("hidden")) return;
-  if (!questions.length || currentQuestionIndex >= maxQuestions) return;
-
-  const q = questions[currentQuestionIndex];
-  if (!q || questionLocked) {
-    if (event.key === "Enter" && nextBtn && !nextBtn.disabled && !nextBtn.classList.contains("hidden")) {
-      event.preventDefault();
-      goToNextQuestion();
-    }
-
-    return;
-  }
-
-  if (event.key === "Enter") {
-    if (nextBtn && !nextBtn.disabled && !nextBtn.classList.contains("hidden")) {
-      event.preventDefault();
-      goToNextQuestion();
-    }
-
-    return;
-  }
-
-  const choice = getKeyboardChoice(event.key, q);
-  if (!choice) return;
-
-  event.preventDefault();
-
-  if (isMultiSelectQuestion(q)) {
-    const choiceIndex = q.displayChoices.findIndex(
-      (item) => item.originalLetter === choice.originalLetter
-    );
-    const button = document.querySelectorAll(".choice-btn")[choiceIndex];
-
-    if (button) toggleMultiSelect(choice.originalLetter, button);
-  } else {
-    handleSingleAnswer(choice.originalLetter);
-  }
 }
 
 if (hintBtn) {
@@ -1532,18 +1328,15 @@ if (startMixedExamBtn) startMixedExamBtn.addEventListener("click", startMixedExa
 if (studyCheatSheetBtn) studyCheatSheetBtn.addEventListener("click", showCheatSheet);
 if (backToQuizBtn) backToQuizBtn.addEventListener("click", backToQuiz);
 
-window.addEventListener("keydown", handleQuizKeyboard);
+window.addEventListener("DOMContentLoaded", async () => {
+  applyVisualPolish();
+  applyInterfaceCopy();
 
-async function initializeApp() {
-  applyUiCopyAndTheme();
   loadVoices();
-
   await populateModuleSelectFromManifest();
 
   if (moduleSelect && moduleSelect.options.length > 0) {
     await loadModuleQuiz();
   }
-}
-
-window.addEventListener("DOMContentLoaded", initializeApp);
+});
 ```
