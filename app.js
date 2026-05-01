@@ -1,4 +1,3 @@
-
 let questionBank = {};
 let modulesManifest = [];
 let questions = [];
@@ -16,16 +15,8 @@ let selectedAnswers = [];
 let currentCheatSheetData = null;
 let cheatSheetPlaylist = [];
 let currentCheatSheetIndex = 0;
-let speechRunId = 0;
-let speechTimeouts = [];
 
 const MODULES_MANIFEST_PATH = "questions/modules.json";
-
-const SPEECH_PAUSES = {
-  short: 350,
-  medium: 600,
-  long: 850
-};
 
 const questionNumber = document.getElementById("questionNumber");
 const questionText = document.getElementById("questionText");
@@ -75,191 +66,6 @@ const cheatSheetModuleTitle = document.getElementById("cheatSheetModuleTitle");
 const cheatSheetTitle = document.getElementById("cheatSheetTitle");
 const cheatSheetContent = document.getElementById("cheatSheetContent");
 const backToQuizBtn = document.getElementById("backToQuizBtn");
-
-function applyInterfaceCopy() {
-  document.title = "AWS Cloud Practitioner Exam Trainer";
-
-  const headline = document.querySelector("[data-app-title], .app-title, h1");
-  if (headline) headline.textContent = "AWS Cloud Practitioner";
-
-  const subtitle = document.querySelector("[data-app-subtitle], .app-subtitle, .subtitle");
-  if (subtitle) {
-    subtitle.textContent = "Certification Practice - 13 Modules - Voice - Study Sheets";
-  }
-
-  if (hintBtn) hintBtn.textContent = "Show Tip";
-  if (speakBtn) speakBtn.textContent = "Read Question";
-  if (nextBtn) nextBtn.textContent = "Next Question";
-  if (restartBtn) restartBtn.textContent = "Restart Current Quiz";
-  if (finalRestartBtn) finalRestartBtn.textContent = "Restart Quiz";
-  if (reviewMissedBtn) reviewMissedBtn.textContent = "Review Missed";
-  if (finalReviewMissedBtn) finalReviewMissedBtn.textContent = "Review Missed";
-  if (loadModuleBtn) loadModuleBtn.textContent = "Load Module Quiz";
-  if (startMixedExamBtn) startMixedExamBtn.textContent = "Start Final Mixed Exam";
-  if (studyCheatSheetBtn) studyCheatSheetBtn.textContent = "Study Cheat Sheet";
-  if (backToQuizBtn) backToQuizBtn.textContent = "Back to Quiz";
-}
-
-function applyVisualPolish() {
-  if (document.getElementById("safeQuizVisualPolish")) return;
-
-  const style = document.createElement("style");
-  style.id = "safeQuizVisualPolish";
-  style.textContent = `
-    :root {
-      --quiz-bg: #07111f;
-      --quiz-card: #111827;
-      --quiz-card-soft: #162033;
-      --quiz-border: #2d4263;
-      --quiz-border-strong: #3b82f6;
-      --quiz-text: #f8fafc;
-      --quiz-muted: #93a4bb;
-      --quiz-primary: #2563eb;
-      --quiz-primary-hover: #1d4ed8;
-      --quiz-success: #10b981;
-      --quiz-warning: #f59e0b;
-      --quiz-danger: #ef4444;
-      --quiz-purple: #7c3aed;
-    }
-
-    body {
-      background:
-        radial-gradient(circle at top left, rgba(37, 99, 235, 0.16), transparent 34%),
-        linear-gradient(135deg, #07111f 0%, #0f172a 55%, #111827 100%);
-      color: var(--quiz-text);
-      letter-spacing: 0;
-    }
-
-    h1,
-    h2,
-    h3 {
-      color: var(--quiz-text);
-      letter-spacing: 0;
-    }
-
-    .card,
-    .panel,
-    .quiz-card,
-    #quizCard,
-    #finalCard,
-    #cheatSheetCard {
-      background: rgba(17, 24, 39, 0.94);
-      border: 1px solid var(--quiz-border);
-      border-radius: 8px;
-      box-shadow: 0 22px 70px rgba(0, 0, 0, 0.3);
-    }
-
-    button,
-    .action-btn {
-      border-radius: 8px;
-      letter-spacing: 0;
-      transition: transform 160ms ease, background 160ms ease, border-color 160ms ease;
-    }
-
-    button:hover:not(:disabled),
-    .action-btn:hover:not(:disabled) {
-      transform: translateY(-1px);
-    }
-
-    button:disabled,
-    .action-btn:disabled {
-      cursor: not-allowed;
-      opacity: 0.58;
-    }
-
-    select,
-    #moduleSelect,
-    #mixedExamCount {
-      background-color: #0f172a !important;
-      color: #f8fafc !important;
-      border: 1px solid #31507a !important;
-      border-radius: 8px;
-    }
-
-    select option,
-    #moduleSelect option,
-    #mixedExamCount option {
-      background-color: #0f172a !important;
-      color: #f8fafc !important;
-    }
-
-    select:focus,
-    #moduleSelect:focus,
-    #mixedExamCount:focus {
-      outline: 2px solid rgba(56, 189, 248, 0.45);
-      outline-offset: 2px;
-    }
-
-    .choice-btn {
-      background: #0f172a;
-      border: 1px solid #334155;
-      border-radius: 8px;
-      color: var(--quiz-text);
-    }
-
-    .choice-btn:hover:not(:disabled) {
-      background: #162235;
-      border-color: #38bdf8;
-    }
-
-    .choice-btn.correct {
-      background: rgba(16, 185, 129, 0.16) !important;
-      border-color: rgba(16, 185, 129, 0.9) !important;
-    }
-
-    .choice-btn.wrong {
-      background: rgba(239, 68, 68, 0.16) !important;
-      border-color: rgba(239, 68, 68, 0.9) !important;
-    }
-
-    .choice-btn.neutral-dim {
-      opacity: 0.58;
-    }
-
-    .result-good {
-      color: var(--quiz-success);
-    }
-
-    .result-bad {
-      color: var(--quiz-danger);
-    }
-
-    #progressBar {
-      background: linear-gradient(90deg, #38bdf8, #10b981);
-    }
-
-    #hintPanel,
-    #feedbackPanel {
-      background: rgba(15, 23, 42, 0.72);
-      border-color: var(--quiz-border);
-    }
-
-    .cheat-block {
-      background: rgba(15, 23, 42, 0.72);
-      border: 1px solid #334155;
-      border-radius: 8px;
-    }
-
-    .active-cheat-block {
-      background: rgba(56, 189, 248, 0.14) !important;
-      border-color: rgba(56, 189, 248, 0.7) !important;
-      box-shadow: 0 0 20px rgba(56, 189, 248, 0.2) !important;
-    }
-
-    .exam-tip {
-      border-left: 3px solid var(--quiz-warning);
-      background: rgba(245, 158, 11, 0.1);
-      padding: 0.85rem 1rem;
-      border-radius: 6px;
-    }
-
-    .small-note {
-      color: var(--quiz-muted);
-    }
-  `;
-
-  document.head.appendChild(style);
-}
 
 function loadVoices() {
   if (!("speechSynthesis" in window)) return [];
@@ -318,121 +124,6 @@ if ("speechSynthesis" in window) {
   loadVoices();
 }
 
-function stopSpeaking() {
-  speechRunId++;
-
-  const pendingTimeouts = [...speechTimeouts];
-  speechTimeouts = [];
-
-  pendingTimeouts.forEach((timeoutRecord) => {
-    clearTimeout(timeoutRecord.id);
-    timeoutRecord.resolve(false);
-  });
-
-  if ("speechSynthesis" in window) {
-    window.speechSynthesis.cancel();
-  }
-}
-
-function waitSpeechDelay(ms, runId) {
-  return new Promise((resolve) => {
-    if (!Number.isFinite(ms) || ms <= 0) {
-      resolve(runId === speechRunId);
-      return;
-    }
-
-    const timeoutRecord = {
-      id: null,
-      resolve: null
-    };
-
-    timeoutRecord.resolve = (result = true) => {
-      speechTimeouts = speechTimeouts.filter((record) => record !== timeoutRecord);
-      resolve(result);
-    };
-
-    timeoutRecord.id = setTimeout(() => {
-      timeoutRecord.resolve(runId === speechRunId);
-    }, ms);
-
-    speechTimeouts.push(timeoutRecord);
-  });
-}
-
-async function speakSpeechParts(parts, errorMessage, onEndCallback) {
-  if (!("speechSynthesis" in window)) {
-    alert("Your browser does not support text-to-speech.");
-    return false;
-  }
-
-  const speechParts = Array.isArray(parts) ? parts : [parts];
-  const hasTextToRead = speechParts.some(
-    (part) => typeof part === "string" && formatSpeechText(part)
-  );
-
-  if (!hasTextToRead) {
-    alert("There is nothing to read yet.");
-    return false;
-  }
-
-  stopSpeaking();
-
-  const runId = speechRunId;
-
-  await waitForVoices();
-  loadVoices();
-
-  const ready = await waitSpeechDelay(120, runId);
-  if (!ready || runId !== speechRunId) return false;
-
-  for (const part of speechParts) {
-    if (runId !== speechRunId) return false;
-
-    if (typeof part === "number") {
-      const stillActive = await waitSpeechDelay(part, runId);
-      if (!stillActive || runId !== speechRunId) return false;
-      continue;
-    }
-
-    const cleanText = formatSpeechText(part);
-    if (!cleanText) continue;
-
-    const completed = await new Promise((resolve) => {
-      const utterance = new SpeechSynthesisUtterance();
-      utterance.text = cleanText;
-      utterance.rate = 0.92;
-      utterance.pitch = 1;
-      utterance.volume = 1;
-
-      if (bestVoice) {
-        utterance.voice = bestVoice;
-      }
-
-      utterance.onend = () => resolve(true);
-
-      utterance.onerror = (event) => {
-        console.warn("Speech event:", event.error);
-
-        if (event.error !== "canceled" && event.error !== "interrupted") {
-          alert(errorMessage || "Speech failed in this browser.");
-        }
-
-        resolve(false);
-      };
-
-      window.speechSynthesis.speak(utterance);
-    });
-
-    if (!completed || runId !== speechRunId) return false;
-  }
-
-  if (typeof onEndCallback === "function") {
-    onEndCallback();
-  }
-
-  return true;
-}
-
 function formatSpeechText(text) {
   return String(text || "")
     .replace(/\s+/g, " ")
@@ -441,16 +132,16 @@ function formatSpeechText(text) {
     .replace(/\./g, ". ")
     .replace(/:/g, ": ")
     .replace(/;/g, "; ")
-    .replace(/\bAWS\b/g, "A W S")
-    .replace(/\bIAM\b/g, "I A M")
-    .replace(/\bMFA\b/g, "M F A")
-    .replace(/\bKMS\b/g, "K M S")
-    .replace(/\bACM\b/g, "A C M")
-    .replace(/\bWAF\b/g, "W A F")
-    .replace(/\bS3\b/g, "S 3")
-    .replace(/\bEC2\b/g, "E C 2")
-    .replace(/\bRDS\b/g, "R D S")
-    .replace(/\bDDoS\b/g, "D D O S")
+    .replace(/AWS/g, "A W S")
+    .replace(/IAM/g, "I A M")
+    .replace(/MFA/g, "M F A")
+    .replace(/KMS/g, "K M S")
+    .replace(/ACM/g, "A C M")
+    .replace(/WAF/g, "W A F")
+    .replace(/S3/g, "S 3")
+    .replace(/EC2/g, "E C 2")
+    .replace(/RDS/g, "R D S")
+    .replace(/DDoS/g, "D D O S")
     .trim();
 }
 
@@ -609,8 +300,6 @@ function hideAllMainCards() {
 }
 
 function resetQuizState() {
-  stopSpeaking();
-
   currentQuestionIndex = 0;
   score = 0;
   answeredCount = 0;
@@ -625,7 +314,7 @@ function resetQuizState() {
 
   if (nextBtn) {
     nextBtn.classList.add("hidden");
-    nextBtn.textContent = "Next Question";
+    nextBtn.textContent = "➡ Next Question";
     nextBtn.disabled = false;
   }
 
@@ -662,8 +351,8 @@ function updateTopBar() {
 
 function setTemporarySelectedStyle(button, isSelected) {
   if (isSelected) {
-    button.style.borderColor = "#38bdf8";
-    button.style.background = "rgba(56, 189, 248, 0.14)";
+    button.style.borderColor = "#60a5fa";
+    button.style.background = "#243041";
   } else {
     button.style.borderColor = "";
     button.style.background = "";
@@ -738,11 +427,11 @@ function renderQuestion() {
   if (nextBtn) {
     if (isMulti) {
       nextBtn.classList.remove("hidden");
-      nextBtn.textContent = "Submit Answer";
+      nextBtn.textContent = "✅ Submit Answer";
       nextBtn.disabled = true;
     } else {
       nextBtn.classList.add("hidden");
-      nextBtn.textContent = "Next Question";
+      nextBtn.textContent = "➡ Next Question";
       nextBtn.disabled = false;
     }
   }
@@ -810,9 +499,9 @@ function evaluateAnswer(selectedOriginalLetters) {
   if (feedbackTitle) {
     if (isCorrect) {
       score++;
-      feedbackTitle.innerHTML = `<span class="result-good">Correct</span>`;
+      feedbackTitle.innerHTML = `<span class="result-good">✅ Correct</span>`;
     } else {
-      feedbackTitle.innerHTML = `<span class="result-bad">Incorrect</span>`;
+      feedbackTitle.innerHTML = `<span class="result-bad">❌ Incorrect</span>`;
       missedQuestions.push(deepClone(q));
     }
   } else if (!isCorrect) {
@@ -849,11 +538,11 @@ function evaluateAnswer(selectedOriginalLetters) {
   if (nextBtn) {
     if (currentQuestionIndex + 1 < maxQuestions) {
       nextBtn.classList.remove("hidden");
-      nextBtn.textContent = "Next Question";
+      nextBtn.textContent = "➡ Next Question";
       nextBtn.disabled = false;
     } else {
       nextBtn.classList.remove("hidden");
-      nextBtn.textContent = "Finish Quiz";
+      nextBtn.textContent = "🏁 Finish Quiz";
       nextBtn.disabled = false;
     }
   }
@@ -880,7 +569,6 @@ function goToNextQuestion() {
 }
 
 function showFinalScreen() {
-  stopSpeaking();
   hideAllMainCards();
   if (finalCard) finalCard.classList.remove("hidden");
   if (progressBar) progressBar.style.width = "100%";
@@ -896,13 +584,13 @@ function showFinalScreen() {
   const ratio = totalQuestions ? score / totalQuestions : 0;
 
   if (ratio === 1) {
-    message = "Perfect run. You are ready for harder questions.";
+    message = "Monster run. You smoked this quiz.";
   } else if (ratio >= 0.8) {
-    message = "Strong score. Review the misses, then run it again.";
+    message = "Strong job. You actually understand the material.";
   } else if (ratio >= 0.6) {
-    message = "Good foundation. Focus on the explanations before retrying.";
+    message = "Decent base, but you need another pass before trusting it.";
   } else {
-    message = "Needs another pass. Start with missed questions and rebuild from there.";
+    message = "No sugar-coating: you need another round.";
   }
 
   if (finalMessage) finalMessage.textContent = message;
@@ -961,7 +649,51 @@ function startMissedReviewMode() {
 }
 
 async function speakText(text, errorMessage, onEndCallback) {
-  return speakSpeechParts([text], errorMessage, onEndCallback);
+  if (!("speechSynthesis" in window)) {
+    alert("Your browser does not support text-to-speech.");
+    return;
+  }
+
+  const cleanText = formatSpeechText(text);
+  if (!cleanText) {
+    alert("There is nothing to read yet.");
+    return;
+  }
+
+  await waitForVoices();
+  loadVoices();
+
+  const utterance = new SpeechSynthesisUtterance();
+  utterance.text = cleanText;
+  utterance.rate = 0.82;
+  utterance.pitch = 0.95;
+  utterance.volume = 1;
+
+  if (bestVoice) {
+    utterance.voice = bestVoice;
+  }
+
+  utterance.onend = () => {
+    if (typeof onEndCallback === "function") {
+      onEndCallback();
+    }
+  };
+
+  utterance.onerror = (event) => {
+    console.warn("Speech event:", event.error);
+
+    if (event.error === "canceled" || event.error === "interrupted") {
+      return;
+    }
+
+    alert(errorMessage || "Speech failed in this browser.");
+  };
+
+  window.speechSynthesis.cancel();
+
+  setTimeout(() => {
+    window.speechSynthesis.speak(utterance);
+  }, 180);
 }
 
 async function speakCurrentQuestion() {
@@ -972,23 +704,16 @@ async function speakCurrentQuestion() {
   const correctAnswers = getCorrectAnswersArray(q);
   const selectInstruction =
     correctAnswers.length > 1
-      ? `Select ${correctAnswers.length} answers.`
-      : "Choose the best answer.";
+      ? `Select ${correctAnswers.length} answers. Pause. `
+      : "Choose the best answer. Pause. ";
 
-  const speechParts = [
-    `Question ${currentQuestionIndex + 1}.`,
-    SPEECH_PAUSES.short,
-    q.question,
-    SPEECH_PAUSES.long,
-    selectInstruction,
-    SPEECH_PAUSES.long,
-    ...q.displayChoices.flatMap((choice) => [
-      `Option ${choice.displayLetter}. ${choice.text}.`,
-      SPEECH_PAUSES.medium
-    ])
-  ];
+  const speechText =
+    `Question ${currentQuestionIndex + 1}. ${q.question}. Pause. ${selectInstruction}` +
+    q.displayChoices
+      .map((choice) => `Option ${choice.displayLetter}. ${choice.text}. Pause.`)
+      .join(" ");
 
-  await speakSpeechParts(speechParts, "Question speech failed in this browser.");
+  await speakText(speechText, "Question speech failed in this browser.");
 }
 
 function buildCheatSheetPlaylist(data) {
@@ -1006,14 +731,15 @@ function buildCheatSheetPlaylist(data) {
     playlist.push({
       index: index,
       title: title,
-      parts: [
+      text: [
         `Section ${index + 1}.`,
-        SPEECH_PAUSES.short,
         title,
-        SPEECH_PAUSES.long,
-        ...points.flatMap((point) => [point, SPEECH_PAUSES.medium]),
-        ...(tip ? [SPEECH_PAUSES.long, tip] : [])
+        "Pause.",
+        ...points.map((point) => `${point}. Pause.`),
+        tip
       ]
+        .filter(Boolean)
+        .join(" ")
     });
   });
 
@@ -1036,9 +762,9 @@ function highlightCheatSheetBlock(index) {
   if (!block) return;
 
   block.classList.add("active-cheat-block");
-  block.style.background = "rgba(56,189,248,0.14)";
-  block.style.borderColor = "rgba(56,189,248,0.7)";
-  block.style.boxShadow = "0 0 20px rgba(56,189,248,0.2)";
+  block.style.background = "rgba(59,130,246,0.14)";
+  block.style.borderColor = "rgba(96,165,250,0.65)";
+  block.style.boxShadow = "0 0 18px rgba(59,130,246,0.22)";
   block.scrollIntoView({ behavior: "smooth", block: "center" });
 }
 
@@ -1066,11 +792,13 @@ async function speakCurrentCheatSheetItem() {
   highlightCheatSheetBlock(item.index);
   updateCheatSheetNowPlaying();
 
-  await speakSpeechParts(item.parts, "Cheat sheet speech failed in this browser.");
+  await speakText(item.text, "Cheat sheet speech failed in this browser.");
 }
 
 function stopCheatSheetReading() {
-  stopSpeaking();
+  if ("speechSynthesis" in window) {
+    window.speechSynthesis.cancel();
+  }
 }
 
 async function nextCheatSheetItem() {
@@ -1162,10 +890,10 @@ function renderCheatSheetSections(data) {
   if (!data || !Array.isArray(data.sections) || data.sections.length === 0) {
     cheatSheetContent.innerHTML = `
       <div class="actions">
-        <button class="action-btn gray-btn" id="readCheatSheetBtn">Read Current</button>
+        <button class="action-btn gray-btn" id="readCheatSheetBtn">🔊 Read Current</button>
       </div>
       <p class="small-note" id="cheatSheetNowPlaying">No notes loaded.</p>
-      <h3>Cheat Sheet Not Added Yet</h3>
+      <h3>⚠ Cheat Sheet Not Added Yet</h3>
       <p>This module does not have study notes yet.</p>
       <p>We can build it next.</p>
     `;
@@ -1178,10 +906,10 @@ function renderCheatSheetSections(data) {
 
   cheatSheetContent.innerHTML = `
     <div class="actions">
-      <button class="action-btn gray-btn" id="prevCheatSheetBtn">Previous</button>
-      <button class="action-btn green-btn" id="readCheatSheetBtn">Read Current</button>
-      <button class="action-btn purple-btn" id="nextCheatSheetBtn">Next</button>
-      <button class="action-btn orange-btn" id="stopCheatSheetBtn">Stop</button>
+      <button class="action-btn gray-btn" id="prevCheatSheetBtn">⏮ Previous</button>
+      <button class="action-btn green-btn" id="readCheatSheetBtn">🔊 Read Current</button>
+      <button class="action-btn purple-btn" id="nextCheatSheetBtn">⏭ Next</button>
+      <button class="action-btn orange-btn" id="stopCheatSheetBtn">⏹ Stop</button>
     </div>
     <p class="small-note" id="cheatSheetNowPlaying"></p>
     ${data.sections
@@ -1234,7 +962,7 @@ async function loadCheatSheet() {
     currentCheatSheetData = null;
     cheatSheetPlaylist = [];
     cheatSheetContent.innerHTML = `
-      <h3>Cheat Sheet Not Added Yet</h3>
+      <h3>⚠ Cheat Sheet Not Added Yet</h3>
       <p>This module path is not valid.</p>
     `;
     return;
@@ -1251,10 +979,10 @@ async function loadCheatSheet() {
     cheatSheetPlaylist = [];
     cheatSheetContent.innerHTML = `
       <div class="actions">
-        <button class="action-btn gray-btn" id="readCheatSheetBtn">Read Current</button>
+        <button class="action-btn gray-btn" id="readCheatSheetBtn">🔊 Read Current</button>
       </div>
       <p class="small-note" id="cheatSheetNowPlaying">No notes loaded.</p>
-      <h3>Cheat Sheet Not Added Yet</h3>
+      <h3>⚠ Cheat Sheet Not Added Yet</h3>
       <p>We looked for:</p>
       <p><code>${escapeHtml(notesPath)}</code></p>
       <p>Create that file when you're ready and this screen will load it automatically.</p>
@@ -1262,7 +990,6 @@ async function loadCheatSheet() {
 
     const readCheatSheetBtn = document.getElementById("readCheatSheetBtn");
     if (readCheatSheetBtn) readCheatSheetBtn.addEventListener("click", speakCurrentCheatSheetItem);
-    updateCheatSheetNowPlaying();
   }
 }
 
@@ -1327,9 +1054,6 @@ if (studyCheatSheetBtn) studyCheatSheetBtn.addEventListener("click", showCheatSh
 if (backToQuizBtn) backToQuizBtn.addEventListener("click", backToQuiz);
 
 window.addEventListener("DOMContentLoaded", async () => {
-  applyVisualPolish();
-  applyInterfaceCopy();
-
   loadVoices();
   await populateModuleSelectFromManifest();
 
@@ -1337,4 +1061,3 @@ window.addEventListener("DOMContentLoaded", async () => {
     await loadModuleQuiz();
   }
 });
-```
