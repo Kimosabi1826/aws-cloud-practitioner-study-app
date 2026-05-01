@@ -13,8 +13,6 @@ let maxQuestions = 0;
 let bestVoice = null;
 let selectedAnswers = [];
 let currentCheatSheetData = null;
-let cheatSheetPlaylist = [];
-let currentCheatSheetIndex = 0;
 
 const MODULES_MANIFEST_PATH = "questions/modules.json";
 
@@ -57,9 +55,11 @@ const finalCorrectCount = document.getElementById("finalCorrectCount");
 const finalMissedCount = document.getElementById("finalMissedCount");
 const finalModeText = document.getElementById("finalModeText");
 
+/* Optional newer UI elements */
 const questionTypeBox = document.getElementById("questionTypeBox");
 const selectionHelpText = document.getElementById("selectionHelpText");
 
+/* Cheat sheet UI */
 const studyCheatSheetBtn = document.getElementById("studyCheatSheetBtn");
 const cheatSheetCard = document.getElementById("cheatSheetCard");
 const cheatSheetModuleTitle = document.getElementById("cheatSheetModuleTitle");
@@ -73,9 +73,8 @@ function loadVoices() {
   const voices = window.speechSynthesis.getVoices();
 
   bestVoice =
-    voices.find((v) => v.name.includes("Microsoft Jenny")) ||
     voices.find((v) => v.name.includes("Microsoft Aria")) ||
-    voices.find((v) => v.name.includes("Google US English")) ||
+    voices.find((v) => v.name.includes("Microsoft Guy")) ||
     voices.find((v) => v.name.includes("Google")) ||
     voices.find((v) => v.lang && v.lang.toLowerCase().includes("en-us")) ||
     voices.find((v) => v.lang && v.lang.toLowerCase().startsWith("en")) ||
@@ -122,27 +121,6 @@ function waitForVoices(timeoutMs = 1500) {
 if ("speechSynthesis" in window) {
   window.speechSynthesis.onvoiceschanged = loadVoices;
   loadVoices();
-}
-
-function formatSpeechText(text) {
-  return String(text || "")
-    .replace(/\s+/g, " ")
-    .replace(/=/g, " means ")
-    .replace(/\?/g, "? ")
-    .replace(/\./g, ". ")
-    .replace(/:/g, ": ")
-    .replace(/;/g, "; ")
-    .replace(/AWS/g, "A W S")
-    .replace(/IAM/g, "I A M")
-    .replace(/MFA/g, "M F A")
-    .replace(/KMS/g, "K M S")
-    .replace(/ACM/g, "A C M")
-    .replace(/WAF/g, "W A F")
-    .replace(/S3/g, "S 3")
-    .replace(/EC2/g, "E C 2")
-    .replace(/RDS/g, "R D S")
-    .replace(/DDoS/g, "D D O S")
-    .trim();
 }
 
 function deepClone(obj) {
@@ -311,7 +289,6 @@ function resetQuizState() {
   if (quizCard) quizCard.classList.remove("hidden");
   if (feedbackPanel) feedbackPanel.classList.add("hidden");
   if (hintPanel) hintPanel.classList.add("hidden");
-
   if (nextBtn) {
     nextBtn.classList.add("hidden");
     nextBtn.textContent = "➡ Next Question";
@@ -325,28 +302,32 @@ function resetQuizState() {
 function updateTopBar() {
   const totalQuestions = maxQuestions || questions.length || 0;
 
-  if (scoreBox) scoreBox.textContent = `Score: ${score} / ${answeredCount}`;
+  if (scoreBox) {
+    scoreBox.textContent = `Score: ${score} / ${answeredCount}`;
+  }
 
   if (questionCounter) {
     if (currentMode === "Study Mode") {
-      questionCounter.textContent = cheatSheetPlaylist.length
-        ? `Note ${currentCheatSheetIndex + 1} / ${cheatSheetPlaylist.length}`
-        : "Question 0 / 0";
+      questionCounter.textContent = "Question 0 / 0";
     } else {
       questionCounter.textContent = `Question ${totalQuestions ? currentQuestionIndex + 1 : 0} / ${totalQuestions}`;
     }
   }
 
-  if (modeBox) modeBox.textContent = `Mode: ${currentMode}`;
+  if (modeBox) {
+    modeBox.textContent = `Mode: ${currentMode}`;
+  }
 
   let progressPercent = 0;
-  if (currentMode === "Study Mode" && cheatSheetPlaylist.length > 0) {
-    progressPercent = ((currentCheatSheetIndex + 1) / cheatSheetPlaylist.length) * 100;
+  if (currentMode === "Study Mode") {
+    progressPercent = 0;
   } else if (totalQuestions > 0) {
     progressPercent = (currentQuestionIndex / totalQuestions) * 100;
   }
 
-  if (progressBar) progressBar.style.width = `${progressPercent}%`;
+  if (progressBar) {
+    progressBar.style.width = `${progressPercent}%`;
+  }
 }
 
 function setTemporarySelectedStyle(button, isSelected) {
@@ -363,18 +344,28 @@ function updateQuestionTypeUi(questionObj) {
   if (!questionTypeBox && !selectionHelpText) return;
 
   if (currentMode === "Study Mode") {
-    if (questionTypeBox) questionTypeBox.textContent = "Type: Cheat Sheet";
-    if (selectionHelpText) selectionHelpText.textContent = "Use Previous / Next to move through notes.";
+    if (questionTypeBox) {
+      questionTypeBox.textContent = "Type: Cheat Sheet";
+    }
+    if (selectionHelpText) {
+      selectionHelpText.textContent = "Study notes for the selected module.";
+    }
     return;
   }
 
   const correctAnswers = getCorrectAnswersArray(questionObj);
 
   if (correctAnswers.length === 1) {
-    if (questionTypeBox) questionTypeBox.textContent = "Type: Single Answer";
-    if (selectionHelpText) selectionHelpText.textContent = "Choose the best answer.";
+    if (questionTypeBox) {
+      questionTypeBox.textContent = "Type: Single Answer";
+    }
+    if (selectionHelpText) {
+      selectionHelpText.textContent = "Choose the best answer.";
+    }
   } else {
-    if (questionTypeBox) questionTypeBox.textContent = `Type: Select ${correctAnswers.length}`;
+    if (questionTypeBox) {
+      questionTypeBox.textContent = `Type: Select ${correctAnswers.length}`;
+    }
     if (selectionHelpText) {
       selectionHelpText.textContent = `Select exactly ${correctAnswers.length} answers, then press Submit Answer.`;
     }
@@ -401,13 +392,22 @@ function renderQuestion() {
   questionLocked = false;
   selectedAnswers = [];
 
-  if (questionNumber) questionNumber.textContent = `Question ${currentQuestionIndex + 1}`;
-  if (questionText) questionText.textContent = q.question;
-  if (choicesContainer) choicesContainer.innerHTML = "";
+  if (questionNumber) {
+    questionNumber.textContent = `Question ${currentQuestionIndex + 1}`;
+  }
+  if (questionText) {
+    questionText.textContent = q.question;
+  }
+
+  if (choicesContainer) {
+    choicesContainer.innerHTML = "";
+  }
   if (hintPanel) hintPanel.classList.add("hidden");
   if (feedbackPanel) feedbackPanel.classList.add("hidden");
-  if (hintText) hintText.textContent = q.tip;
 
+  if (hintText) {
+    hintText.textContent = q.tip;
+  }
   updateQuestionTypeUi(q);
 
   q.displayChoices.forEach((choice) => {
@@ -421,7 +421,9 @@ function renderQuestion() {
       btn.addEventListener("click", () => handleSingleAnswer(choice.originalLetter));
     }
 
-    if (choicesContainer) choicesContainer.appendChild(btn);
+    if (choicesContainer) {
+      choicesContainer.appendChild(btn);
+    }
   });
 
   if (nextBtn) {
@@ -454,7 +456,9 @@ function toggleMultiSelect(originalLetter, button) {
     setTemporarySelectedStyle(button, true);
   }
 
-  if (nextBtn) nextBtn.disabled = selectedAnswers.length !== requiredSelections;
+  if (nextBtn) {
+    nextBtn.disabled = selectedAnswers.length !== requiredSelections;
+  }
 }
 
 function handleSingleAnswer(selectedOriginalLetter) {
@@ -477,7 +481,9 @@ function evaluateAnswer(selectedOriginalLetters) {
     clearButtonState(btn);
     btn.disabled = true;
 
-    if (correctAnswers.includes(choice.originalLetter)) btn.classList.add("correct");
+    if (correctAnswers.includes(choice.originalLetter)) {
+      btn.classList.add("correct");
+    }
 
     if (
       selectedOriginalLetters.includes(choice.originalLetter) &&
@@ -533,7 +539,9 @@ function evaluateAnswer(selectedOriginalLetters) {
     });
   }
 
-  if (feedbackPanel) feedbackPanel.classList.remove("hidden");
+  if (feedbackPanel) {
+    feedbackPanel.classList.remove("hidden");
+  }
 
   if (nextBtn) {
     if (currentQuestionIndex + 1 < maxQuestions) {
@@ -570,15 +578,27 @@ function goToNextQuestion() {
 
 function showFinalScreen() {
   hideAllMainCards();
-  if (finalCard) finalCard.classList.remove("hidden");
-  if (progressBar) progressBar.style.width = "100%";
+  if (finalCard) {
+    finalCard.classList.remove("hidden");
+  }
+  if (progressBar) {
+    progressBar.style.width = "100%";
+  }
 
   const totalQuestions = maxQuestions || questions.length || 0;
 
-  if (finalScore) finalScore.textContent = `Final Score: ${score} / ${totalQuestions}`;
-  if (finalCorrectCount) finalCorrectCount.textContent = `Correct: ${score}`;
-  if (finalMissedCount) finalMissedCount.textContent = `Missed: ${missedQuestions.length}`;
-  if (finalModeText) finalModeText.textContent = `Mode: ${currentMode}`;
+  if (finalScore) {
+    finalScore.textContent = `Final Score: ${score} / ${totalQuestions}`;
+  }
+  if (finalCorrectCount) {
+    finalCorrectCount.textContent = `Correct: ${score}`;
+  }
+  if (finalMissedCount) {
+    finalMissedCount.textContent = `Missed: ${missedQuestions.length}`;
+  }
+  if (finalModeText) {
+    finalModeText.textContent = `Mode: ${currentMode}`;
+  }
 
   let message = "";
   const ratio = totalQuestions ? score / totalQuestions : 0;
@@ -593,7 +613,9 @@ function showFinalScreen() {
     message = "No sugar-coating: you need another round.";
   }
 
-  if (finalMessage) finalMessage.textContent = message;
+  if (finalMessage) {
+    finalMessage.textContent = message;
+  }
 
   if (missedQuestions.length > 0) {
     if (reviewMissedBtn) reviewMissedBtn.classList.remove("hidden");
@@ -648,13 +670,13 @@ function startMissedReviewMode() {
   renderQuestion();
 }
 
-async function speakText(text, errorMessage, onEndCallback) {
+async function speakText(text, errorMessage) {
   if (!("speechSynthesis" in window)) {
     alert("Your browser does not support text-to-speech.");
     return;
   }
 
-  const cleanText = formatSpeechText(text);
+  const cleanText = String(text || "").trim();
   if (!cleanText) {
     alert("There is nothing to read yet.");
     return;
@@ -665,35 +687,21 @@ async function speakText(text, errorMessage, onEndCallback) {
 
   const utterance = new SpeechSynthesisUtterance();
   utterance.text = cleanText;
-  utterance.rate = 0.82;
-  utterance.pitch = 0.95;
+  utterance.rate = 0.92;
+  utterance.pitch = 1.0;
   utterance.volume = 1;
 
   if (bestVoice) {
     utterance.voice = bestVoice;
   }
 
-  utterance.onend = () => {
-    if (typeof onEndCallback === "function") {
-      onEndCallback();
-    }
-  };
-
   utterance.onerror = (event) => {
-    console.warn("Speech event:", event.error);
-
-    if (event.error === "canceled" || event.error === "interrupted") {
-      return;
-    }
-
-    alert(errorMessage || "Speech failed in this browser.");
+    console.error("Speech error:", event);
+    alert(errorMessage || "Speech failed in this browser. Try Microsoft Edge.");
   };
 
   window.speechSynthesis.cancel();
-
-  setTimeout(() => {
-    window.speechSynthesis.speak(utterance);
-  }, 180);
+  window.speechSynthesis.speak(utterance);
 }
 
 async function speakCurrentQuestion() {
@@ -704,123 +712,56 @@ async function speakCurrentQuestion() {
   const correctAnswers = getCorrectAnswersArray(q);
   const selectInstruction =
     correctAnswers.length > 1
-      ? `Select ${correctAnswers.length} answers. Pause. `
-      : "Choose the best answer. Pause. ";
+      ? `Select ${correctAnswers.length} answers. `
+      : "Choose the best answer. ";
 
   const speechText =
-    `Question ${currentQuestionIndex + 1}. ${q.question}. Pause. ${selectInstruction}` +
+    `Question ${currentQuestionIndex + 1}. ${q.question}. ${selectInstruction}` +
     q.displayChoices
-      .map((choice) => `Option ${choice.displayLetter}. ${choice.text}. Pause.`)
+      .map((choice) => `Option ${choice.displayLetter}. ${choice.text}.`)
       .join(" ");
 
-  await speakText(speechText, "Question speech failed in this browser.");
+  await speakText(speechText, "Question speech failed in this browser. Try Microsoft Edge.");
 }
 
-function buildCheatSheetPlaylist(data) {
-  const playlist = [];
+function buildCheatSheetSpeechText(data) {
+  const selectedLabel =
+    moduleSelect?.options[moduleSelect.selectedIndex]?.textContent || "Selected module";
 
-  if (!data || !Array.isArray(data.sections)) {
-    return playlist;
+  if (!data || !Array.isArray(data.sections) || data.sections.length === 0) {
+    return `${selectedLabel}. Cheat sheet has not been added yet.`;
   }
 
-  data.sections.forEach((section, index) => {
-    const title = section.title || `Section ${index + 1}`;
-    const points = Array.isArray(section.points) ? section.points : [];
-    const tip = section.exam_tip ? `Exam tip. ${section.exam_tip}` : "";
+  const parts = [`${selectedLabel}. Study Cheat Sheet.`];
 
-    playlist.push({
-      index: index,
-      title: title,
-      text: [
-        `Section ${index + 1}.`,
-        title,
-        "Pause.",
-        ...points.map((point) => `${point}. Pause.`),
-        tip
-      ]
-        .filter(Boolean)
-        .join(" ")
-    });
+  data.sections.forEach((section, sectionIndex) => {
+    parts.push(`Section ${sectionIndex + 1}. ${section.title || "Section"}.`);
+
+    if (Array.isArray(section.points)) {
+      section.points.forEach((point) => {
+        parts.push(point);
+      });
+    }
+
+    if (section.exam_tip) {
+      parts.push(`Exam tip. ${section.exam_tip}`);
+    }
   });
 
-  return playlist;
+  return parts.join(" ");
 }
 
-function clearCheatSheetHighlight() {
-  document.querySelectorAll(".cheat-block").forEach((block) => {
-    block.classList.remove("active-cheat-block");
-    block.style.background = "";
-    block.style.borderColor = "";
-    block.style.boxShadow = "";
-  });
-}
-
-function highlightCheatSheetBlock(index) {
-  clearCheatSheetHighlight();
-
-  const block = document.querySelector(`[data-cheat-index="${index}"]`);
-  if (!block) return;
-
-  block.classList.add("active-cheat-block");
-  block.style.background = "rgba(59,130,246,0.14)";
-  block.style.borderColor = "rgba(96,165,250,0.65)";
-  block.style.boxShadow = "0 0 18px rgba(59,130,246,0.22)";
-  block.scrollIntoView({ behavior: "smooth", block: "center" });
-}
-
-function updateCheatSheetNowPlaying() {
-  const nowPlaying = document.getElementById("cheatSheetNowPlaying");
-  if (!nowPlaying) return;
-
-  if (!cheatSheetPlaylist.length) {
-    nowPlaying.textContent = "No notes loaded.";
-    return;
-  }
-
-  const item = cheatSheetPlaylist[currentCheatSheetIndex];
-  nowPlaying.textContent = `Now Reading: ${currentCheatSheetIndex + 1}/${cheatSheetPlaylist.length} - ${item.title}`;
-  updateTopBar();
-}
-
-async function speakCurrentCheatSheetItem() {
-  if (!cheatSheetPlaylist.length) {
-    await speakText("No cheat sheet notes loaded yet.", "Cheat sheet speech failed in this browser.");
-    return;
-  }
-
-  const item = cheatSheetPlaylist[currentCheatSheetIndex];
-  highlightCheatSheetBlock(item.index);
-  updateCheatSheetNowPlaying();
-
-  await speakText(item.text, "Cheat sheet speech failed in this browser.");
-}
-
-function stopCheatSheetReading() {
-  if ("speechSynthesis" in window) {
-    window.speechSynthesis.cancel();
-  }
-}
-
-async function nextCheatSheetItem() {
-  if (!cheatSheetPlaylist.length) return;
-
-  stopCheatSheetReading();
-  currentCheatSheetIndex = Math.min(currentCheatSheetIndex + 1, cheatSheetPlaylist.length - 1);
-  await speakCurrentCheatSheetItem();
-}
-
-async function previousCheatSheetItem() {
-  if (!cheatSheetPlaylist.length) return;
-
-  stopCheatSheetReading();
-  currentCheatSheetIndex = Math.max(currentCheatSheetIndex - 1, 0);
-  await speakCurrentCheatSheetItem();
+async function speakCurrentCheatSheet() {
+  const speechText = buildCheatSheetSpeechText(currentCheatSheetData);
+  await speakText(speechText, "Cheat sheet speech failed in this browser. Try Microsoft Edge.");
 }
 
 async function loadModuleQuiz() {
   try {
     const filePath = moduleSelect.value;
-    if (!filePath) throw new Error("No module selected.");
+    if (!filePath) {
+      throw new Error("No module selected.");
+    }
 
     currentSourceFiles = [filePath];
     currentMode = "Module Quiz";
@@ -841,7 +782,9 @@ async function loadModuleQuiz() {
 async function startMixedExam() {
   try {
     const filePath = moduleSelect.value;
-    if (!filePath) throw new Error("No module selected.");
+    if (!filePath) {
+      throw new Error("No module selected.");
+    }
 
     currentSourceFiles = [filePath];
     currentMode = "Final Mixed Exam";
@@ -852,7 +795,9 @@ async function startMixedExam() {
       combinedQuestions = combinedQuestions.concat(fileQuestions);
     }
 
-    if (combinedQuestions.length === 0) throw new Error("No questions found for mixed exam.");
+    if (combinedQuestions.length === 0) {
+      throw new Error("No questions found for mixed exam.");
+    }
 
     combinedQuestions = shuffleArray(combinedQuestions);
 
@@ -871,6 +816,10 @@ async function startMixedExam() {
   }
 }
 
+/* ==============================
+   Cheat Sheet Mode
+============================== */
+
 function escapeHtml(value) {
   return String(value)
     .replaceAll("&", "&amp;")
@@ -884,36 +833,31 @@ function renderCheatSheetSections(data) {
   if (!cheatSheetContent) return;
 
   currentCheatSheetData = data;
-  cheatSheetPlaylist = buildCheatSheetPlaylist(data);
-  currentCheatSheetIndex = 0;
 
   if (!data || !Array.isArray(data.sections) || data.sections.length === 0) {
     cheatSheetContent.innerHTML = `
       <div class="actions">
-        <button class="action-btn gray-btn" id="readCheatSheetBtn">🔊 Read Current</button>
+        <button class="action-btn gray-btn" id="readCheatSheetBtn">🔊 Read Cheat Sheet</button>
       </div>
-      <p class="small-note" id="cheatSheetNowPlaying">No notes loaded.</p>
       <h3>⚠ Cheat Sheet Not Added Yet</h3>
       <p>This module does not have study notes yet.</p>
       <p>We can build it next.</p>
     `;
 
     const readCheatSheetBtn = document.getElementById("readCheatSheetBtn");
-    if (readCheatSheetBtn) readCheatSheetBtn.addEventListener("click", speakCurrentCheatSheetItem);
-    updateCheatSheetNowPlaying();
+    if (readCheatSheetBtn) {
+      readCheatSheetBtn.addEventListener("click", speakCurrentCheatSheet);
+    }
     return;
   }
 
   cheatSheetContent.innerHTML = `
     <div class="actions">
-      <button class="action-btn gray-btn" id="prevCheatSheetBtn">⏮ Previous</button>
-      <button class="action-btn green-btn" id="readCheatSheetBtn">🔊 Read Current</button>
-      <button class="action-btn purple-btn" id="nextCheatSheetBtn">⏭ Next</button>
-      <button class="action-btn orange-btn" id="stopCheatSheetBtn">⏹ Stop</button>
+      <button class="action-btn gray-btn" id="readCheatSheetBtn">🔊 Read Cheat Sheet</button>
+      <button class="action-btn orange-btn" id="stopCheatSheetBtn">⏹ Stop Reading</button>
     </div>
-    <p class="small-note" id="cheatSheetNowPlaying"></p>
     ${data.sections
-      .map((section, index) => {
+      .map((section) => {
         const safeTitle = escapeHtml(section.title || "Section");
         const points = Array.isArray(section.points) ? section.points : [];
         const examTip = section.exam_tip
@@ -921,7 +865,7 @@ function renderCheatSheetSections(data) {
           : "";
 
         return `
-          <div class="cheat-block" data-cheat-index="${index}">
+          <div class="cheat-block">
             <h3>${safeTitle}</h3>
             <ul>
               ${points.map((point) => `<li>${escapeHtml(point)}</li>`).join("")}
@@ -935,16 +879,16 @@ function renderCheatSheetSections(data) {
 
   const readCheatSheetBtn = document.getElementById("readCheatSheetBtn");
   const stopCheatSheetBtn = document.getElementById("stopCheatSheetBtn");
-  const nextCheatSheetBtn = document.getElementById("nextCheatSheetBtn");
-  const prevCheatSheetBtn = document.getElementById("prevCheatSheetBtn");
 
-  if (readCheatSheetBtn) readCheatSheetBtn.addEventListener("click", speakCurrentCheatSheetItem);
-  if (stopCheatSheetBtn) stopCheatSheetBtn.addEventListener("click", stopCheatSheetReading);
-  if (nextCheatSheetBtn) nextCheatSheetBtn.addEventListener("click", nextCheatSheetItem);
-  if (prevCheatSheetBtn) prevCheatSheetBtn.addEventListener("click", previousCheatSheetItem);
+  if (readCheatSheetBtn) {
+    readCheatSheetBtn.addEventListener("click", speakCurrentCheatSheet);
+  }
 
-  highlightCheatSheetBlock(currentCheatSheetIndex);
-  updateCheatSheetNowPlaying();
+  if (stopCheatSheetBtn && "speechSynthesis" in window) {
+    stopCheatSheetBtn.addEventListener("click", () => {
+      window.speechSynthesis.cancel();
+    });
+  }
 }
 
 async function loadCheatSheet() {
@@ -960,7 +904,6 @@ async function loadCheatSheet() {
 
   if (!filePath.endsWith(".json")) {
     currentCheatSheetData = null;
-    cheatSheetPlaylist = [];
     cheatSheetContent.innerHTML = `
       <h3>⚠ Cheat Sheet Not Added Yet</h3>
       <p>This module path is not valid.</p>
@@ -976,12 +919,10 @@ async function loadCheatSheet() {
   } catch (error) {
     console.warn("Cheat sheet load skipped or failed:", error.message);
     currentCheatSheetData = null;
-    cheatSheetPlaylist = [];
     cheatSheetContent.innerHTML = `
       <div class="actions">
-        <button class="action-btn gray-btn" id="readCheatSheetBtn">🔊 Read Current</button>
+        <button class="action-btn gray-btn" id="readCheatSheetBtn">🔊 Read Cheat Sheet</button>
       </div>
-      <p class="small-note" id="cheatSheetNowPlaying">No notes loaded.</p>
       <h3>⚠ Cheat Sheet Not Added Yet</h3>
       <p>We looked for:</p>
       <p><code>${escapeHtml(notesPath)}</code></p>
@@ -989,7 +930,9 @@ async function loadCheatSheet() {
     `;
 
     const readCheatSheetBtn = document.getElementById("readCheatSheetBtn");
-    if (readCheatSheetBtn) readCheatSheetBtn.addEventListener("click", speakCurrentCheatSheetItem);
+    if (readCheatSheetBtn) {
+      readCheatSheetBtn.addEventListener("click", speakCurrentCheatSheet);
+    }
   }
 }
 
@@ -997,7 +940,9 @@ async function showCheatSheet() {
   currentMode = "Study Mode";
   hideAllMainCards();
 
-  if (cheatSheetCard) cheatSheetCard.classList.remove("hidden");
+  if (cheatSheetCard) {
+    cheatSheetCard.classList.remove("hidden");
+  }
 
   updateQuestionTypeUi({ correct: ["A", "B"] });
   updateTopBar();
@@ -1005,13 +950,16 @@ async function showCheatSheet() {
 }
 
 function backToQuiz() {
-  stopCheatSheetReading();
-  clearCheatSheetHighlight();
+  if ("speechSynthesis" in window) {
+    window.speechSynthesis.cancel();
+  }
 
   currentMode = "Module Quiz";
   hideAllMainCards();
 
-  if (quizCard) quizCard.classList.remove("hidden");
+  if (quizCard) {
+    quizCard.classList.remove("hidden");
+  }
 
   if (questions.length > 0) {
     updateQuestionTypeUi(questions[currentQuestionIndex] || questions[0]);
@@ -1023,12 +971,11 @@ function backToQuiz() {
 function showLoadError(error) {
   alert(
     "Could not load question file.\n\n" +
-      "If you opened index.html directly by double-clicking it, some browsers block fetch for local JSON files.\n\n" +
-      "Best fix: run a local server.\n\n" +
-      "Python example:\npython -m http.server 8000\n\n" +
-      "Then open:\nhttp://localhost:8000\n\n" +
-      "Error: " +
-      error.message
+    "If you opened index.html directly by double-clicking it, some browsers block fetch for local JSON files.\n\n" +
+    "Best fix: run a local server.\n\n" +
+    "Python example:\npython -m http.server 8000\n\n" +
+    "Then open:\nhttp://localhost:8000\n\n" +
+    "Error: " + error.message
   );
   console.error(error);
 }
@@ -1050,8 +997,13 @@ if (finalReviewMissedBtn) finalReviewMissedBtn.addEventListener("click", startMi
 if (loadModuleBtn) loadModuleBtn.addEventListener("click", loadModuleQuiz);
 if (startMixedExamBtn) startMixedExamBtn.addEventListener("click", startMixedExam);
 
-if (studyCheatSheetBtn) studyCheatSheetBtn.addEventListener("click", showCheatSheet);
-if (backToQuizBtn) backToQuizBtn.addEventListener("click", backToQuiz);
+if (studyCheatSheetBtn) {
+  studyCheatSheetBtn.addEventListener("click", showCheatSheet);
+}
+
+if (backToQuizBtn) {
+  backToQuizBtn.addEventListener("click", backToQuiz);
+}
 
 window.addEventListener("DOMContentLoaded", async () => {
   loadVoices();
