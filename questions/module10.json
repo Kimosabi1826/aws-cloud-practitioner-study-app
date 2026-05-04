@@ -1,0 +1,513 @@
+[
+  {
+    "question": "What is the purpose of an AWS Control Tower landing zone?",
+    "choices": {
+      "A": "To create a logically isolated virtual network for launching AWS resources",
+      "B": "To provide an enterprise-wide multi-account environment based on security and compliance best practices",
+      "C": "To filter inbound and outbound traffic for Amazon EC2 instances",
+      "D": "To store compliance reports from third-party auditors"
+    },
+    "correct": "B",
+    "tip": "Think enterprise-wide governance container.",
+    "explanations": {
+      "A": "Incorrect. A logically isolated virtual network is an Amazon VPC.",
+      "B": "Correct. A landing zone is a well-architected multi-account environment that holds OUs, accounts, users, and resources regulated for compliance.",
+      "C": "Incorrect. Security groups and network ACLs help filter traffic.",
+      "D": "Incorrect. AWS Artifact stores compliance reports and agreements."
+    }
+  },
+  {
+    "question": "Which AWS Control Tower feature provides a configurable template for standardizing the creation of new AWS accounts?",
+    "choices": {
+      "A": "Account Factory",
+      "B": "CloudTrail Insights",
+      "C": "Service control policies",
+      "D": "AWS Artifact Reports"
+    },
+    "correct": "A",
+    "tip": "Think factory for new accounts.",
+    "explanations": {
+      "A": "Correct. Account Factory is a configurable account template that standardizes new account provisioning.",
+      "B": "Incorrect. CloudTrail Insights detects unusual API activity.",
+      "C": "Incorrect. SCPs are part of AWS Organizations and set maximum permissions.",
+      "D": "Incorrect. Artifact Reports provide compliance documentation."
+    }
+  },
+  {
+    "question": "Which AWS Control Tower feature, also called guardrails, provides high-level rules for governance across an AWS environment?",
+    "choices": {
+      "A": "Controls",
+      "B": "Metrics",
+      "C": "Dashboards",
+      "D": "Agreements"
+    },
+    "correct": "A",
+    "tip": "Guardrails = governance rules.",
+    "explanations": {
+      "A": "Correct. Controls, also called guardrails, are high-level rules that provide governance across the AWS environment.",
+      "B": "Incorrect. Metrics are data points collected by monitoring tools such as CloudWatch.",
+      "C": "Incorrect. Dashboards display information visually but are not governance rules.",
+      "D": "Incorrect. Agreements are managed through AWS Artifact."
+    }
+  },
+  {
+    "question": "A company wants to centrally manage multiple AWS accounts and restrict the maximum permissions available to accounts in specific organizational units. Which AWS feature should they use?",
+    "choices": {
+      "A": "Service control policies",
+      "B": "CloudWatch Logs",
+      "C": "AWS Artifact Reports",
+      "D": "Amazon EC2 key pairs"
+    },
+    "correct": "A",
+    "tip": "Maximum permissions across accounts.",
+    "explanations": {
+      "A": "Correct. Service control policies define the maximum available permissions for member accounts or OUs in AWS Organizations.",
+      "B": "Incorrect. CloudWatch Logs centralize application and system logs.",
+      "C": "Incorrect. Artifact Reports provide AWS compliance documents.",
+      "D": "Incorrect. EC2 key pairs are used to connect securely to instances."
+    }
+  },
+  {
+    "question": "Which AWS service helps customers find information about AWS compliance, customer compliance stories, key compliance questions, and auditing security checklists?",
+    "choices": {
+      "A": "AWS Customer Compliance Center",
+      "B": "Amazon CloudWatch",
+      "C": "AWS Trusted Advisor",
+      "D": "AWS License Manager"
+    },
+    "correct": "A",
+    "tip": "Think compliance learning resources, not audit reports.",
+    "explanations": {
+      "A": "Correct. The AWS Customer Compliance Center provides compliance resources, stories, answers to compliance questions, and auditing security checklists.",
+      "B": "Incorrect. CloudWatch monitors metrics, logs, dashboards, and alarms.",
+      "C": "Incorrect. Trusted Advisor gives best-practice recommendations.",
+      "D": "Incorrect. License Manager manages software licenses."
+    }
+  },
+  {
+    "question": "Which TWO tasks can be completed in AWS Artifact?",
+    "choices": {
+      "A": "Access AWS compliance reports on demand",
+      "B": "Review, accept, and manage agreements with AWS",
+      "C": "Create IAM users for applications",
+      "D": "Configure service control policies"
+    },
+    "correct": ["A", "B"],
+    "tip": "Artifact = reports and agreements.",
+    "explanations": {
+      "A": "Correct. AWS Artifact provides on-demand access to AWS compliance reports.",
+      "B": "Correct. AWS Artifact lets customers review, accept, and manage agreements with AWS.",
+      "C": "Incorrect. IAM is used to create users and manage permissions.",
+      "D": "Incorrect. AWS Organizations is used to configure SCPs."
+    }
+  },
+  {
+    "question": "An ecommerce application runs on multiple Amazon EC2 instances. The company wants to visualize metrics, create alarms for high utilization, and collect application logs. Which THREE CloudWatch features help with this?",
+    "choices": {
+      "A": "CloudWatch Dashboards",
+      "B": "CloudWatch Alarms",
+      "C": "CloudWatch Logs",
+      "D": "AWS Artifact Agreements"
+    },
+    "correct": ["A", "B", "C"],
+    "tip": "Visualize, alert, and collect logs.",
+    "explanations": {
+      "A": "Correct. CloudWatch Dashboards visualize metrics and alarms in a consolidated view.",
+      "B": "Correct. CloudWatch Alarms can alert when utilization crosses a threshold and trigger actions.",
+      "C": "Correct. CloudWatch Logs collect and analyze application and system logs.",
+      "D": "Incorrect. Artifact Agreements are for managing agreements with AWS."
+    }
+  },
+  {
+    "question": "Which AWS service should a company use to receive timely, actionable guidance about planned changes and events affecting its AWS account resources?",
+    "choices": {
+      "A": "AWS Health Dashboard",
+      "B": "AWS Artifact",
+      "C": "AWS License Manager",
+      "D": "AWS Service Catalog"
+    },
+    "correct": "A",
+    "tip": "Think account-specific AWS health events.",
+    "explanations": {
+      "A": "Correct. AWS Health Dashboard provides account-specific information about service events, planned changes, and resource health.",
+      "B": "Incorrect. AWS Artifact provides compliance reports and agreements.",
+      "C": "Incorrect. License Manager manages software licenses.",
+      "D": "Incorrect. Service Catalog provides approved AWS resources for deployment."
+    }
+  },
+  {
+    "question": "Which AWS service helps users verify who can access AWS resources, detect external access, and refine broad permissions?",
+    "choices": {
+      "A": "IAM Access Analyzer",
+      "B": "AWS Control Tower",
+      "C": "AWS CloudTrail",
+      "D": "Amazon CloudWatch"
+    },
+    "correct": "A",
+    "tip": "Think least privilege permissions.",
+    "explanations": {
+      "A": "Correct. IAM Access Analyzer helps identify external access, validate policies, and refine permissions toward least privilege.",
+      "B": "Incorrect. Control Tower governs multi-account environments.",
+      "C": "Incorrect. CloudTrail records API activity but does not directly refine permissions.",
+      "D": "Incorrect. CloudWatch monitors resources and applications."
+    }
+  },
+  {
+    "question": "Which AWS service is BEST for continually evaluating an AWS environment using best-practice checks and recommending improvements for cost, security, performance, resilience, and service limits?",
+    "choices": {
+      "A": "AWS Trusted Advisor",
+      "B": "AWS Audit Manager",
+      "C": "AWS CloudTrail",
+      "D": "AWS Config"
+    },
+    "correct": "A",
+    "tip": "Think automated AWS best-practice advisor.",
+    "explanations": {
+      "A": "Correct. AWS Trusted Advisor continuously evaluates AWS environments and provides recommendations across cost optimization, performance, security, fault tolerance/resilience, and service limits.",
+      "B": "Incorrect. Audit Manager automates evidence collection for audits.",
+      "C": "Incorrect. CloudTrail records user activity and API calls.",
+      "D": "Incorrect. Config evaluates resource configurations against rules."
+    }
+  },
+  {
+    "question": "A company wants account-specific notifications about AWS service events, planned changes, and issues that may affect its AWS resources. Which AWS service should they use?",
+    "choices": {
+      "A": "AWS Health",
+      "B": "AWS Artifact",
+      "C": "AWS Config",
+      "D": "AWS Service Catalog"
+    },
+    "correct": "A",
+    "tip": "Think service health and account-specific events.",
+    "explanations": {
+      "A": "Correct. AWS Health provides events and notifications about changes affecting AWS resources and services.",
+      "B": "Incorrect. AWS Artifact provides compliance reports and agreements.",
+      "C": "Incorrect. AWS Config evaluates resource configurations.",
+      "D": "Incorrect. AWS Service Catalog provides approved resources users can deploy."
+    }
+  },
+  {
+    "question": "A security team wants to identify external access to AWS resources and validate IAM policies to support least privilege. Which AWS service should they use?",
+    "choices": {
+      "A": "IAM Access Analyzer",
+      "B": "AWS License Manager",
+      "C": "AWS CloudTrail",
+      "D": "Amazon CloudWatch"
+    },
+    "correct": "A",
+    "tip": "Think least privilege and permission analysis.",
+    "explanations": {
+      "A": "Correct. IAM Access Analyzer helps identify external access and validate IAM policies to refine permissions.",
+      "B": "Incorrect. License Manager manages software licenses.",
+      "C": "Incorrect. CloudTrail records API activity but does not refine IAM permissions.",
+      "D": "Incorrect. CloudWatch monitors metrics, logs, dashboards, and alarms."
+    }
+  },
+  {
+    "question": "A company needs to automate evidence collection for audits and create audit-ready reports with less manual effort. Which AWS service should they use?",
+    "choices": {
+      "A": "AWS Audit Manager",
+      "B": "AWS Artifact",
+      "C": "AWS Organizations",
+      "D": "Amazon CloudWatch"
+    },
+    "correct": "A",
+    "tip": "Think automated audit evidence collection.",
+    "explanations": {
+      "A": "Correct. AWS Audit Manager continually audits AWS usage and automates evidence collection for compliance assessments.",
+      "B": "Incorrect. AWS Artifact gives access to compliance reports and agreements, but it does not automate evidence collection from your environment.",
+      "C": "Incorrect. AWS Organizations centrally manages multiple accounts.",
+      "D": "Incorrect. CloudWatch monitors resources and applications."
+    }
+  },
+  {
+    "question": "Which feature of Amazon CloudWatch allows a company to define a threshold and automatically send a notification when the threshold is reached?",
+    "choices": {
+      "A": "CloudWatch Alarms",
+      "B": "CloudWatch Dashboards",
+      "C": "CloudWatch Events",
+      "D": "CloudTrail Logs"
+    },
+    "correct": "A",
+    "tip": "Threshold + action = alarm.",
+    "explanations": {
+      "A": "Correct. CloudWatch Alarms can watch metrics, define thresholds, and trigger actions such as notifications.",
+      "B": "Incorrect. Dashboards visualize metrics but do not define threshold actions by themselves.",
+      "C": "Incorrect. This is not the best answer for metric thresholds and notifications.",
+      "D": "Incorrect. CloudTrail Logs are related to API activity, not CloudWatch metric alarms."
+    }
+  },
+  {
+    "question": "Which Amazon CloudWatch feature provides customizable home pages to view metrics and alarms in a single place?",
+    "choices": {
+      "A": "CloudWatch Logs",
+      "B": "CloudWatch Dashboards",
+      "C": "CloudWatch Metrics",
+      "D": "AWS Config Rules"
+    },
+    "correct": "B",
+    "tip": "Think single visual view.",
+    "explanations": {
+      "A": "Incorrect. CloudWatch Logs collect and centralize log data.",
+      "B": "Correct. CloudWatch Dashboards provide customizable views for monitoring resources in one place.",
+      "C": "Incorrect. Metrics are the data points CloudWatch collects.",
+      "D": "Incorrect. AWS Config Rules evaluate resource configurations."
+    }
+  },
+  {
+    "question": "A company wants to collect, store, search, and filter application log files from AWS resources. Which Amazon CloudWatch feature should they use?",
+    "choices": {
+      "A": "CloudWatch Logs",
+      "B": "CloudWatch Alarms",
+      "C": "CloudWatch Dashboards",
+      "D": "AWS Artifact Reports"
+    },
+    "correct": "A",
+    "tip": "Think centralized log management.",
+    "explanations": {
+      "A": "Correct. CloudWatch Logs centralizes log collection, storage, searching, filtering, and monitoring.",
+      "B": "Incorrect. Alarms trigger actions based on metric thresholds.",
+      "C": "Incorrect. Dashboards visualize monitoring data.",
+      "D": "Incorrect. Artifact Reports provide compliance documentation."
+    }
+  },
+  {
+    "question": "A company wants to store AWS API activity logs in an Amazon S3 bucket for auditing and compliance. Which AWS CloudTrail feature should they use?",
+    "choices": {
+      "A": "CloudTrail Logs",
+      "B": "CloudTrail Insights",
+      "C": "CloudTrail Event History",
+      "D": "CloudWatch Dashboards"
+    },
+    "correct": "A",
+    "tip": "API activity files delivered to S3.",
+    "explanations": {
+      "A": "Correct. CloudTrail Logs deliver event log files to an Amazon S3 bucket for auditing and compliance.",
+      "B": "Incorrect. CloudTrail Insights detects unusual API call volume or error rate patterns.",
+      "C": "Incorrect. Event History lets you view recent management events, but the S3 storage capability is CloudTrail Logs.",
+      "D": "Incorrect. CloudWatch Dashboards visualize monitoring data."
+    }
+  },
+  {
+    "question": "Which AWS CloudTrail feature detects unusual API activity, such as abnormal API call volume or error rates?",
+    "choices": {
+      "A": "CloudTrail Insights",
+      "B": "AWS Artifact Agreements",
+      "C": "AWS Config Rules",
+      "D": "CloudWatch Metrics"
+    },
+    "correct": "A",
+    "tip": "Think anomaly detection for API activity.",
+    "explanations": {
+      "A": "Correct. CloudTrail Insights analyzes normal API activity patterns and detects unusual API call volume or error rates.",
+      "B": "Incorrect. Artifact Agreements are used to review and manage agreements with AWS.",
+      "C": "Incorrect. Config Rules evaluate resource configuration compliance.",
+      "D": "Incorrect. CloudWatch Metrics are performance and operational data points."
+    }
+  },
+  {
+    "question": "A company needs to review, accept, and manage agreements with AWS for specific regulatory requirements such as HIPAA. Which AWS Artifact feature should they use?",
+    "choices": {
+      "A": "AWS Artifact Agreements",
+      "B": "AWS Artifact Reports",
+      "C": "AWS Config Rules",
+      "D": "AWS CloudTrail Events"
+    },
+    "correct": "A",
+    "tip": "Think agreements with AWS.",
+    "explanations": {
+      "A": "Correct. AWS Artifact Agreements lets customers review, accept, and manage agreements with AWS.",
+      "B": "Incorrect. Artifact Reports provide compliance reports from third-party auditors.",
+      "C": "Incorrect. AWS Config Rules evaluate AWS resource configurations.",
+      "D": "Incorrect. CloudTrail Events record API and user activity."
+    }
+  },
+  {
+    "question": "A developer needs compliance reports from third-party auditors showing that AWS meets global and industry-specific security standards. Which AWS Artifact feature should they use?",
+    "choices": {
+      "A": "AWS Artifact Reports",
+      "B": "AWS Artifact Agreements",
+      "C": "AWS Audit Manager Controls",
+      "D": "AWS Organizations SCPs"
+    },
+    "correct": "A",
+    "tip": "Think downloadable compliance reports.",
+    "explanations": {
+      "A": "Correct. AWS Artifact Reports provide compliance reports from third-party auditors.",
+      "B": "Incorrect. Artifact Agreements are used to manage agreements with AWS.",
+      "C": "Incorrect. Audit Manager helps automate audit evidence collection.",
+      "D": "Incorrect. SCPs restrict permissions in AWS Organizations."
+    }
+  },
+  {
+    "question": "A company wants to monitor Amazon EC2 instance CPU utilization, collect application logs, and create alarms when usage becomes too high. Which AWS service should they use?",
+    "choices": {
+      "A": "AWS CloudTrail",
+      "B": "Amazon CloudWatch",
+      "C": "AWS Artifact",
+      "D": "AWS Organizations"
+    },
+    "correct": "B",
+    "tip": "Think metrics, logs, dashboards, and alarms.",
+    "explanations": {
+      "A": "Incorrect. CloudTrail records API activity and user actions.",
+      "B": "Correct. Amazon CloudWatch monitors resources, collects metrics and logs, and can trigger alarms.",
+      "C": "Incorrect. AWS Artifact provides compliance reports and agreements.",
+      "D": "Incorrect. AWS Organizations manages multiple AWS accounts."
+    }
+  },
+  {
+    "question": "A security team wants to know which user changed an AWS resource, what action they performed, and when the action happened. Which AWS service should they use?",
+    "choices": {
+      "A": "AWS CloudTrail",
+      "B": "Amazon CloudWatch",
+      "C": "AWS Config",
+      "D": "AWS Trusted Advisor"
+    },
+    "correct": "A",
+    "tip": "Who did what, where, and when?",
+    "explanations": {
+      "A": "Correct. AWS CloudTrail records user activity and API calls across AWS services.",
+      "B": "Incorrect. CloudWatch focuses on metrics, logs, alarms, and monitoring performance.",
+      "C": "Incorrect. AWS Config evaluates resource configurations.",
+      "D": "Incorrect. Trusted Advisor gives best-practice recommendations."
+    }
+  },
+  {
+    "question": "A company needs no-cost, on-demand access to AWS security and compliance reports from third-party auditors. Which AWS service should they use?",
+    "choices": {
+      "A": "AWS Audit Manager",
+      "B": "AWS Artifact",
+      "C": "AWS Config",
+      "D": "AWS Control Tower"
+    },
+    "correct": "B",
+    "tip": "Think compliance documents and agreements.",
+    "explanations": {
+      "A": "Incorrect. Audit Manager helps automate evidence collection for audits.",
+      "B": "Correct. AWS Artifact provides on-demand access to AWS compliance reports and agreements.",
+      "C": "Incorrect. AWS Config evaluates resource configurations.",
+      "D": "Incorrect. Control Tower helps govern multi-account AWS environments."
+    }
+  },
+  {
+    "question": "A company wants to check whether its AWS resources follow required configuration rules, such as using only approved Amazon EC2 instance types. Which service should they use?",
+    "choices": {
+      "A": "AWS Config",
+      "B": "AWS CloudTrail",
+      "C": "Amazon CloudWatch",
+      "D": "AWS Artifact"
+    },
+    "correct": "A",
+    "tip": "Think resource configuration compliance.",
+    "explanations": {
+      "A": "Correct. AWS Config assesses, audits, and evaluates AWS resource configurations against desired rules.",
+      "B": "Incorrect. CloudTrail records API calls and user activity.",
+      "C": "Incorrect. CloudWatch monitors metrics, logs, and alarms.",
+      "D": "Incorrect. Artifact provides compliance reports and agreements."
+    }
+  },
+  {
+    "question": "An enterprise has many AWS accounts and wants centralized account management, consolidated billing, and organizational units. Which AWS service should they use?",
+    "choices": {
+      "A": "AWS Organizations",
+      "B": "AWS Service Catalog",
+      "C": "AWS Trusted Advisor",
+      "D": "AWS License Manager"
+    },
+    "correct": "A",
+    "tip": "Think multiple AWS accounts under one organization.",
+    "explanations": {
+      "A": "Correct. AWS Organizations centrally manages multiple AWS accounts, consolidated billing, OUs, and SCPs.",
+      "B": "Incorrect. Service Catalog provides approved AWS resources for users to deploy.",
+      "C": "Incorrect. Trusted Advisor recommends improvements based on best practices.",
+      "D": "Incorrect. License Manager manages software licenses."
+    }
+  },
+  {
+    "question": "Which TWO identities or resources can service control policies (SCPs) be applied to in AWS Organizations?",
+    "choices": {
+      "A": "IAM users",
+      "B": "IAM groups",
+      "C": "Organizational units (OUs)",
+      "D": "Individual member accounts"
+    },
+    "correct": ["C", "D"],
+    "tip": "SCPs apply at the organization structure level, not directly to IAM identities.",
+    "explanations": {
+      "A": "Incorrect. SCPs are not applied directly to IAM users.",
+      "B": "Incorrect. SCPs are not applied directly to IAM groups.",
+      "C": "Correct. SCPs can be applied to organizational units.",
+      "D": "Correct. SCPs can be applied to individual member accounts."
+    }
+  },
+  {
+    "question": "A government agency needs to set up and govern a secure, compliant, multi-account AWS environment based on best practices. Which AWS service should they use?",
+    "choices": {
+      "A": "AWS CloudTrail",
+      "B": "AWS Control Tower",
+      "C": "AWS License Manager",
+      "D": "Amazon CloudWatch"
+    },
+    "correct": "B",
+    "tip": "Think landing zone, guardrails, and account governance.",
+    "explanations": {
+      "A": "Incorrect. CloudTrail records API activity for auditing.",
+      "B": "Correct. AWS Control Tower helps set up and govern secure, compliant, multi-account AWS environments.",
+      "C": "Incorrect. License Manager manages software licenses.",
+      "D": "Incorrect. CloudWatch monitors resources and applications."
+    }
+  },
+  {
+    "question": "A company wants employees to deploy only approved AWS resources from a curated list instead of creating resources manually. Which service should they use?",
+    "choices": {
+      "A": "AWS Service Catalog",
+      "B": "AWS Artifact",
+      "C": "AWS Health",
+      "D": "AWS CloudTrail"
+    },
+    "correct": "A",
+    "tip": "Think approved self-service resource catalog.",
+    "explanations": {
+      "A": "Correct. AWS Service Catalog lets organizations create and manage approved catalogs of AWS resources.",
+      "B": "Incorrect. Artifact provides compliance reports and agreements.",
+      "C": "Incorrect. AWS Health provides alerts about service events and account-specific issues.",
+      "D": "Incorrect. CloudTrail records AWS API activity."
+    }
+  },
+  {
+    "question": "A company is using the Bring Your Own License (BYOL) model and wants to track license usage, enforce limits, and reduce the risk of noncompliance. Which AWS service should they use?",
+    "choices": {
+      "A": "AWS Organizations",
+      "B": "AWS License Manager",
+      "C": "AWS Trusted Advisor",
+      "D": "AWS Audit Manager"
+    },
+    "correct": "B",
+    "tip": "BYOL means software license management.",
+    "explanations": {
+      "A": "Incorrect. Organizations manages multiple AWS accounts.",
+      "B": "Correct. AWS License Manager helps manage software licenses, enforce usage limits, and reduce noncompliance risk.",
+      "C": "Incorrect. Trusted Advisor provides best-practice recommendations.",
+      "D": "Incorrect. Audit Manager automates evidence collection for audits."
+    }
+  },
+  {
+    "question": "A company wants continuous recommendations to improve cost optimization, performance, security, fault tolerance, and service limits. Which AWS service should they use?",
+    "choices": {
+      "A": "AWS Trusted Advisor",
+      "B": "AWS CloudTrail",
+      "C": "AWS Artifact",
+      "D": "AWS Config"
+    },
+    "correct": "A",
+    "tip": "Think AWS best-practice checks.",
+    "explanations": {
+      "A": "Correct. AWS Trusted Advisor evaluates AWS environments and recommends improvements across cost, performance, security, fault tolerance, and service limits.",
+      "B": "Incorrect. CloudTrail records API activity.",
+      "C": "Incorrect. Artifact provides compliance reports and agreements.",
+      "D": "Incorrect. Config evaluates resource configurations against rules."
+    }
+  }
+]
+

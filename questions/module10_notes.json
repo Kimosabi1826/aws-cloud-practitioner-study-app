@@ -1,0 +1,303 @@
+{
+  "module": "Module 10 - Monitoring, Compliance, and Governance",
+  "sections": [
+    {
+      "title": "Core Idea",
+      "points": [
+        "Module 10 focuses on monitoring AWS resources, auditing activity, meeting compliance requirements, and governing cloud environments.",
+        "The main flow is Secure → Monitor → Audit → Compliance.",
+        "AWS provides services to track performance, record actions, evaluate configurations, manage accounts, and optimize resources."
+      ],
+      "exam_tip": "AWS exams often test which service fits monitoring, auditing, compliance, or governance scenarios."
+    },
+    {
+      "title": "Governance and Compliance Flow",
+      "points": [
+        "Secure = protect data, systems, and infrastructure.",
+        "Monitor = continuously observe activity, performance, traffic, and events.",
+        "Audit = review activity and check whether requirements are being followed.",
+        "Compliance = meet regulations, standards, and internal policies."
+      ],
+      "exam_tip": "Know the difference between monitoring, auditing, and compliance."
+    },
+    {
+      "title": "Amazon CloudWatch",
+      "points": [
+        "Monitors AWS resources and applications in real time.",
+        "Collects metrics from AWS resources, applications, and on-premises servers.",
+        "Can create alarms when metrics cross thresholds.",
+        "Provides dashboards for a single view of metrics and alarms.",
+        "Collects and analyzes logs from systems, applications, and AWS services."
+      ],
+      "exam_tip": "Need metrics, alarms, dashboards, logs, or EC2 utilization monitoring = CloudWatch."
+    },
+    {
+      "title": "CloudWatch Metrics",
+      "points": [
+        "Metrics are data points tied to resources.",
+        "Examples include EC2 CPU utilization, network traffic, and application performance data.",
+        "CloudWatch uses metrics to track resource health and performance."
+      ],
+      "exam_tip": "Performance data point = CloudWatch Metric."
+    },
+    {
+      "title": "CloudWatch Alarms",
+      "points": [
+        "Alarms watch metrics and compare them to thresholds.",
+        "Can send notifications when thresholds are reached.",
+        "Can trigger automated actions, such as scaling resources."
+      ],
+      "exam_tip": "Threshold + notification or action = CloudWatch Alarm."
+    },
+    {
+      "title": "CloudWatch Dashboards",
+      "points": [
+        "Dashboards are customizable visual pages in the CloudWatch console.",
+        "They show metrics, alarms, and operational data in one place.",
+        "Useful for monitoring multiple resources from a single view."
+      ],
+      "exam_tip": "Need one visual monitoring page = CloudWatch Dashboard."
+    },
+    {
+      "title": "CloudWatch Logs",
+      "points": [
+        "Centralizes logs from applications, systems, and AWS services.",
+        "Can collect, store, search, filter, and analyze log files.",
+        "Useful for troubleshooting application errors and performance issues."
+      ],
+      "exam_tip": "Need application logs or log analysis = CloudWatch Logs."
+    },
+    {
+      "title": "AWS CloudTrail",
+      "points": [
+        "Records user activity and API calls across AWS services.",
+        "Helps answer who did what, where, and when.",
+        "Used for auditing, security monitoring, operational troubleshooting, and compliance.",
+        "Can deliver log files to Amazon S3 for retention and audit evidence."
+      ],
+      "exam_tip": "Need to know who changed something or track API activity = CloudTrail."
+    },
+    {
+      "title": "CloudTrail Events",
+      "points": [
+        "Events capture actions performed in an AWS account.",
+        "Examples include API calls, console actions, and management events.",
+        "Event history provides a searchable record of recent management events."
+      ],
+      "exam_tip": "Recent searchable record of AWS actions = CloudTrail Event History."
+    },
+    {
+      "title": "CloudTrail Logs",
+      "points": [
+        "CloudTrail can deliver event logs to an Amazon S3 bucket.",
+        "These logs can be retained for auditing and compliance.",
+        "CloudTrail logs help provide evidence of AWS account activity."
+      ],
+      "exam_tip": "Need API activity files stored in S3 = CloudTrail Logs."
+    },
+    {
+      "title": "CloudTrail Insights",
+      "points": [
+        "Analyzes normal API call patterns.",
+        "Detects unusual API call volume or API error rates.",
+        "Generates events when activity differs from normal behavior."
+      ],
+      "exam_tip": "Unusual API activity or anomaly detection = CloudTrail Insights."
+    },
+    {
+      "title": "AWS Artifact",
+      "points": [
+        "Provides no-cost, on-demand access to AWS security and compliance reports.",
+        "Provides access to select online agreements.",
+        "Helps customers assess AWS compliance and provide documentation to auditors."
+      ],
+      "exam_tip": "Need AWS compliance reports or agreements = AWS Artifact."
+    },
+    {
+      "title": "AWS Artifact Reports",
+      "points": [
+        "Provides compliance reports from third-party auditors.",
+        "Shows that AWS meets different global, regional, and industry-specific standards.",
+        "Can be shared with auditors or regulators as evidence of AWS controls."
+      ],
+      "exam_tip": "Need third-party AWS compliance reports = Artifact Reports."
+    },
+    {
+      "title": "AWS Artifact Agreements",
+      "points": [
+        "Lets customers review, accept, and manage agreements with AWS.",
+        "Can manage agreements for individual accounts or accounts in AWS Organizations.",
+        "Useful for regulated workloads such as HIPAA-related requirements."
+      ],
+      "exam_tip": "Need to accept or manage AWS agreements = Artifact Agreements."
+    },
+    {
+      "title": "AWS Config",
+      "points": [
+        "Assesses, audits, and evaluates AWS resource configurations.",
+        "Tracks resource configuration changes over time.",
+        "Checks whether resources follow required company rules or compliance standards.",
+        "Can identify noncompliant resources and support remediation."
+      ],
+      "exam_tip": "Need to check if resources are configured correctly = AWS Config."
+    },
+    {
+      "title": "AWS Audit Manager",
+      "points": [
+        "Continually audits AWS usage to simplify risk and compliance assessments.",
+        "Automates evidence collection for audits.",
+        "Helps create audit-ready reports with less manual effort.",
+        "Useful when teams need proof that controls are operating effectively."
+      ],
+      "exam_tip": "Need automated audit evidence collection = AWS Audit Manager."
+    },
+    {
+      "title": "AWS Organizations",
+      "points": [
+        "Centrally manages multiple AWS accounts.",
+        "Supports consolidated billing across accounts.",
+        "Uses organizational units, or OUs, to group accounts.",
+        "Uses service control policies, or SCPs, to set maximum permissions.",
+        "Can help manage access, security, compliance, and billing at scale."
+      ],
+      "exam_tip": "Multiple AWS accounts, consolidated billing, OUs, or SCPs = AWS Organizations."
+    },
+    {
+      "title": "AWS Organizations Key Terms",
+      "points": [
+        "Management account = central account that creates and manages the organization.",
+        "Member account = account that belongs to the organization.",
+        "Organizational unit = logical group of accounts.",
+        "Service control policy = policy that sets maximum permissions for accounts or OUs.",
+        "Root = top-level parent container for the organization."
+      ],
+      "exam_tip": "SCPs apply to OUs and member accounts, not directly to IAM users, groups, or roles."
+    },
+    {
+      "title": "AWS Control Tower",
+      "points": [
+        "Helps set up and govern a secure, compliant, multi-account AWS environment.",
+        "Uses best practices for security, operations, and compliance.",
+        "Provides guardrails, dashboards, account provisioning, and governance automation.",
+        "Works well for organizations that need standardized account setup."
+      ],
+      "exam_tip": "Need governed multi-account setup with best practices = AWS Control Tower."
+    },
+    {
+      "title": "AWS Control Tower Features",
+      "points": [
+        "Landing zone = enterprise-wide multi-account environment based on best practices.",
+        "Account Factory = standardized account creation template.",
+        "Controls or guardrails = high-level governance rules.",
+        "Dashboard = visual view of accounts, controls, and compliance status."
+      ],
+      "exam_tip": "Landing zone, guardrails, and Account Factory are Control Tower clues."
+    },
+    {
+      "title": "AWS Service Catalog",
+      "points": [
+        "Lets organizations create, share, and manage approved catalogs of AWS resources.",
+        "Allows users to deploy approved resources through self-service.",
+        "Helps maintain governance while speeding up resource provisioning.",
+        "Useful when employees need approved templates instead of creating resources manually."
+      ],
+      "exam_tip": "Approved resource menu or curated catalog = AWS Service Catalog."
+    },
+    {
+      "title": "AWS License Manager",
+      "points": [
+        "Helps manage software licenses and licensing costs.",
+        "Supports Bring Your Own License, or BYOL, scenarios.",
+        "Tracks license usage and enforces license limits.",
+        "Helps reduce the risk of software license noncompliance."
+      ],
+      "exam_tip": "BYOL, software licenses, or license limits = AWS License Manager."
+    },
+    {
+      "title": "AWS Trusted Advisor",
+      "points": [
+        "Continuously evaluates AWS environments using best-practice checks.",
+        "Provides recommendations for cost optimization, performance, security, fault tolerance, and service limits.",
+        "Can identify underutilized resources, security risks, missing backups, and approaching limits.",
+        "Helps customers optimize AWS resources at scale."
+      ],
+      "exam_tip": "Need best-practice recommendations across cost, security, performance, resilience, and limits = Trusted Advisor."
+    },
+    {
+      "title": "AWS Health",
+      "points": [
+        "Provides information about events and changes affecting AWS resources.",
+        "AWS Health Dashboard shows account-specific health information.",
+        "Can notify customers about service events, planned changes, and account notifications.",
+        "Useful for troubleshooting incidents and planning for lifecycle events."
+      ],
+      "exam_tip": "Account-specific AWS service events or planned changes = AWS Health."
+    },
+    {
+      "title": "IAM Access Analyzer",
+      "points": [
+        "Helps identify external access to AWS resources.",
+        "Validates IAM policies against security standards.",
+        "Helps refine permissions toward least privilege.",
+        "Can detect broad or unused access."
+      ],
+      "exam_tip": "Least privilege, external access, or IAM policy validation = IAM Access Analyzer."
+    },
+    {
+      "title": "Customer Compliance Center",
+      "points": [
+        "Provides AWS compliance learning resources.",
+        "Includes customer compliance stories and answers to common compliance questions.",
+        "Includes auditing security checklists and compliance guidance."
+      ],
+      "exam_tip": "Need compliance resources and guidance, not reports = Customer Compliance Center."
+    },
+    {
+      "title": "Common Exam Scenarios",
+      "points": [
+        "Monitor EC2 CPU utilization = CloudWatch.",
+        "Send alert when utilization crosses a threshold = CloudWatch Alarm.",
+        "Collect application logs = CloudWatch Logs.",
+        "Find out who changed a resource = CloudTrail.",
+        "Store API activity logs in S3 = CloudTrail Logs.",
+        "Download AWS compliance reports = AWS Artifact.",
+        "Check if resources follow required configurations = AWS Config.",
+        "Automate audit evidence collection = AWS Audit Manager.",
+        "Manage multiple accounts and billing = AWS Organizations.",
+        "Set up governed multi-account environment = AWS Control Tower."
+      ],
+      "exam_tip": "Look for the action word: monitor, audit, comply, govern, optimize."
+    },
+    {
+      "title": "Common Exam Traps",
+      "points": [
+        "CloudWatch monitors performance, but CloudTrail records API activity.",
+        "AWS Config checks resource configurations, but CloudTrail records who made changes.",
+        "AWS Artifact gives reports and agreements, but Audit Manager collects audit evidence.",
+        "AWS Organizations manages accounts, but Control Tower governs and sets up a best-practice multi-account environment.",
+        "Service Catalog provides approved resources, but License Manager manages software licenses.",
+        "Trusted Advisor recommends improvements, but AWS Health reports AWS events affecting your resources."
+      ],
+      "exam_tip": "Many services sound similar, so focus on the exact job each one performs."
+    },
+    {
+      "title": "Quick Memory Map",
+      "points": [
+        "CloudWatch = monitor metrics and logs",
+        "CloudTrail = record API actions",
+        "Artifact = compliance reports and agreements",
+        "Config = resource configuration compliance",
+        "Audit Manager = audit evidence collection",
+        "Organizations = multiple accounts and billing",
+        "Control Tower = governed multi-account setup",
+        "Service Catalog = approved resource catalog",
+        "License Manager = software licenses and BYOL",
+        "Trusted Advisor = best-practice recommendations",
+        "AWS Health = account-specific service events",
+        "IAM Access Analyzer = least privilege access analysis"
+      ],
+      "exam_tip": "Memorize this map cold before taking the quiz."
+    }
+  ]
+}
+
